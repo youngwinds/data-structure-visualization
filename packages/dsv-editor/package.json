@@ -1,5 +1,5 @@
 {
-  "name": "src",
+  "name": "dsv-editor",
   "private": true,
   "version": "0.0.0",
   "description": "Interactive editor of data-structure-visualization based on monaco",

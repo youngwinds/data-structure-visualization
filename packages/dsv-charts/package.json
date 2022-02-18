@@ -1,5 +1,5 @@
 {
-  "name": "src",
+  "name": "dsv-charts",
   "private": true,
   "version": "0.0.0",
   "description": "Chart library of data-structure-visualization based on d3",

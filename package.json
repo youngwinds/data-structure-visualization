@@ -5,7 +5,7 @@
   "description": "algorithm-visualization depends on data-structure-visualization",
   "main": "index.js",
   "scripts": {
-    "test": "lerna exec --scope src yarn test"
+    "start": "lerna exec --scope dsv-website yarn start"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,6 @@
     "lerna": "^4.0.0"
   },
   "workspaces": [
-    "packages/*",
-    "src"
+    "packages/*"
   ]
 }
