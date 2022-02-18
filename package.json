@@ -1,0 +1,33 @@
+{
+  "name": "data-structure-visualization",
+  "version": "0.0.0",
+  "private": true,
+  "description": "algorithm-visualization depends on data-structure-visualization",
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna exec --scope src yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youngwinds/data-structure-visualization.git"
+  },
+  "keywords": [
+    "data-structure",
+    "algorithm",
+    "visualization"
+  ],
+  "author": "youngwinds",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youngwinds/data-structure-visualization/issues"
+  },
+  "homepage": "https://github.com/youngwinds/data-structure-visualization#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "src"
+  ]
+}
