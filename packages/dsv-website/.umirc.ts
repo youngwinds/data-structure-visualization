@@ -4,6 +4,8 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  history: { type: 'hash' },
+
   fastRefresh: {},
   locale: {
     default: 'zh-CN',

@@ -3,8 +3,8 @@ import { IRouteComponentProps } from 'umi';
 import { Layout, Row, Col } from 'antd';
 
 import styles from './index.less';
-import { LocaleIcon } from './LanguageIcon';
-import { NavMenu } from './NavMenu';
+import { LocaleIcon } from '../components/LanguageIcon';
+import { NavMenu } from '../components/NavMenu';
 
 const { Header, Content, Footer } = Layout;
 
@@ -24,7 +24,7 @@ export default function GlobalLayout({ children }: IRouteComponentProps) {
       <Content>
         <div>{children}</div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
+      <Footer style={{ textAlign: 'center', height: '48px' }}>
         youngwind.top ©2022 Created
       </Footer>
     </Layout>

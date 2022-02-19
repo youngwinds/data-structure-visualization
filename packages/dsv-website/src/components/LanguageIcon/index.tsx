@@ -2,14 +2,13 @@ import { getLocale, setLocale } from 'umi';
 
 import { Menu, Dropdown } from 'antd';
 
-import { ReactComponent as Icon } from '../../icons/language.svg';
+import { ReactComponent as Icon } from '../../assets/icons/language.svg';
 import { useReducer } from 'react';
 
 export function LocaleIcon() {
-  const [count, forceUpdate] = useReducer((v) => v + 1, 0);
+  const [, forceUpdate] = useReducer((v) => v + 1, 0);
   const handleLocaleChange = ({ key }: any) => {
-    setLocale(key, false);
-    forceUpdate();
+    setLocale(key, true);
   };
 
   return (
