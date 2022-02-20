@@ -1,4 +1,4 @@
-import { IMenu, IMenuItem } from '@/typings/IMenu';
+import { IMenu, IMenuItem } from '@dsv-website/typings/IMenu';
 
 const pathGenerator = (menu: IMenu, root = '/') => {
   return menu.map((menuItem: IMenuItem) => {

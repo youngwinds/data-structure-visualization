@@ -3,8 +3,8 @@ import { IRouteComponentProps } from 'umi';
 import { Layout, Row, Col } from 'antd';
 
 import styles from './index.less';
-import { LocaleIcon } from '../components/LanguageIcon';
-import { NavMenu } from '../components/NavMenu';
+import { LocaleIcon } from '@dsv-website/components/LanguageIcon';
+import { NavMenu } from '@dsv-website/components/NavMenu';
 
 const { Header, Content, Footer } = Layout;
 
