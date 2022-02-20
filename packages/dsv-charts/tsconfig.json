@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@dsv-charts/*": ["./src/*"]
+    }
+  }
+}
