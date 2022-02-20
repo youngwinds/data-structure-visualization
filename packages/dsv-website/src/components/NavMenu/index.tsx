@@ -1,7 +1,7 @@
 import { Link, useIntl } from 'umi';
 import { Menu } from 'antd';
 import { navMenu } from '../../assets/routes/nav-menu';
-import { pathGenerator } from '@/utils/route-path';
+import { pathGenerator } from '@dsv-website/utils/route-path';
 import { useMemo } from 'react';
 
 export function NavMenu() {

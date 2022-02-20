@@ -11,6 +11,7 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
+      "@dsv-website/*": ["src/*"],
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },

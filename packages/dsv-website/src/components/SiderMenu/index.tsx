@@ -1,9 +1,8 @@
 import { Link, useIntl } from 'umi';
 import { useCallback, useMemo, useState } from 'react';
 import { Layout, Menu } from 'antd';
-
-import { IMenu, IMenuItem } from '@/typings/IMenu';
-import { pathGenerator } from '@/utils/route-path';
+import { IMenu, IMenuItem } from '@dsv-website/typings/IMenu';
+import { pathGenerator } from '@dsv-website/utils/route-path';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;

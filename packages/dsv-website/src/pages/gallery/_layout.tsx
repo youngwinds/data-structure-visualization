@@ -1,7 +1,7 @@
 import { IRouteComponentProps } from 'umi';
 import { Layout } from 'antd';
-import { SiderMenu } from '@/components/SiderMenu';
-import { GalleryMenu } from '@/assets/routes/gallery-menu';
+import { SiderMenu } from '@dsv-website/components/SiderMenu';
+import { GalleryMenu } from '@dsv-website/assets/routes/gallery-menu';
 const { Content } = Layout;
 
 export default function DataStructure({

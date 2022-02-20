@@ -2,7 +2,7 @@ import { getLocale, setLocale } from 'umi';
 
 import { Menu, Dropdown } from 'antd';
 
-import { ReactComponent as Icon } from '../../assets/icons/language.svg';
+import { ReactComponent as Icon } from '@dsv-website/assets/icons/language.svg';
 import { useReducer } from 'react';
 
 export function LocaleIcon() {
