@@ -1,0 +1,33 @@
+# DsvChart
+
+## 图表注册机制
+
+维护一个核心对象 DsvChart
+
+### 构造函数
+
+```ts
+const chart = new DsvChart("domId", {
+    type : "array",
+    data : [1, 2, 3, 4, 5]
+})
+
+```
+
+### 注册接口
+
+1. useChart 使用图表
+2. useComponent 使用组件
+2. useTheme 使用主题
+
+### 图表类型
+
+1. Array
+2. Stack
+3. Tree
+
+### 组件类型
+
+1. Title
+2. Tooltip
+
