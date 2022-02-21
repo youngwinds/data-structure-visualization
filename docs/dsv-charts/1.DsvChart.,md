@@ -1,33 +1,21 @@
 # DsvChart
 
-## 图表注册机制
+## 图表
 
-维护一个核心对象 DsvChart
+## 布局
 
-### 构造函数
+### 笛卡尔二维坐标系
 
-```ts
-const chart = new DsvChart("domId", {
-    type : "array",
-    data : [1, 2, 3, 4, 5]
-})
+1. 负责创建图表容器(done)
+2. 计算图表区域(done)
+3. 更新时，重新计算图表区域(doing)
 
-```
 
-### 注册接口
+## 图层
 
-1. useChart 使用图表
-2. useComponent 使用组件
-2. useTheme 使用主题
+每一个组件都是一个图层，
 
-### 图表类型
+每一个布局，都可以向其添加图层。
 
-1. Array
-2. Stack
-3. Tree
-
-### 组件类型
-
-1. Title
-2. Tooltip
+图表 -> 布局 -> 布局的集合 -> Data Driven Document
 

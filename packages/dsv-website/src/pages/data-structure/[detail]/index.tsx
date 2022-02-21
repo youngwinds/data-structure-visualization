@@ -1,4 +1,4 @@
-import { TreeChart } from '@dsv-charts/index';
+import { ArrayChart } from '@dsv-charts/index';
 import { useEffect, useRef } from 'react';
 
 export default function Detail() {
@@ -9,7 +9,20 @@ export default function Detail() {
       return () => {};
     }
 
-    const chart = new TreeChart(ref.current, { type: 'tree' });
+    const chart = new ArrayChart(ref.current, {
+      type: 'tree',
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 15,
+          left: 20,
+          right: 30,
+        },
+      },
+    });
+
+    console.log(chart);
+
     chart.render();
     return () => {
       chart.destroy();
