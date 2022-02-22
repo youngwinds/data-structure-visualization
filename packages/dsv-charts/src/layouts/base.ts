@@ -12,19 +12,10 @@ export class BaseLayout {
     this.initRect().initContainer().initSvg();
   }
 
-  public destroy() {
-    this._svg.remove();
-    this._container.remove();
-
-    this._dom = null;
-    this._rootRect = null;
-    this._container = null;
-    this._svg = null;
+  public addGroup() {
+    return this._svg.append('g').style('border', '1px');
   }
 
-  /**
-   * 初始化Rect
-   */
   private initRect() {
     this._rootRect = this._dom.getBoundingClientRect();
     return this;
@@ -48,8 +39,10 @@ export class BaseLayout {
   private initSvg() {
     this._svg = this._container
       .append('svg')
+      .attr('viewBox', [0, 0, this._rootRect.width, this._rootRect.height])
       .attr('width', this._rootRect.width)
-      .attr('height', this._rootRect.height);
+      .attr('height', this._rootRect.height)
+      .attr('style', 'max-width: 100%; height: auto; height: intrinsic;');
     return this;
   }
 
@@ -66,5 +59,15 @@ export class BaseLayout {
 
   public getRootRect() {
     return this._rootRect;
+  }
+
+  public destroy() {
+    this._svg.remove();
+    this._container.remove();
+
+    this._dom = null;
+    this._rootRect = null;
+    this._container = null;
+    this._svg = null;
   }
 }

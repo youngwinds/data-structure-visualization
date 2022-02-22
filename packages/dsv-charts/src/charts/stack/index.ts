@@ -1,8 +1,7 @@
-import { IConfig } from '@dsv-charts/typings/IConfig';
-import { IChart } from '@dsv-charts/typings/IChart';
+import { IConfig } from '@dsv-charts/typings/config';
 import { BaseChart } from '../base';
 
-export class StackTree extends BaseChart implements IChart {
+export class StackTree extends BaseChart {
   constructor(dom: string | HTMLElement, config: IConfig) {
     super(dom, config);
   }

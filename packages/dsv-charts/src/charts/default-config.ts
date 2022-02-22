@@ -1,4 +1,4 @@
-import { IConfig } from '@dsv-charts/typings/IConfig';
+import { IConfig } from '@dsv-charts/typings/config';
 
 export const defaultConfig: IConfig = {
   type: undefined,

@@ -1,4 +1,4 @@
-import { ILayoutConfig } from '@dsv-charts/typings/IConfig';
+import { Cartesian2LayoutType } from '@dsv-charts/typings/config';
 import { BaseLayout } from './base';
 
 type Cartesian2Rect = {
@@ -22,26 +22,20 @@ type Cartesian2InnerRect = {
 };
 
 export class Cartesian2Layout extends BaseLayout {
-  private _config: ILayoutConfig;
   private _cartesian2Rect: Cartesian2Rect;
   private _cartesian2InnerRect: Cartesian2InnerRect;
-  constructor(dom: HTMLElement, config: ILayoutConfig) {
+
+  constructor(dom: HTMLElement, config: Cartesian2LayoutType) {
     super(dom);
 
-    this._config = config;
-
-    this.calculateRect().calculateInnerRect();
+    this.calculateRect().calculateInnerRect(config);
   }
 
   /**
-   * 释放接口
+   * 更新接口
    */
-  public destroy(): void {
-    super.destroy();
-
-    this._config = null;
-    this._cartesian2Rect = null;
-    this._cartesian2InnerRect = null;
+  public render(config: Cartesian2LayoutType) {
+    this.calculateRect().calculateInnerRect(config);
   }
 
   /**
@@ -66,9 +60,9 @@ export class Cartesian2Layout extends BaseLayout {
   /**
    * 计算移除padding后的图表区域
    */
-  private calculateInnerRect() {
+  private calculateInnerRect(config: Cartesian2LayoutType) {
     const rootRect = this.getRootRect();
-    const { padding } = this._config;
+    const { padding } = config;
 
     const width = rootRect.width - padding.left - padding.right;
     const height = rootRect.height - padding.top - padding.bottom;
@@ -95,5 +89,15 @@ export class Cartesian2Layout extends BaseLayout {
 
   public getInnerRect() {
     return this._cartesian2InnerRect;
+  }
+
+  /**
+   * 释放接口
+   */
+  public destroy(): void {
+    super.destroy();
+
+    this._cartesian2Rect = null;
+    this._cartesian2InnerRect = null;
   }
 }

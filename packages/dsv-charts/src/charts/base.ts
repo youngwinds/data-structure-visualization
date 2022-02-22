@@ -1,4 +1,4 @@
-import { IConfig, IConfigKeys } from '@dsv-charts/typings/IConfig';
+import { DataType, IConfig, IConfigKeys } from '@dsv-charts/typings/config';
 import { merge } from 'lodash';
 import { defaultConfig } from './default-config';
 
@@ -14,18 +14,35 @@ export abstract class BaseChart {
     this._config = merge({}, defaultConfig, customConfig) as IConfig;
   }
 
+  protected render() {}
+
+  /**
+   * update
+   */
+  protected updateData(data: DataType) {
+    this._config.data = data;
+  }
+
+  protected updateConfig(customConfig: IConfig) {
+    this._config = merge({}, defaultConfig, customConfig) as IConfig;
+  }
+
   /**
    * getters
    */
-  getDom() {
+  protected getDom() {
     return this._dom;
   }
 
-  getConfig() {
+  protected getConfig() {
     return this._config;
   }
 
-  getConfigByKey(key: IConfigKeys) {
+  protected getData() {
+    return this._config.data;
+  }
+
+  protected getConfigByKey(key: IConfigKeys) {
     if (this._config[key]) {
       return this._config[key];
     }
