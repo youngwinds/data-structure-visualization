@@ -1,19 +1,52 @@
-import { IConfig } from '@dsv-charts/typings/IConfig';
+import { DataType, IConfig, IConfigKeys } from '@dsv-charts/typings/config';
+import { merge } from 'lodash';
+import { defaultConfig } from './default-config';
 
-export abstract class Base {
-  private _dom: string | HTMLElement;
+export abstract class BaseChart {
+  private _dom: HTMLElement;
   private _config: IConfig;
 
-  constructor(dom: string | HTMLElement, config: IConfig) {
-    this._dom = dom;
-    this._config = config;
+  constructor(selector: string | HTMLElement, customConfig: IConfig) {
+    this._dom =
+      typeof selector === 'string'
+        ? document.getElementById(selector)
+        : selector;
+    this._config = merge({}, defaultConfig, customConfig) as IConfig;
   }
 
-  getDom() {
+  protected render() {}
+
+  /**
+   * update
+   */
+  protected updateData(data: DataType) {
+    this._config.data = data;
+  }
+
+  protected updateConfig(customConfig: IConfig) {
+    this._config = merge({}, defaultConfig, customConfig) as IConfig;
+  }
+
+  /**
+   * getters
+   */
+  protected getDom() {
     return this._dom;
   }
 
-  getConfig() {
+  protected getConfig() {
     return this._config;
+  }
+
+  protected getData() {
+    return this._config.data;
+  }
+
+  protected getConfigByKey(key: IConfigKeys) {
+    if (this._config[key]) {
+      return this._config[key];
+    }
+
+    throw new Error(`error key: ${key}`);
   }
 }

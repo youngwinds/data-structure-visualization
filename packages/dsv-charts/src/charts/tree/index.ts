@@ -1,15 +1,9 @@
-import { IConfig } from '@dsv-charts/typings/IConfig';
-import { IChart } from '@dsv-charts/typings/IChart';
-import { Base } from '../base';
+import { IConfig } from '@dsv-charts/typings/config';
+import { BaseChart } from '../base';
 
-export class TreeChart extends Base implements IChart {
+export class TreeChart extends BaseChart {
   constructor(dom: string | HTMLElement, config: IConfig) {
     super(dom, config);
-    this.init();
-  }
-
-  init() {
-    console.log('init TreeChart');
   }
 
   render() {
