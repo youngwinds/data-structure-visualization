@@ -141,6 +141,8 @@ export class ArrayChart extends BaseChart {
         .transition()
         .attr('x', (d) => this._xScale(d.key) + innerRect.innerLeft)
         .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
+        .attr('dx', this._xScale.bandwidth() / 2)
+        .attr('dy', 20)
         .selection()
         .html((d) => d.name);
     });

@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 export default function Detail() {
   const ref = useRef<HTMLDivElement>(null);
 
-  const data: DataType = new Array(10).fill(0).map((d, i) => {
+  const data: DataType = new Array(5).fill(0).map((d, i) => {
     return {
       key: i.toString(),
       name: i.toString(),
@@ -32,11 +32,7 @@ export default function Detail() {
     });
 
     setTimeout(() => {
-      array.pop();
-    }, 1500);
-
-    setTimeout(() => {
-      array.push(1);
+      array.sort();
     }, 2000);
   }, []);
 

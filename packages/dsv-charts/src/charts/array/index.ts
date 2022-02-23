@@ -1,52 +1,96 @@
-import { ArrayItemType, DataType, IConfig } from '@dsv-charts/typings/config';
+import {
+  ArrayDataType,
+  ArrayItemType,
+  DataType,
+  IConfig,
+} from '@dsv-charts/typings/config';
 import { ArrayChart } from './array';
 
 class DsArray extends ArrayChart {
-  private _key = Number.MAX_VALUE;
+  private _key = 0;
+
   constructor(selector: string | HTMLElement, customConfig: IConfig) {
     super(selector, customConfig);
 
     super.render();
   }
 
+  private warpMethod(callback) {
+    const data: ArrayDataType = this.getData();
+
+    const returnValue = callback(data);
+
+    console.log(data);
+
+    super.updateData(data);
+    return returnValue;
+  }
+
+  private create(value: number) {
+    return {
+      key: `__${this._key++}__`,
+      value: value,
+      name: value.toString(),
+    };
+  }
+
+  public push(...args: number[]) {
+    return this.warpMethod((data) =>
+      data.push(...args.map(this.create.bind(this)))
+    );
+  }
+
   public pop() {
-    const data = this.getData();
-
-    data.pop();
-
-    super.updateData(data);
+    return this.warpMethod((data) => data.pop());
   }
 
-  public push(value: number) {
-    const data = this.getData();
+  public fill(value, start?: number, end?: number) {
+    return this.warpMethod((data: ArrayDataType) => {
+      start = start ? start : 0;
+      end = end ? end : data.length;
 
-    data.push({
-      key: `${this._key--}key`,
-      value: value,
-      name: value.toString(),
+      for (let i = start; i < end; i++) {
+        data[i].value = value;
+        data[i].name = value.toString();
+      }
+
+      return data;
     });
-
-    super.updateData(data);
   }
 
-  public insert(index: number, value: number) {
-    const data = this.getData();
-
-    data.splice(index, 0, {
-      key: `${this._key--}key`,
-      value: value,
-      name: value.toString(),
+  public sort(compareFunction?: (a: number, b: number) => number) {
+    const cf = (a: number, b: number) => {
+      compareFunction = compareFunction ? compareFunction : (a, b) => a - b;
+      return compareFunction(a, b);
+    };
+    return this.warpMethod((data: DataType) => {
+      return data.sort((a, b) => {
+        return cf(a.value, b.value);
+      });
     });
-
-    super.updateData(data);
   }
 
-  public delete(index: number) {
-    const data = this.getData();
+  public reverse() {
+    return this.warpMethod((data: DataType) => {
+      return data.reverse();
+    });
+  }
 
-    data.splice(index, 1);
-
-    super.updateData(data);
+  public splice(start = 0, deleteCount?: number, ...items: number[]) {
+    if (arguments.length === 1) {
+      return this.warpMethod((data) => {
+        data.splice(start);
+      });
+    } else if (arguments.length === 2) {
+      return this.warpMethod((data) => {
+        data.splice(start, deleteCount);
+      });
+    } else {
+      const newItems = items.map((d) => this.create(d));
+      return this.warpMethod((data) => {
+        return data.splice(start, deleteCount, ...newItems);
+      });
+    }
   }
 
   public set(index: number, value: number) {
