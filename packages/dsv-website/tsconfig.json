@@ -13,7 +13,6 @@
     "paths": {
       "@dsv-website/*": ["src/*"],
       "@dsv-charts/*": ["../dsv-charts/src/*"],
-      "@dsv-editor/*": ["../dsv-editor/src/*"],
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
