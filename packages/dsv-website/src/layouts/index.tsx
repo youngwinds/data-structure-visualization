@@ -21,9 +21,7 @@ export default function GlobalLayout({ children }: IRouteComponentProps) {
           </Col>
         </Row>
       </Header>
-      <Content>
-        <div>{children}</div>
-      </Content>
+      <Content>{children}</Content>
       <Footer style={{ textAlign: 'center', height: '48px' }}>
         youngwind.top ©2022 Created
       </Footer>

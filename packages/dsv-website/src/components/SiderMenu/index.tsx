@@ -55,6 +55,7 @@ export function SiderMenu({ menu }: ISiderMenu) {
 
   return (
     <Sider
+      width={200}
       theme="light"
       collapsible
       collapsed={collapsed}
