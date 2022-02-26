@@ -3,41 +3,34 @@ import {
   ArrayItemType,
   DataType,
   IConfig,
-} from '@dsv-charts/typings/config';
+  ITheme,
+} from '@dsv-charts/typings';
 import { ArrayChart } from './array';
+import { createArrayItem } from '@dsv-charts/utils';
+import { merge } from 'lodash';
 
 class DsArray extends ArrayChart {
-  private _key = 0;
-
-  constructor(selector: string | HTMLElement, customConfig: IConfig) {
-    super(selector, customConfig);
-
+  constructor(data: number[], customConfig: IConfig, customTheme: ITheme) {
+    super(
+      'container',
+      merge(
+        { data: data.map((d: number) => createArrayItem(d)) },
+        customConfig
+      ),
+      customTheme
+    );
     super.render();
   }
 
   private warpMethod(callback) {
     const data: ArrayDataType = this.getData();
-
     const returnValue = callback(data);
-
-    console.log(data);
-
     super.updateData(data);
     return returnValue;
   }
 
-  private create(value: number) {
-    return {
-      key: `__${this._key++}__`,
-      value: value,
-      name: value.toString(),
-    };
-  }
-
   public push(...args: number[]) {
-    return this.warpMethod((data) =>
-      data.push(...args.map(this.create.bind(this)))
-    );
+    return this.warpMethod((data) => data.push(...args.map(createArrayItem)));
   }
 
   public pop() {
@@ -86,7 +79,7 @@ class DsArray extends ArrayChart {
         data.splice(start, deleteCount);
       });
     } else {
-      const newItems = items.map((d) => this.create(d));
+      const newItems = items.map((d) => createArrayItem(d));
       return this.warpMethod((data) => {
         return data.splice(start, deleteCount, ...newItems);
       });

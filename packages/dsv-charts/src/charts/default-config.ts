@@ -4,10 +4,10 @@ export const defaultConfig: IConfig = {
   type: undefined,
   layout: {
     padding: {
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
+      top: 30,
+      left: 30,
+      right: 30,
+      bottom: 30,
     },
   },
 };
