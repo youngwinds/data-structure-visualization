@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { DsArray } from '@dsv-charts/charts';
+import { useDebounceFn } from 'ahooks';
 import * as monaco from 'monaco-editor';
 
 interface IMonaco {
@@ -23,12 +24,14 @@ export function Monaco({ value }: IMonaco) {
 
     runFun(DsArray);
   }, []);
+  const { run } = useDebounceFn(runCode, {
+    wait: 2000,
+  });
 
   useEffect(() => {
     if (refContainer.current === null) {
       return () => {};
     }
-
     const editor = monaco.editor.create(refContainer.current, {
       value,
       language: 'javascript',
@@ -39,6 +42,11 @@ export function Monaco({ value }: IMonaco) {
     refEditor.current = editor;
 
     runCode();
+
+    editor.onDidChangeModelContent(() => {
+      run();
+    });
+
     return () => {
       editor.dispose();
     };

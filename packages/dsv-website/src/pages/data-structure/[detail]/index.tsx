@@ -8,17 +8,10 @@ import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
   const pathName = props.location.pathname.replace('_', '/');
-  const code = require(`../../../assets/docs${pathName}`).default.code;
+  const code = require(`../../../assets/config${pathName}`).default.code;
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.run}>
-          <Button size="small" type="primary" icon={<CaretRightOutlined />}>
-            Run
-          </Button>
-        </div>
-      </div>
       <div className={styles.body}>
         <div className={styles.left}>
           <Chart />
