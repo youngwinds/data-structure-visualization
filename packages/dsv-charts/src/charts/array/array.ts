@@ -1,16 +1,19 @@
+import 'd3-transition';
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from 'd3-scale';
+import { Selection } from 'd3-selection';
+import { max } from 'd3-array';
+import { BaseChart } from '../base';
+import { Cartesian2Layout } from '@dsv-charts/layouts/cartesian2';
+
 import {
   IConfig,
   Cartesian2LayoutType,
   DataType,
   ArrayItemType,
   ArrayDataType,
-} from '@dsv-charts/typings/config';
-import { BaseChart } from '../base';
-import { Cartesian2Layout } from '@dsv-charts/layouts/cartesian2';
-import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from 'd3-scale';
-import { max } from 'd3-array';
-import { Selection } from 'd3-selection';
-import 'd3-transition';
+  ITheme,
+  TextType,
+} from '@dsv-charts/typings';
 
 export class ArrayChart extends BaseChart {
   private _layout: Cartesian2Layout;
@@ -20,8 +23,12 @@ export class ArrayChart extends BaseChart {
   private _rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   private _textGroup: Selection<SVGGElement, unknown, null, undefined>;
 
-  constructor(selector: string | HTMLElement, customConfig: IConfig) {
-    super(selector, customConfig);
+  constructor(
+    selector: string | HTMLElement,
+    customConfig: IConfig,
+    customTheme: ITheme
+  ) {
+    super(selector, customConfig, customTheme);
 
     this._layout = new Cartesian2Layout(
       super.getDom(),
@@ -71,6 +78,8 @@ export class ArrayChart extends BaseChart {
 
   protected renderRectGroup() {
     const innerRect = this._layout.getInnerRect();
+    const colorScheme = this.getThemeByKey('colorScheme');
+
     this._rectGroup.call((g) => {
       g.selectAll('rect')
         .data(this._data, (d: ArrayItemType) => d.key)
@@ -81,7 +90,7 @@ export class ArrayChart extends BaseChart {
               .attr('x', (d) => this._xScale(d.key) + innerRect.innerLeft)
               .attr('width', this._xScale.bandwidth())
               .attr('height', 0)
-              .attr('fill', 'red')
+              .attr('fill', colorScheme[0])
               .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
               .transition()
               .attr('height', (d) => this._yScale(d.value))
@@ -96,7 +105,7 @@ export class ArrayChart extends BaseChart {
           (update) =>
             update
               .transition()
-              .attr('fill', 'red')
+              .attr('fill', colorScheme[0])
               .attr('width', this._xScale.bandwidth())
               .attr('height', (d) => this._yScale(d.value))
               .attr('x', (d) => this._xScale(d.key) + innerRect.innerLeft)
@@ -121,6 +130,7 @@ export class ArrayChart extends BaseChart {
 
   protected renderTextGroup() {
     const innerRect = this._layout.getInnerRect();
+    const text = this.getThemeByKey('text') as TextType;
 
     this._textGroup.call((g) => {
       g.selectAll('text')
@@ -143,6 +153,7 @@ export class ArrayChart extends BaseChart {
         .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
         .attr('dx', this._xScale.bandwidth() / 2)
         .attr('dy', 20)
+        .attr('fill', text.textColor)
         .selection()
         .html((d) => d.name);
     });
