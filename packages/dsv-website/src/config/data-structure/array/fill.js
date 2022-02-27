@@ -1,20 +1,20 @@
 const code = `const array = new DsArray([10, 8, 6, 4, 2, 1, 3, 5, 7, 9])
 
 setTimeout(() => {
-  array.push(15)
+  array.fill(5, 5)
 }, 1000)
 
 setTimeout(() => {
-  array.push(20, 30)
+  array.fill(15, 0, 5)
 }, 2000)
 
 setTimeout(() => {
-  array.push(40, 50, 60)
+  array.fill(30)
 }, 3000)
  `;
 
 module.exports = {
-  'zh-CN': 'push',
-  'en-US': 'push',
+  'zh-CN': 'fill',
+  'en-US': 'fill',
   code: code,
 };
