@@ -1,7 +1,7 @@
 import { IRouteComponentProps } from 'umi';
 import { Layout, Row, Col } from 'antd';
 import { SiderMenu } from '@dsv-website/components/SiderMenu';
-import { DataStructureMenu } from '@dsv-website/assets/routes/data-structure-menu';
+import { dataStructureMenu } from '@dsv-website/routes/data-structure';
 const { Content } = Layout;
 
 export default function DataStructure({
@@ -13,7 +13,7 @@ export default function DataStructure({
 }: IRouteComponentProps) {
   return (
     <Layout hasSider={true} style={{ minHeight: '100vh' }}>
-      <SiderMenu menu={DataStructureMenu} />
+      <SiderMenu menu={dataStructureMenu} />
       <Layout style={{ padding: '16px' }}>
         <Content>{children}</Content>
       </Layout>

@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Website of data-structure-visualization",
   "scripts": {
+    "prestart": "node ./scripts/generators/routes.js && node ./scripts/generators/locales.js",
     "start": "umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",

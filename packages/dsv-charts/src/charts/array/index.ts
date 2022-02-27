@@ -29,14 +29,6 @@ class DsArray extends ArrayChart {
     return returnValue;
   }
 
-  public push(...args: number[]) {
-    return this.warpMethod((data) => data.push(...args.map(createArrayItem)));
-  }
-
-  public pop() {
-    return this.warpMethod((data) => data.pop());
-  }
-
   public fill(value, start?: number, end?: number) {
     return this.warpMethod((data: ArrayDataType) => {
       start = start ? start : 0;
@@ -51,6 +43,20 @@ class DsArray extends ArrayChart {
     });
   }
 
+  public pop() {
+    return this.warpMethod((data) => data.pop());
+  }
+
+  public push(...args: number[]) {
+    return this.warpMethod((data) => data.push(...args.map(createArrayItem)));
+  }
+
+  public reverse() {
+    return this.warpMethod((data: DataType) => {
+      return data.reverse();
+    });
+  }
+
   public sort(compareFunction?: (a: number, b: number) => number) {
     const cf = (a: number, b: number) => {
       compareFunction = compareFunction ? compareFunction : (a, b) => a - b;
@@ -60,12 +66,6 @@ class DsArray extends ArrayChart {
       return data.sort((a, b) => {
         return cf(a.value, b.value);
       });
-    });
-  }
-
-  public reverse() {
-    return this.warpMethod((data: DataType) => {
-      return data.reverse();
     });
   }
 

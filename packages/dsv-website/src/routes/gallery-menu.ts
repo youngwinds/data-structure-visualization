@@ -1,4 +1,4 @@
-import { IMenu } from '../../typings/IMenu';
+import { IMenu } from '../typings/IMenu';
 
 /**
  * 数据结构页面菜单配置
