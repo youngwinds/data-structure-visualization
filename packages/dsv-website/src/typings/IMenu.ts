@@ -1,6 +1,6 @@
 interface IMenuItem {
   key: string;
-  locale: string;
+  locale?: string;
   path?: string;
   children?: Array<IMenuItem>;
 }

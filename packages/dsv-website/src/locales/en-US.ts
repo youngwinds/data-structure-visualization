@@ -1,9 +1,8 @@
+import { generatorLocaleByLanguage } from '@dsv-website/utils/locale';
+import { navbar } from './menu';
+
 export default {
-  // Nav Menu
-  Home: 'Home',
-  About: 'About',
-  DataStructure: 'DataStructure',
-  Gallery: 'Gallery',
+  ...generatorLocaleByLanguage(navbar, 'en-US'),
   // DataStructure Sider Menu
   DS_Array: 'Array',
   DS_Array_Push: 'push',
@@ -19,4 +18,5 @@ export default {
   Ga_Selection_Sort: 'selection sort',
   Ga_Stack: 'Stack',
   Ga_Parenthesis_Matching: 'parenthesis matching',
+  ...navbar.map((item) => ({ [item.key]: item['en-US'] })),
 };

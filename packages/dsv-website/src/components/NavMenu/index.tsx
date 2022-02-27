@@ -1,6 +1,6 @@
 import { Link, useIntl } from 'umi';
 import { Menu } from 'antd';
-import { navMenu } from '../../assets/routes/nav-menu';
+import { navMenu } from '../../routes/nav-menu';
 import { pathGenerator } from '@dsv-website/utils/route-path';
 import { useMemo } from 'react';
 

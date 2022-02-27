@@ -2,7 +2,6 @@ import { Link, useIntl } from 'umi';
 import { useCallback, useMemo, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { IMenu, IMenuItem } from '@dsv-website/typings/IMenu';
-import { pathGenerator } from '@dsv-website/utils/route-path';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -25,10 +24,11 @@ export function SiderMenu({ menu }: ISiderMenu) {
       if (item.children !== undefined) {
         return (
           <SubMenu
-            key={item.path}
-            title={intl.formatMessage({
-              id: item.locale,
-            })}
+            key={item.key}
+            // title={intl.formatMessage({
+            //   id: item.key,
+            // })}
+            title={item.key}
           >
             {menuGenerator(item.children)}
           </SubMenu>
@@ -36,11 +36,12 @@ export function SiderMenu({ menu }: ISiderMenu) {
       }
 
       return (
-        <Menu.Item key={item.path}>
+        <Menu.Item key={item.key}>
           <Link to={item.path}>
-            {intl.formatMessage({
+            {/* {intl.formatMessage({
               id: item.locale,
-            })}
+            })} */}
+            {item.key}
           </Link>
         </Menu.Item>
       );
@@ -48,9 +49,7 @@ export function SiderMenu({ menu }: ISiderMenu) {
   }, []);
 
   const SiderMenu = useMemo(() => {
-    const pathMenu = pathGenerator(menu, `/${location.hash.split('/')[1]}/`);
-
-    return menuGenerator(pathMenu);
+    return menuGenerator(menu);
   }, [menu, window.location.hash]);
 
   return (

@@ -5,7 +5,7 @@ setTimeout(()=>{
 },1000)
 `;
 
-export default {
+module.exports = {
   'zh-CN': 'pop',
   'en-US': 'pop',
   code: code,

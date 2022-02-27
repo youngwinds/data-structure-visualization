@@ -1,9 +1,9 @@
+import { generatorLocaleByLanguage } from '@dsv-website/utils/locale';
+import { navbar } from './menu';
+
 export default {
   // 导航菜单
-  Home: '首页',
-  About: '关于',
-  DataStructure: '数据结构',
-  Gallery: '画廊',
+  ...generatorLocaleByLanguage(navbar, 'zh-CN'),
   /** 数据结构侧导航 */
   DS_Array: '数组',
   DS_Array_Push: 'push',

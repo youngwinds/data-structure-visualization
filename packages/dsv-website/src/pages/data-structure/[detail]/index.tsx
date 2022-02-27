@@ -6,7 +6,7 @@ import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
   const pathName = props.location.pathname.replace('_', '/');
-  const code = require(`../../../config${pathName}`).default.code;
+  const code = require(`../../../config${pathName}`).code;
 
   return (
     <div className={styles.container}>
