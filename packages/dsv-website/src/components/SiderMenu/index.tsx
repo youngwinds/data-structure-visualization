@@ -25,23 +25,23 @@ export function SiderMenu({ menu }: ISiderMenu) {
         return (
           <SubMenu
             key={item.key}
-            // title={intl.formatMessage({
-            //   id: item.key,
-            // })}
-            title={item.key}
+            title={intl.formatMessage({
+              id: item.key,
+            })}
           >
             {menuGenerator(item.children)}
           </SubMenu>
         );
       }
+      console.log();
 
       return (
         <Menu.Item key={item.key}>
           <Link to={item.path}>
-            {/* {intl.formatMessage({
-              id: item.locale,
-            })} */}
-            {item.key}
+            {intl.formatMessage({
+              id:
+                location.hash.split('/')[1].replace('-', '_') + '_' + item.key,
+            })}
           </Link>
         </Menu.Item>
       );

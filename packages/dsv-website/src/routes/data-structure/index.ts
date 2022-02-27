@@ -5,6 +5,10 @@ export const dataStructureMenu : IMenu =  [
     "key": "array",
     "children": [
       {
+        "path": "/data-structure/array_fill",
+        "key": "array_fill"
+      },
+      {
         "path": "/data-structure/array_pop",
         "key": "array_pop"
       },
@@ -15,6 +19,10 @@ export const dataStructureMenu : IMenu =  [
       {
         "path": "/data-structure/array_reverse",
         "key": "array_reverse"
+      },
+      {
+        "path": "/data-structure/array_slice",
+        "key": "array_slice"
       },
       {
         "path": "/data-structure/array_sort",

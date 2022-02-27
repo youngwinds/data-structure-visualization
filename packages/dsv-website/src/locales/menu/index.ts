@@ -1,6 +1,4 @@
-import { ILocale } from '@dsv-website/typings/ILocale';
-
-export const navbar: ILocale[] = [
+export default [
   {
     key: 'Home',
     'zh-CN': '主页',

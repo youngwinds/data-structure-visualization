@@ -1,5 +1,5 @@
 /**
- * 基于config 生成 routes & locales
+ * 基于config 生成 routes
  */
 const path = require('path');
 const fs = require('fs');
@@ -36,9 +36,7 @@ function createFile(path, content) {
   }
   fs.writeFile(path + '/index.ts', content, function (error) {
     if (error) {
-      console.log('写入失败');
-    } else {
-      console.log('写入成功了');
+      console.log('Error: generators routes');
     }
   });
 }
@@ -58,6 +56,9 @@ function run(folderName, fileName) {
       2,
     )}`,
   );
+
+  console.log(`Successful: generators routes ${folderName}`);
 }
+
 run('/data-structure', 'dataStructureMenu');
 run('/gallery', 'galleryMenu');
