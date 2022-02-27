@@ -1,14 +1,12 @@
 import { IRouteComponentProps } from 'umi';
-import { Button } from 'antd';
 import { Chart } from '@dsv-website/components/Editor/Chart';
 import { Monaco } from '@dsv-website/components/Editor/Monaco';
-import { CaretRightOutlined } from '@ant-design/icons';
 
 import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
   const pathName = props.location.pathname.replace('_', '/');
-  const code = require(`../../../assets/config${pathName}`).default.code;
+  const code = require(`../../../config${pathName}`).default.code;
 
   return (
     <div className={styles.container}>

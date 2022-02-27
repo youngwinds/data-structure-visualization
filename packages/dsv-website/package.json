@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Website of data-structure-visualization",
   "scripts": {
+    "prestart": "",
     "start": "umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
