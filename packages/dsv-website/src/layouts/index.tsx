@@ -22,9 +22,7 @@ export default function GlobalLayout({ children }: IRouteComponentProps) {
         </Row>
       </Header>
       <Content>{children}</Content>
-      <Footer style={{ textAlign: 'center', height: '48px' }}>
-        youngwind.top ©2022 Created
-      </Footer>
+      <Footer className={styles.footer}>youngwind.top ©2022 Created</Footer>
     </Layout>
   );
 }
