@@ -18,3 +18,9 @@
 /src/.umi-production
 /src/.umi-test
 /.env.local
+
+# generators
+/src/locales/data-structure
+/src/locales/gallery
+/src/routes/data-structure
+/src/routes/gallery
