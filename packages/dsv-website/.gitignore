@@ -20,7 +20,7 @@
 /.env.local
 
 # generators
-/src/locales/data-structure/index.ts
-/src/locales/gallery/index.ts
-/src/routes/data-structure/index.ts
-/src/routes/gallery/index.ts
+/src/locales/data-structure
+/src/locales/gallery
+/src/routes/data-structure
+/src/routes/gallery
