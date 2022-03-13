@@ -1,7 +1,6 @@
 import { IRouteComponentProps } from 'umi';
-import { Chart } from '@dsv-website/components/Editor/Chart';
-import { Monaco } from '@dsv-website/components/Editor/Monaco';
-
+import { Chart } from '@dsv-website/components/Chart';
+import { Editor } from '@dsv-website/components/Editor';
 import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
@@ -18,7 +17,7 @@ export default function Detail(props: IRouteComponentProps) {
           <div className={styles.line}></div>
         </div>
         <div className={styles.right}>
-          <Monaco value={code} />
+          <Editor initValue={code} />
         </div>
       </div>
     </div>
