@@ -22,43 +22,43 @@ export abstract class BaseChart {
     this._theme = merge({}, defaultTheme, customTheme) as ITheme;
   }
 
-  protected render() {}
+  public render() {}
 
   /**
-   * update
+   * setters
    */
-  protected updateData(data: DataType) {
+  public setData(data: DataType) {
     this._config.data = data;
   }
 
-  protected updateConfig(customConfig: IConfig) {
+  public setConfig(customConfig: IConfig) {
     this._config = merge({}, defaultConfig, customConfig) as IConfig;
   }
 
-  protected updateTheme(customTheme: ITheme) {
+  public setTheme(customTheme: ITheme) {
     this._theme = merge({}, defaultTheme, customTheme) as ITheme;
   }
 
   /**
    * getters
    */
-  protected getDom() {
+  public getDom() {
     return this._dom;
   }
 
-  protected getConfig() {
+  public getConfig() {
     return this._config;
   }
 
-  protected getTheme() {
+  public getTheme() {
     return this._theme;
   }
 
-  protected getData() {
+  public getData() {
     return this._config.data;
   }
 
-  protected getConfigByKey(key: IConfigKeys): any {
+  public getConfigByKey(key: IConfigKeys): any {
     if (this._config[key]) {
       return this._config[key];
     }
@@ -66,7 +66,7 @@ export abstract class BaseChart {
     throw new Error(`error key: ${key}`);
   }
 
-  protected getThemeByKey(key: IThemeKeys): any {
+  public getThemeByKey(key: IThemeKeys): any {
     if (this._theme[key]) {
       return this._theme[key];
     }

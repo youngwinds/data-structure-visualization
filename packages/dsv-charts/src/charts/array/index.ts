@@ -25,7 +25,8 @@ class DsArray extends ArrayChart {
   private warpMethod(callback) {
     const data: ArrayDataType = this.getData();
     const returnValue = callback(data);
-    super.updateData(data);
+    super.setData(data);
+    super.render();
     return returnValue;
   }
 
@@ -93,7 +94,7 @@ class DsArray extends ArrayChart {
     item.value = value;
     item.name = value.toString();
 
-    super.updateData(data);
+    super.setData(data);
   }
 
   public get(index: number) {
