@@ -20,14 +20,14 @@ export default {
     ) {
       return { ...state, ...payload };
     },
-    runCode(state: IMonacoState, { payload }: any) {
-      if (state.editor === null) {
-        return { ...state };
-      }
-      const code = state.editor.getValue();
-      runCode(code);
-      return { ...state };
-    },
+    // runCode(state: IMonacoState, { payload }: any) {
+    //   if (state.editor === null) {
+    //     return { ...state };
+    //   }
+    //   const code = state.editor.getValue();
+    //   runCode(code);
+    //   return { ...state };
+    // },
     release(state: IMonacoState) {
       if (state.editor === null) {
         return { ...state };
