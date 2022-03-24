@@ -10,4 +10,7 @@ export const defaultConfig: IConfig = {
       bottom: 30,
     },
   },
+  transition: {
+    duration: 1000,
+  },
 };

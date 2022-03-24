@@ -10,13 +10,16 @@ import { createArrayItem } from '@dsv-charts/utils';
 import { merge } from 'lodash';
 
 class DsArray extends ArrayChart {
-  constructor(data: number[], customConfig: IConfig, customTheme: ITheme) {
+  constructor(customConfig: IConfig, customTheme: ITheme) {
     super(
       'container',
-      merge(
-        { data: data.map((d: number) => createArrayItem(d)) },
-        customConfig
-      ),
+      merge(customConfig, {
+        data: customConfig.data.map((d) => {
+          if (typeof d === 'number') {
+            return createArrayItem(d);
+          }
+        }),
+      }),
       customTheme
     );
     super.render();
@@ -25,7 +28,7 @@ class DsArray extends ArrayChart {
   private warpMethod(callback) {
     const data: ArrayDataType = this.getData();
     const returnValue = callback(data);
-    super.updateData(data);
+    super.setData(data);
     return returnValue;
   }
 
@@ -93,7 +96,7 @@ class DsArray extends ArrayChart {
     item.value = value;
     item.name = value.toString();
 
-    super.updateData(data);
+    super.setData(data);
   }
 
   public get(index: number) {

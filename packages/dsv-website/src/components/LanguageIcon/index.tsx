@@ -13,7 +13,7 @@ export function LocaleIcon() {
 
   return (
     <Dropdown
-      placement="bottomCenter"
+      placement="bottom"
       arrow
       overlay={
         <Menu selectedKeys={[getLocale()]} onClick={handleLocaleChange}>

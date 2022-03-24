@@ -1,16 +1,13 @@
-const code = `const array = new DsArray([10, 8, 6, 4, 2, 1, 3, 5, 7, 9])
+const code = `const array = dsv.create({
+  type: 'array',
+  data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9]
+})
 
-setTimeout(() => {
-  array.push(15)
-}, 1000)
+array.push(15)
 
-setTimeout(() => {
-  array.push(20, 30)
-}, 2000)
+array.push(20, 30)
 
-setTimeout(() => {
-  array.push(40, 50, 60)
-}, 3000)
+array.push(40, 50, 60)
  `;
 
 module.exports = {

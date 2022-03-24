@@ -41,28 +41,29 @@ export class ArrayChart extends BaseChart {
     this._data = super.getConfigByKey('data') as DataType;
   }
 
-  protected updateData(data: ArrayDataType): void {
-    super.updateData(data);
+  public setData(data: ArrayDataType, ignoreLifeCircle = false) {
+    super.setData(data, ignoreLifeCircle);
     this._data = super.getConfigByKey('data') as DataType;
-
-    this.render();
   }
 
-  protected updateConfig(customConfig: IConfig): void {
-    super.updateConfig(customConfig);
+  public setConfig(customConfig: IConfig): void {
+    super.setConfig(customConfig);
     this._data = super.getConfigByKey('data') as DataType;
-
-    this.render();
   }
 
-  protected render() {
+  public async renderAsync() {
+    return await new Promise((resolve) => {
+      this.render().transitionEnd(resolve);
+    });
+  }
+
+  public render() {
     this._layout.render(this.getConfigByKey('layout') as Cartesian2LayoutType);
-    this.renderScale();
-    this.renderRectGroup();
-    this.renderTextGroup();
+    this.renderScale().renderRectGroup().renderTextGroup();
+    return this;
   }
 
-  protected renderScale() {
+  private renderScale() {
     const innerRect = this._layout.getInnerRect();
 
     this._xScale = scaleBand(
@@ -74,11 +75,14 @@ export class ArrayChart extends BaseChart {
       [0, max(this._data, (d) => d.value)],
       [0, innerRect.innerHeight]
     );
+
+    return this;
   }
 
-  protected renderRectGroup() {
+  private renderRectGroup() {
     const innerRect = this._layout.getInnerRect();
     const colorScheme = this.getThemeByKey('colorScheme');
+    const { duration } = this.getConfigByKey('transition');
 
     this._rectGroup.call((g) => {
       g.selectAll('rect')
@@ -93,6 +97,7 @@ export class ArrayChart extends BaseChart {
               .attr('fill', colorScheme[0])
               .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
               .transition()
+              .duration(duration)
               .attr('height', (d) => this._yScale(d.value))
               .attr(
                 'y',
@@ -105,6 +110,7 @@ export class ArrayChart extends BaseChart {
           (update) =>
             update
               .transition()
+              .duration(duration)
               .attr('fill', colorScheme[0])
               .attr('width', this._xScale.bandwidth())
               .attr('height', (d) => this._yScale(d.value))
@@ -120,17 +126,21 @@ export class ArrayChart extends BaseChart {
           (exit) =>
             exit
               .transition()
+              .duration(duration)
               .attr('height', '0')
               .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
               .transition()
               .remove()
         );
     });
+
+    return this;
   }
 
-  protected renderTextGroup() {
+  private renderTextGroup() {
     const innerRect = this._layout.getInnerRect();
     const text = this.getThemeByKey('text') as TextType;
+    const { duration } = this.getConfigByKey('transition');
 
     this._textGroup.call((g) => {
       g.selectAll('text')
@@ -146,9 +156,16 @@ export class ArrayChart extends BaseChart {
               .attr('dy', 20)
               .attr('y', () => innerRect.innerTop + innerRect.innerHeight),
           (update) => update,
-          (exit) => exit.transition().attr('opacity', 0).transition().remove()
+          (exit) =>
+            exit
+              .transition()
+              .duration(duration)
+              .attr('opacity', 0)
+              .transition()
+              .remove()
         )
         .transition()
+        .duration(duration)
         .attr('x', (d) => this._xScale(d.key) + innerRect.innerLeft)
         .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
         .attr('dx', this._xScale.bandwidth() / 2)
@@ -157,11 +174,22 @@ export class ArrayChart extends BaseChart {
         .selection()
         .html((d) => d.name);
     });
+
+    return this;
   }
 
-  protected destroy() {
-    console.log('destroy ArrayChart');
+  private transitionEnd(resolve) {
+    const { duration } = this.getConfigByKey('transition');
 
+    return this._rectGroup
+      .transition()
+      .duration(duration)
+      .on('end', () => {
+        resolve();
+      });
+  }
+
+  public destroy() {
     this._layout.destroy();
     this._textGroup.remove();
     this._rectGroup.remove();

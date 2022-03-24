@@ -1,6 +1,8 @@
 import { IRouteComponentProps } from 'umi';
 import { Chart } from '@dsv-website/components/Chart';
-import { Editor } from '@dsv-website/components/Editor';
+import { CodeEditor } from '@dsv-website/components/CodeEditor';
+import { Backtracking } from '@dsv-website/components/Backtracking';
+
 import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
@@ -17,7 +19,12 @@ export default function Detail(props: IRouteComponentProps) {
           <div className={styles.line}></div>
         </div>
         <div className={styles.right}>
-          <Editor initValue={code} />
+          <div className={styles.backtracking}>
+            <Backtracking initValue={code} />
+          </div>
+          <div className={styles.editor}>
+            <CodeEditor initValue={code} />
+          </div>
         </div>
       </div>
     </div>
