@@ -1,13 +1,18 @@
 import { DataType, IConfig, IConfigKeys, ITheme } from '@dsv-charts/typings';
-import { merge } from 'lodash';
+import { merge, cloneDeep } from 'lodash';
 import { defaultConfig } from './default-config';
 import { light as defaultTheme } from '@dsv-charts/theme';
 import { IThemeKeys } from '@dsv-charts/typings';
+
+type lifeCircleType = 'didSetData' | 'willSetData';
 
 export abstract class BaseChart {
   private _dom: HTMLElement;
   private _config: IConfig;
   private _theme: ITheme;
+
+  private willSetData: Function;
+  private didSetData: Function;
 
   constructor(
     selector: string | HTMLElement,
@@ -20,6 +25,11 @@ export abstract class BaseChart {
         : selector;
     this._config = merge({}, defaultConfig, customConfig) as IConfig;
     this._theme = merge({}, defaultTheme, customTheme) as ITheme;
+
+    const { afterInit } = this.getConfigByKey('lifeCircle');
+
+    typeof afterInit === 'function' &&
+      afterInit(cloneDeep(this._config.data), this);
   }
 
   public render() {}
@@ -27,8 +37,14 @@ export abstract class BaseChart {
   /**
    * setters
    */
-  public setData(data: DataType) {
+  public setData(data: DataType, ignoreLifeCircle = false) {
+    const { afterSetData } = this.getConfigByKey('lifeCircle');
+
     this._config.data = data;
+
+    !ignoreLifeCircle &&
+      typeof afterSetData === 'function' &&
+      afterSetData(cloneDeep(data), this);
   }
 
   public setConfig(customConfig: IConfig) {

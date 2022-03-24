@@ -1,7 +1,12 @@
-import { DsArray } from '@dsv-charts/charts';
-export function runCode(code: string) {
+import { Dsv } from '@dsv-charts/core';
+
+export function runCode(code: string, didSetData: Function) {
   const chartContainer = document.querySelector('#container');
   chartContainer && (chartContainer.innerHTML = '');
-  const runFun = new Function('DsArray', code);
-  runFun(DsArray);
+
+  const dsv = Dsv.getInstance(didSetData);
+
+  const runFun = new Function('dsv', code);
+
+  runFun(dsv);
 }

@@ -10,13 +10,16 @@ import { createArrayItem } from '@dsv-charts/utils';
 import { merge } from 'lodash';
 
 class DsArray extends ArrayChart {
-  constructor(data: number[], customConfig: IConfig, customTheme: ITheme) {
+  constructor(customConfig: IConfig, customTheme: ITheme) {
     super(
       'container',
-      merge(
-        { data: data.map((d: number) => createArrayItem(d)) },
-        customConfig
-      ),
+      merge(customConfig, {
+        data: customConfig.data.map((d) => {
+          if (typeof d === 'number') {
+            return createArrayItem(d);
+          }
+        }),
+      }),
       customTheme
     );
     super.render();
@@ -26,7 +29,6 @@ class DsArray extends ArrayChart {
     const data: ArrayDataType = this.getData();
     const returnValue = callback(data);
     super.setData(data);
-    super.render();
     return returnValue;
   }
 

@@ -41,8 +41,8 @@ export class ArrayChart extends BaseChart {
     this._data = super.getConfigByKey('data') as DataType;
   }
 
-  public setData(data: ArrayDataType) {
-    super.setData(data);
+  public setData(data: ArrayDataType, ignoreLifeCircle = false) {
+    super.setData(data, ignoreLifeCircle);
     this._data = super.getConfigByKey('data') as DataType;
   }
 

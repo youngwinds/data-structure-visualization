@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'umi';
 import * as monaco from 'monaco-editor';
 import { runCode } from '@dsv-website/utils/run-code';
-
 interface ICodeEditor {
   initValue: string;
 }
@@ -30,7 +29,12 @@ export function CodeEditor({ initValue }: ICodeEditor) {
       },
     });
 
-    runCode(initValue);
+    runCode(initValue, (state: any, instance: any) => {
+      dispatch({
+        type: 'backtracking/push',
+        payload: [instance, state],
+      });
+    });
 
     return () => {
       editor.dispose();

@@ -1,12 +1,11 @@
-const code = `const array = new DsArray([10, 8, 6, 4, 2, 1, 3, 5, 7, 9])
+const code = `const array = dsv.create({
+  type: 'array',
+  data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9]
+})
 
-setTimeout(() => {
-  array.splice(0, 4)
-}, 1000)
+array.splice(0, 4)
 
-setTimeout(() => {
-  array.splice(2, 0, 9, 8, 7, 6)
-}, 2000)
+array.splice(2, 0, 9, 8, 7, 6)
  `;
 
 module.exports = {

@@ -20,7 +20,7 @@ export default function Detail(props: IRouteComponentProps) {
         </div>
         <div className={styles.right}>
           <div className={styles.backtracking}>
-            <Backtracking />
+            <Backtracking initValue={code} />
           </div>
           <div className={styles.editor}>
             <CodeEditor initValue={code} />

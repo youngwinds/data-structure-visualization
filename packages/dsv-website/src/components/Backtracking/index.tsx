@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'umi';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { Button, Progress, Space, Tooltip } from 'antd';
 import {
@@ -9,7 +9,11 @@ import {
 } from '@ant-design/icons';
 
 import styles from './index.less';
-export function Backtracking() {
+interface IBacktracking {
+  initValue: string;
+}
+
+export function Backtracking({ initValue }: IBacktracking) {
   const dispatch = useDispatch();
   const { percent } = useSelector((state: any) => state.backtracking);
 
@@ -18,11 +22,27 @@ export function Backtracking() {
       type: 'backtracking/run',
       payload: {},
     });
-  }, []);
+  }, [initValue]);
 
-  const handleBackward = useCallback(() => {}, []);
+  const handleBackward = useCallback(() => {
+    dispatch({
+      type: 'backtracking/backward',
+    });
+  }, [initValue]);
 
-  const handleForward = useCallback(() => {}, []);
+  const handleForward = useCallback(() => {
+    dispatch({
+      type: 'backtracking/forward',
+    });
+  }, [initValue]);
+
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: 'backtracking/destroy',
+      });
+    };
+  }, [initValue]);
 
   return (
     <Space className={styles.backtracking}>
