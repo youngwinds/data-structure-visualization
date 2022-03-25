@@ -161,7 +161,7 @@ export class ArrayChart extends BaseChart {
               .transition()
               .duration(duration)
               .attr('opacity', 0)
-              .transition()
+              .selection()
               .remove()
         )
         .transition()
