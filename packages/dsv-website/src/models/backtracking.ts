@@ -27,6 +27,9 @@ export default {
       runCode(editor.getValue(), () => {
         console.log('Error');
       });
+      yield put({
+        type: 'init',
+      });
     },
   },
 
@@ -74,6 +77,9 @@ export default {
         currentIndex: nextIndex,
         percent: Math.floor((100 * (nextIndex + 1)) / state.queue.length),
       };
+    },
+    init(state: IBacktrackingState) {
+      return { ...state, percent: Math.floor(100 * (1 / state.queue.length)) };
     },
     destroy() {
       return { ...initState };
