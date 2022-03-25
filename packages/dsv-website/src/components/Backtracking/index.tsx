@@ -1,10 +1,11 @@
-import { useSelector, useDispatch } from 'umi';
+import { useSelector, useDispatch, useIntl } from 'umi';
 import { useCallback, useEffect } from 'react';
 
 import { Button, Progress, Space, Tooltip } from 'antd';
 import {
   StepBackwardOutlined,
   StepForwardOutlined,
+  SettingOutlined,
   PlayCircleOutlined,
 } from '@ant-design/icons';
 
@@ -14,8 +15,23 @@ interface IBacktracking {
 }
 
 export function Backtracking({ initValue }: IBacktracking) {
+  const intl = useIntl();
   const dispatch = useDispatch();
-  const { percent } = useSelector((state: any) => state.backtracking);
+  const {
+    percent,
+    progressFormat,
+    disableForward,
+    disableBackward,
+    disablePlay,
+    disableBuild,
+  } = useSelector((state: any) => state.backtracking);
+
+  const handleBuild = useCallback(() => {
+    dispatch({
+      type: 'backtracking/build',
+      payload: {},
+    });
+  }, [initValue]);
 
   const handleRun = useCallback(() => {
     dispatch({
@@ -46,21 +62,61 @@ export function Backtracking({ initValue }: IBacktracking) {
 
   return (
     <Space className={styles.backtracking}>
-      <Tooltip placement="top" overlay="Run">
-        <Button icon={<PlayCircleOutlined />} onClick={handleRun} />
+      <Tooltip
+        placement="top"
+        overlay={intl.formatMessage({
+          id: 'Build',
+        })}
+      >
+        <Button
+          disabled={disableBuild}
+          icon={<SettingOutlined />}
+          onClick={handleBuild}
+        />
+      </Tooltip>
+
+      <Tooltip
+        placement="top"
+        overlay={intl.formatMessage({
+          id: 'Run',
+        })}
+      >
+        <Button
+          disabled={disablePlay}
+          icon={<PlayCircleOutlined />}
+          onClick={handleRun}
+        />
+      </Tooltip>
+
+      <Tooltip
+        placement="top"
+        overlay={intl.formatMessage({
+          id: 'Backward',
+        })}
+      >
+        <Button
+          disabled={disableBackward}
+          icon={<StepBackwardOutlined />}
+          onClick={handleBackward}
+        />
+      </Tooltip>
+
+      <Tooltip
+        placement="top"
+        overlay={intl.formatMessage({
+          id: 'Forward',
+        })}
+      >
+        <Button
+          disabled={disableForward}
+          icon={<StepForwardOutlined />}
+          onClick={handleForward}
+        />
       </Tooltip>
 
       <div style={{ width: 170 }}>
-        <Progress percent={percent} />
+        <Progress percent={percent} format={() => progressFormat} />
       </div>
-
-      <Tooltip placement="top" overlay="Backward">
-        <Button icon={<StepBackwardOutlined />} onClick={handleBackward} />
-      </Tooltip>
-
-      <Tooltip placement="top" overlay="Forward">
-        <Button icon={<StepForwardOutlined />} onClick={handleForward} />
-      </Tooltip>
     </Space>
   );
 }

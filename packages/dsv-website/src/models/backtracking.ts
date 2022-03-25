@@ -1,16 +1,27 @@
 import { runCode } from '@dsv-website/utils/run-code';
-import { message } from 'antd';
 
 interface IBacktrackingState {
   percent: number;
+  progressFormat: string;
   queue: [];
   currentIndex: number;
+  disableBackward: boolean;
+  disableForward: boolean;
+  disablePlay: boolean;
+  disableBuild: boolean;
+  isRunning: boolean;
 }
 
 const initState: IBacktrackingState = {
   percent: 0,
+  progressFormat: '',
   queue: [],
   currentIndex: 0,
+  disableBackward: true,
+  disableForward: false,
+  disablePlay: false,
+  disableBuild: false,
+  isRunning: false,
 };
 
 export default {
@@ -19,17 +30,105 @@ export default {
   state: { ...initState },
 
   effects: {
-    *run(action: any, { select, put }: any) {
+    *build(action: any, { select, put }: any) {
       const { editor } = yield select((store: any) => store.monaco);
       yield put({
         type: 'destroy',
       });
+
       runCode(editor.getValue(), () => {
         console.log('Error');
       });
+
       yield put({
         type: 'init',
       });
+    },
+
+    *run(action: any, { select, put, call }: any) {
+      const state: IBacktrackingState = yield select(
+        (store: any) => store.backtracking,
+      );
+
+      const { currentIndex, queue } = state;
+
+      yield put({
+        type: 'update',
+        payload: {
+          disableForward: true,
+          disableBackward: true,
+          disablePlay: true,
+          disableBuild: true,
+          isRunning: true,
+        },
+      });
+
+      for (let i = currentIndex; i < queue.length - 1; i++) {
+        yield put.resolve({
+          type: 'forward',
+        });
+      }
+
+      yield put({
+        type: 'update',
+        payload: {
+          disableForward: true,
+          disableBackward: false,
+          disablePlay: false,
+          disableBuild: false,
+          isRunning: false,
+        },
+      });
+    },
+
+    *backward(action: any, { put, select }: any) {
+      const state: IBacktrackingState = yield select(
+        (store: any) => store.backtracking,
+      );
+
+      const { currentIndex, queue, isRunning } = state;
+      const prevIndex = currentIndex - 1;
+
+      const [instance, data] = queue[prevIndex] as any;
+
+      yield put({
+        type: 'update',
+        payload: {
+          currentIndex: prevIndex,
+          percent: Math.floor((100 * (prevIndex + 1)) / queue.length),
+          progressFormat: `${prevIndex + 1}/${queue.length}`,
+          disableForward: isRunning ? true : false,
+          disableBackward: isRunning ? true : prevIndex === 0,
+        },
+      });
+
+      instance.setData(data, true);
+      yield instance.renderAsync();
+    },
+
+    *forward(action: any, { put, select }: any) {
+      const state: IBacktrackingState = yield select(
+        (store: any) => store.backtracking,
+      );
+      const { currentIndex, queue, isRunning } = state;
+
+      const nextIndex = currentIndex + 1;
+
+      const [instance, data] = queue[nextIndex] as any;
+
+      yield put({
+        type: 'update',
+        payload: {
+          currentIndex: nextIndex,
+          percent: Math.floor((100 * (nextIndex + 1)) / queue.length),
+          progressFormat: `${nextIndex + 1}/${queue.length}`,
+          disableBackward: isRunning ? true : false,
+          disableForward: isRunning ? true : nextIndex === queue.length - 1,
+        },
+      });
+
+      instance.setData(data, true);
+      yield instance.renderAsync();
     },
   },
 
@@ -42,45 +141,19 @@ export default {
         queue: [...state.queue, [instance, chartState]],
       };
     },
-    backward(state: IBacktrackingState) {
-      const prevIndex = state.currentIndex - 1;
 
-      if (prevIndex === -1) {
-        message.info('无法后退');
-        return { ...state };
-      }
-
-      const [instance, data] = state.queue[prevIndex] as any;
-      instance.setData(data, true);
-      instance.render(data);
-
-      return {
-        ...state,
-        currentIndex: prevIndex,
-        percent: Math.floor((100 * (prevIndex + 1)) / state.queue.length),
-      };
+    update(state: IBacktrackingState, { payload }: any) {
+      return { ...state, ...payload };
     },
-    forward(state: IBacktrackingState) {
-      const nextIndex = state.currentIndex + 1;
 
-      if (nextIndex === state.queue.length) {
-        message.info('无法前进');
-        return { ...state };
-      }
-
-      const [instance, data] = state.queue[nextIndex] as any;
-      instance.setData(data, true);
-      instance.render(data);
-
-      return {
-        ...state,
-        currentIndex: nextIndex,
-        percent: Math.floor((100 * (nextIndex + 1)) / state.queue.length),
-      };
-    },
     init(state: IBacktrackingState) {
-      return { ...state, percent: Math.floor(100 * (1 / state.queue.length)) };
+      return {
+        ...state,
+        percent: Math.floor(100 * (1 / state.queue.length)),
+        progressFormat: `${1}/${state.queue.length}`,
+      };
     },
+
     destroy() {
       return { ...initState };
     },
