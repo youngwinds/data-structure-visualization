@@ -29,6 +29,12 @@ export function CodeEditor({ initValue }: ICodeEditor) {
       },
     });
 
+    return () => {
+      editor.dispose();
+    };
+  }, [initValue]);
+
+  useEffect(() => {
     runCode(initValue, (state: any, instance: any) => {
       dispatch({
         type: 'backtracking/push',
@@ -36,9 +42,9 @@ export function CodeEditor({ initValue }: ICodeEditor) {
       });
     });
 
-    return () => {
-      editor.dispose();
-    };
+    dispatch({
+      type: 'backtracking/init',
+    });
   }, [initValue]);
 
   return (
