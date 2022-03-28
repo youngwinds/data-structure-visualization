@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "lerna exec --scope dsv-website yarn start",
-    "build": "yarn build:charts",
+    "build": "lerna exec --scope dsv-website yarn build",
     "build:charts": "lerna exec --scope dsv-charts yarn build"
   },
   "repository": {
