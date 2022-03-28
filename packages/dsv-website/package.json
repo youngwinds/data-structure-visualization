@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "description": "Website of data-structure-visualization",
   "scripts": {
-    "prestart": "node ./scripts/generators/routes.js && node ./scripts/generators/locales.js",
+    "prestart": "yarn generate",
     "start": "umi dev",
-    "build": "umi build",
+    "build": "yarn generate && umi build",
     "postinstall": "umi generate tmp",
+    "generate": "node ./scripts/generators/routes.js && node ./scripts/generators/locales.js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
