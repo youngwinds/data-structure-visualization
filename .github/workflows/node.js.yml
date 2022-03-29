@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-
-      - run: npm install yarn -g
-      - run: yarn
-      - run: yarn release
+        run: |
+          npm install yarn -g
+          yarn
+          yarn release
