@@ -149,12 +149,15 @@ export class StackChart extends BaseChart {
           (enter) =>
             enter
               .append('text')
+              .attr('y', 0)
+              .attr('x', () => innerRect.innerRight)
+              .attr('dx', () => innerRect.innerWidth / 2)
               .transition()
               .ease(easeCubic)
               .duration(duration)
-              .attr('x', () => innerRect.innerRight)
-              .transition()
               .attr('x', () => innerRect.innerLeft)
+              .attr('y', innerRect.innerTop / 2)
+              .transition()
               .attr('dx', () => innerRect.innerWidth / 2)
               .attr('y', (d) => this._yScale(d.key))
               .attr('dy', (d) => this._yScale.bandwidth() / 2)
