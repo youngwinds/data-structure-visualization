@@ -11,13 +11,15 @@ const code = `const stack = dsv.create({
   }
 })
 
-stack.pop()
+stack.push(15)
 
-stack.pop()
-`;
+stack.push(20, 30)
+
+stack.push(40, 50, 60)
+ `;
 
 module.exports = {
-  'zh-CN': 'pop',
-  'en-US': 'pop',
+  'zh-CN': 'push',
+  'en-US': 'push',
   code: code,
 };

@@ -10,14 +10,14 @@ const code = `const stack = dsv.create({
     }
   }
 })
+  
+const topValue = stack.top()
 
-stack.pop()
-
-stack.pop()
+stack.push(topValue)
 `;
 
 module.exports = {
-  'zh-CN': 'pop',
-  'en-US': 'pop',
+  'zh-CN': 'top',
+  'en-US': 'top',
   code: code,
 };

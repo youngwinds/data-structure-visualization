@@ -12,4 +12,8 @@ export const dark: ITheme = {
   text: {
     textColor: '#212121',
   },
+  border: {
+    color: '#cccccc',
+    width: 4,
+  },
 };

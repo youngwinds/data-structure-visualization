@@ -8,7 +8,6 @@ import { Cartesian2Layout } from '@dsv-charts/layouts/cartesian2';
 import {
   IConfig,
   Cartesian2LayoutType,
-  DataType,
   ArrayItemType,
   ArrayDataType,
   ITheme,
@@ -17,7 +16,7 @@ import {
 
 export class ArrayChart extends BaseChart {
   private _layout: Cartesian2Layout;
-  private _data: DataType;
+  private _data: ArrayDataType;
   private _xScale: ScaleBand<string>;
   private _yScale: ScaleLinear<number, number, never>;
   private _rectGroup: Selection<SVGGElement, unknown, null, undefined>;
@@ -38,17 +37,17 @@ export class ArrayChart extends BaseChart {
     this._rectGroup = this._layout.addGroup();
     this._textGroup = this._layout.addGroup();
 
-    this._data = super.getConfigByKey('data') as DataType;
+    this._data = super.getConfigByKey('data') as ArrayDataType;
   }
 
   public setData(data: ArrayDataType, ignoreLifeCircle = false) {
     super.setData(data, ignoreLifeCircle);
-    this._data = super.getConfigByKey('data') as DataType;
+    this._data = super.getConfigByKey('data') as ArrayDataType;
   }
 
   public setConfig(customConfig: IConfig): void {
     super.setConfig(customConfig);
-    this._data = super.getConfigByKey('data') as DataType;
+    this._data = super.getConfigByKey('data') as ArrayDataType;
   }
 
   public async renderAsync() {

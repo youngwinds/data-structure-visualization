@@ -25,6 +25,10 @@ class DsArray extends ArrayChart {
     super.render();
   }
 
+  public destroy(): void {
+    super.destroy();
+  }
+
   private warpMethod(callback) {
     const data: ArrayDataType = this.getData();
     const returnValue = callback(data);
@@ -87,26 +91,6 @@ class DsArray extends ArrayChart {
         return data.splice(start, deleteCount, ...newItems);
       });
     }
-  }
-
-  public set(index: number, value: number) {
-    const data = this.getData();
-
-    const item: ArrayItemType = data[index];
-    item.value = value;
-    item.name = value.toString();
-
-    super.setData(data);
-  }
-
-  public get(index: number) {
-    const data = this.getData();
-
-    return data[index];
-  }
-
-  public destroy(): void {
-    super.destroy();
   }
 }
 
