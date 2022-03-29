@@ -7,7 +7,7 @@
   "scripts": {
     "start": "lerna exec --scope dsv-website yarn start",
     "build": "lerna exec --scope dsv-website yarn build",
-    "release": "yarn build && lerna version --conventional-commits --create-release github"
+    "release": "lerna version --conventional-commits --create-release github"
   },
   "repository": {
     "type": "git",
