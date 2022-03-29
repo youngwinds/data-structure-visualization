@@ -29,7 +29,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: |
-          git checkout "$(echo ${{ github.ref }}
+          git checkout ${{ github.ref }}
           npm install yarn -g
           yarn
           yarn release
