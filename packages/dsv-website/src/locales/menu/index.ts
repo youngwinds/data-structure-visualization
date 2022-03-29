@@ -16,7 +16,7 @@ export default [
   },
   {
     key: 'Gallery',
-    'zh-CN': '画廊',
-    'en-US': 'Gallery',
+    'zh-CN': '算法画廊',
+    'en-US': 'Algorithm Gallery',
   },
 ];

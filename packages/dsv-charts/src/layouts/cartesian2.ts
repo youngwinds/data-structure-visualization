@@ -69,8 +69,8 @@ export class Cartesian2Layout extends BaseLayout {
 
     this._cartesian2InnerRect = {
       innerTop: padding.top,
-      innerRight: padding.left + rootRect.width,
-      innerBottom: padding.top + rootRect.height,
+      innerRight: padding.left + width,
+      innerBottom: padding.top + height,
       innerLeft: padding.left,
       innerWidth: width,
       innerHeight: height,

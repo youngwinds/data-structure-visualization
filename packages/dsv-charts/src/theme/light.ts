@@ -12,4 +12,8 @@ export const light: ITheme = {
   text: {
     textColor: '#212121',
   },
+  border: {
+    color: '#eeeeee',
+    width: 10,
+  },
 };
