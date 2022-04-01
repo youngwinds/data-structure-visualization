@@ -25,10 +25,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
       - run: |
-          npm ci
-          npm run build
+          yarn ci
+          yarn build
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
