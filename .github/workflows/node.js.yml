@@ -29,7 +29,6 @@ jobs:
       - run: |
           npm ci
           npm run build
-      - name: Deploy
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
