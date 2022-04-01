@@ -92,6 +92,29 @@ class DsArray extends ArrayChart {
       });
     }
   }
+
+  public swap(index1, index2) {
+    return this.warpMethod((data: DataType) => {
+      const tempData = data[index1];
+      data[index1] = data[index2];
+      data[index2] = tempData;
+    });
+  }
+
+  public set(index: number, value: number) {
+    return this.warpMethod((data: DataType) => {
+      return (data[index].value = value);
+    });
+  }
+
+  public get(index: number) {
+    const data = this.getConfigByKey('data') as DataType;
+    return data[index].value;
+  }
+
+  public getSize() {
+    return this.getConfigByKey('data').length;
+  }
 }
 
 export { ArrayChart, DsArray };
