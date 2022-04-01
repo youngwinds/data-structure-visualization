@@ -7,7 +7,7 @@ export default defineConfig({
     process.env.NODE_ENV === 'production'
       ? '/data-structure-visualization/'
       : '/',
-  outputPath: process.env.NODE_ENV === 'production' ? '../../docs' : 'dist',
+  outputPath: 'dist',
   nodeModulesTransform: {
     type: 'none',
     exclude: ['monaco-editor'],
