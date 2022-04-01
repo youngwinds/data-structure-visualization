@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: |
-          yarn ci
+          yarn
           yarn build
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
