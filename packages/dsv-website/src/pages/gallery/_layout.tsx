@@ -4,17 +4,13 @@ import { SiderMenu } from '@dsv-website/components/SiderMenu';
 import { galleryMenu } from '@dsv-website/routes/gallery';
 const { Content } = Layout;
 
-export default function DataStructure({
-  children,
-  location,
-  route,
-  history,
-  match,
-}: IRouteComponentProps) {
+export default function DataStructure({ children }: IRouteComponentProps) {
   return (
-    <Layout style={{ minHeight: 'calc(100vh)' }}>
+    <Layout hasSider={true} style={{ minHeight: 'calc(100vh - 64px - 48px)' }}>
       <SiderMenu menu={galleryMenu} />
-      <Content style={{ margin: '0 16px' }}>{children}</Content>
+      <Layout style={{ padding: '16px' }}>
+        <Content>{children}</Content>
+      </Layout>
     </Layout>
   );
 }
