@@ -58,6 +58,16 @@ class DsArray extends ArrayChart {
     return this.warpMethod((data) => data.push(...args.map(createArrayItem)));
   }
 
+  public shift() {
+    return this.warpMethod((data) => data.shift());
+  }
+
+  public unshift(...args) {
+    return this.warpMethod((data) =>
+      data.unshift(...args.map(createArrayItem))
+    );
+  }
+
   public reverse() {
     return this.warpMethod((data: DataType) => {
       return data.reverse();
@@ -103,7 +113,9 @@ class DsArray extends ArrayChart {
 
   public set(index: number, value: number) {
     return this.warpMethod((data: DataType) => {
-      return (data[index].value = value);
+      data[index].value = value;
+      data[index].name = String(value);
+      return value;
     });
   }
 
