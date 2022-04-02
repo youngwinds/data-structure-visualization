@@ -1,4 +1,4 @@
 export * from './register';
 export * from './array';
 export * from './stack';
-export * from './tree';
+export * from './queue';

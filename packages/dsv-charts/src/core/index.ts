@@ -1,5 +1,5 @@
 import { DataType, IConfig, ChartType } from '@dsv-charts/typings';
-import { DsArray, DsStack } from '../charts';
+import { DsArray, DsStack, DsQueue } from '../charts';
 
 export class Dsv {
   private map = new Map<ChartType, Function>();
@@ -16,11 +16,32 @@ export class Dsv {
   init(addStateCallback) {
     this.initArray(addStateCallback);
     this.initStack(addStateCallback);
+    this.initQueue(addStateCallback);
   }
 
   initArray(addStateCallback) {
     return this.map.set('array', (config: IConfig) => {
       const array = new DsArray(
+        {
+          ...config,
+          lifeCircle: {
+            afterInit: (data: DataType, instance: any) => {
+              addStateCallback(data, instance);
+            },
+            afterSetData: (data: DataType, instance: any) => {
+              addStateCallback(data, instance);
+            },
+          },
+        },
+        {}
+      );
+      return array;
+    });
+  }
+
+  initQueue(addStateCallback) {
+    return this.map.set('queue', (config: IConfig) => {
+      const array = new DsQueue(
         {
           ...config,
           lifeCircle: {

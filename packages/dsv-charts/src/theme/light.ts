@@ -16,4 +16,8 @@ export const light: ITheme = {
     color: '#eeeeee',
     width: 10,
   },
+  arrow: {
+    color: '#212121',
+    width: 2,
+  },
 };

@@ -4,19 +4,25 @@ import { TransitionType } from './transition';
 
 import { ArrayKeyType, ArrayDataType } from './charts/array';
 import { StackKeyType, StackDataType } from './charts/stack';
+import { QueueKeyType, QueueDataType } from './charts/queue';
 
 export * from './charts/array';
 export * from './charts/stack';
+export * from './charts/queue';
 
 export * from './layouts/cartesian2';
 export * from './transition';
 export * from './life-circle';
 
-export type DataType = ArrayDataType | StackDataType | undefined;
+export type DataType =
+  | ArrayDataType
+  | StackDataType
+  | QueueDataType
+  | undefined;
 
 export type LayoutType = Cartesian2LayoutType | undefined;
 
-export type ChartType = ArrayKeyType | StackKeyType;
+export type ChartType = ArrayKeyType | StackKeyType | QueueKeyType;
 
 export interface IConfig {
   type: ChartType;
