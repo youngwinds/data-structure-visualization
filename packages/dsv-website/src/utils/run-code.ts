@@ -6,7 +6,10 @@ export function runCode(code: string, didSetData: Function) {
 
   const dsv = Dsv.getInstance(didSetData);
 
-  const runFun = new Function('dsv', code);
-
-  runFun(dsv);
+  try {
+    const runFun = new Function('dsv', code);
+    runFun(dsv);
+  } catch (e) {
+    console.log(e);
+  }
 }
