@@ -51,7 +51,7 @@ class DsArray extends ArrayChart {
   }
 
   public pop() {
-    return this.warpMethod((data) => data.pop());
+    return this.warpMethod((data) => data.pop().value);
   }
 
   public push(...args: number[]) {
@@ -59,7 +59,7 @@ class DsArray extends ArrayChart {
   }
 
   public shift() {
-    return this.warpMethod((data) => data.shift());
+    return this.warpMethod((data) => data.shift().value);
   }
 
   public unshift(...args) {

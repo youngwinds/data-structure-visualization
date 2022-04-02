@@ -5,14 +5,39 @@ const dataStructure = [
     'en-US': 'Array',
   },
   {
+    key: 'linkedlist',
+    'zh-CN': '链表',
+    'en-US': 'LinkedList',
+  },
+  {
     key: 'stack',
     'zh-CN': '栈',
     'en-US': 'Stack',
   },
   {
+    key: 'queue',
+    'zh-CN': '队列',
+    'en-US': 'Queue',
+  },
+  {
+    key: 'hashtable',
+    'zh-CN': '哈希表',
+    'en-US': 'Hashtable',
+  },
+  {
     key: 'tree',
     'zh-CN': '树',
     'en-US': 'Tree',
+  },
+  {
+    key: 'binarytree',
+    'zh-CN': '二叉树',
+    'en-US': 'Binary Tree',
+  },
+  {
+    key: 'heap',
+    'zh-CN': '堆',
+    'en-US': 'Heap',
   },
 ];
 

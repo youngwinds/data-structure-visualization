@@ -16,4 +16,8 @@ export const dark: ITheme = {
     color: '#cccccc',
     width: 4,
   },
+  arrow: {
+    color: '#212121',
+    width: 2,
+  },
 };
