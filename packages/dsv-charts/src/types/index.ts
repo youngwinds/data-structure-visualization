@@ -13,3 +13,5 @@ export * from './IChartLifeCircle';
 export * from './util';
 
 export * from './transition';
+export * from './layout';
+

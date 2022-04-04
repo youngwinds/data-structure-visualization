@@ -4,7 +4,7 @@ import { easeCubic } from 'd3-ease';
 import { scaleBand, ScaleBand } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { BaseChart } from '../base';
-import { Cartesian2Layout } from '@dsv-charts/layouts/cartesian2';
+import { Cartesian2Layout } from '@dsv-charts/components/layouts/cartesian2';
 
 import {
   IConfig,

@@ -1,10 +1,12 @@
-import { IChart, IChartLifeCircle, TransitionType } from '@dsv-charts/types';
-
-import {
-  Cartesian2Layout,
-  Cartesian2LayoutConfigType,
-} from '@dsv-charts/layouts/index';
 import { Selection, ScaleBand, ScaleLinear } from 'd3';
+import {
+  IChart,
+  IChartLifeCircle,
+  TransitionType,
+  Cartesian2LayoutConfigType,
+} from '@dsv-charts/types';
+
+import { Cartesian2Layout } from '@dsv-charts/components';
 
 type ArrayChartItemType = { key: string; name: string; value: string | number };
 

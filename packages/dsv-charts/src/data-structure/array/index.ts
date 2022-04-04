@@ -5,13 +5,12 @@ import {
 } from '@dsv-charts/charts';
 
 import { merge } from 'lodash';
-import { ArrayItemType } from '@dsv-charts/typings';
 import { isNumber, isString } from '@dsv-charts/utils/type-check';
 import { DSArrayConfigType, DsArrayThemeType } from './type';
 
 let key = 0;
 
-const createArrayItem = (d: ArrayItemType | number | string) => {
+const createArrayItem = (d: ArrayChartItemType | number | string) => {
   if (typeof d === 'number') {
     return {
       key: `__${key++}__`,
@@ -161,4 +160,4 @@ class DsArray extends ArrayChart {
   }
 }
 
-export { ArrayChart, DsArray, DSArrayConfigType, DsArrayThemeType };
+export { DsArray, DSArrayConfigType, DsArrayThemeType };

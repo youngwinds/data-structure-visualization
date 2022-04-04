@@ -3,7 +3,7 @@ import {
   Cartesian2LayoutConfigType,
   Cartesian2Rect,
   Cartesian2InnerRect,
-} from './type';
+} from '@dsv-charts/types/layout';
 
 export class Cartesian2Layout extends BaseLayout {
   private _cartesian2Rect: Cartesian2Rect;

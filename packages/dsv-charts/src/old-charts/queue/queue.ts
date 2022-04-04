@@ -4,7 +4,7 @@ import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { max } from 'd3-array';
 import { BaseChart } from '../base';
-import { Cartesian2Layout } from '@dsv-charts/layouts/cartesian2';
+import { Cartesian2Layout } from '@dsv-charts/components/layouts/cartesian2';
 
 import {
   IConfig,

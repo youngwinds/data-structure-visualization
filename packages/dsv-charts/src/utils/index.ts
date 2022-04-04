@@ -1,2 +1,1 @@
-export * from './array';
-export * from './stack';
+export * from './type-check';

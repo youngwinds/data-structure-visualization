@@ -8,6 +8,7 @@ import {
 } from 'd3';
 import { merge, cloneDeep } from 'lodash';
 
+import { Cartesian2Layout } from '@dsv-charts/components';
 import {
   isFunction,
   isHTMLElement,
@@ -15,11 +16,11 @@ import {
   isString,
 } from '@dsv-charts/utils/type-check';
 import {
-  Cartesian2Layout,
+  IChartLifeCircle,
+  TransitionType,
   Cartesian2LayoutConfigType,
   Cartesian2InnerRect,
-} from '@dsv-charts/layouts/index';
-import { IChartLifeCircle, TransitionType } from '@dsv-charts/types';
+} from '@dsv-charts/types';
 
 import {
   ArrayChartItemType,
