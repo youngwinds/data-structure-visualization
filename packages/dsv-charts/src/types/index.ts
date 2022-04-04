@@ -1,8 +1,7 @@
-import {
-  ArrayChart,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
-} from '@dsv-charts/charts';
+import { DSArrayConfigType } from '@dsv-charts/data-structure';
+import { ArrayChart, ArrayChartThemeType } from '@dsv-charts/charts';
+
+import {} from '@dsv-charts/data-structure';
 
 export type ArrayLike<T> = {
   [key: number]: T;
@@ -10,7 +9,7 @@ export type ArrayLike<T> = {
 };
 
 export type Chart = ArrayChart;
-export type ConfigType = ArrayChartConfigType;
+export type ConfigType = DSArrayConfigType;
 export type ThemeType = ArrayChartThemeType;
 
 export * from './IChart';
