@@ -1,14 +1,13 @@
-import { ArrayChartConfigType, ArrayChartThemeType } from '@dsv-charts/charts';
-
 import {
   ArrayChart,
   ArrayChartDataType,
   ArrayChartItemType,
 } from '@dsv-charts/charts';
+
 import { merge } from 'lodash';
 import { ArrayItemType } from '@dsv-charts/typings';
 import { isNumber, isString } from '@dsv-charts/utils/type-check';
-import { DSArrayConfigType } from './type';
+import { DSArrayConfigType, DsArrayThemeType } from './type';
 
 let key = 0;
 
@@ -35,15 +34,12 @@ const createArrayItem = (d: ArrayItemType | number | string) => {
 };
 
 class DsArray extends ArrayChart {
-  constructor(
-    customConfig: DSArrayConfigType,
-    customTheme: ArrayChartThemeType
-  ) {
+  constructor(customConfig: DSArrayConfigType, customTheme: DsArrayThemeType) {
     super(
       'container',
       merge({}, customConfig, {
         data: customConfig.data.map((d) => createArrayItem(d)),
-      }) as ArrayChartConfigType,
+      }),
       customTheme
     );
     super.render();
@@ -165,4 +161,4 @@ class DsArray extends ArrayChart {
   }
 }
 
-export { ArrayChart, DsArray, DSArrayConfigType };
+export { ArrayChart, DsArray, DSArrayConfigType, DsArrayThemeType };

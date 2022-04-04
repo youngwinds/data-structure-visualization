@@ -1,4 +1,3 @@
-import { IChartLifeCircle } from '@dsv-charts/types';
 import {
   max,
   Selection,
@@ -20,6 +19,7 @@ import {
   Cartesian2LayoutConfigType,
   Cartesian2InnerRect,
 } from '@dsv-charts/layouts/index';
+import { IChartLifeCircle, TransitionType } from '@dsv-charts/types';
 
 import {
   ArrayChartItemType,
@@ -28,6 +28,7 @@ import {
   ArrayChartThemeType,
   IArrayChart,
 } from './type';
+
 import { defaultConfig, defaultTheme } from './default';
 
 class ArrayChart implements IArrayChart {
@@ -121,9 +122,7 @@ class ArrayChart implements IArrayChart {
   }
 
   private transitionEnd(resolve) {
-    const { duration } = this.getConfigByKey('transition') as {
-      duration: number;
-    };
+    const { duration } = this.getConfigByKey('transition') as TransitionType;
 
     return this.rectGroup.call((g) => {
       g.transition()
@@ -158,9 +157,7 @@ class ArrayChart implements IArrayChart {
   renderRectGroup() {
     const innerRect = this.layout.getInnerRect();
     const colorScheme = this.getThemeByKey('colorScheme');
-    const { duration } = this.getConfigByKey('transition') as {
-      duration: number;
-    };
+    const { duration } = this.getConfigByKey('transition') as TransitionType;
 
     const data = this.getData();
 
@@ -226,9 +223,8 @@ class ArrayChart implements IArrayChart {
     const text = this.getThemeByKey('text') as {
       textColor?: string;
     };
-    const { duration } = this.getConfigByKey('transition') as {
-      duration?: number;
-    };
+    const { duration } = this.getConfigByKey('transition') as TransitionType;
+
     const data = this.getData();
 
     this.textGroup.call((g) => {

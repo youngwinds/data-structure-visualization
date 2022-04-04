@@ -1,4 +1,4 @@
-import { ArrayChartConfigType, ArrayChartDataType } from '@dsv-charts/charts';
+import { ArrayChartThemeType, ArrayChartDataType } from '@dsv-charts/charts';
 import { Cartesian2LayoutConfigType } from '@dsv-charts/layouts';
 import { IChartLifeCircle } from '@dsv-charts/types';
 
@@ -11,3 +11,5 @@ export type DSArrayConfigType = {
   };
   lifeCircle?: IChartLifeCircle;
 };
+
+export type DsArrayThemeType = ArrayChartThemeType;

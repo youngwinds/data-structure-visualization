@@ -1,16 +1,15 @@
-import { DSArrayConfigType } from '@dsv-charts/data-structure';
-import { ArrayChart, ArrayChartThemeType } from '@dsv-charts/charts';
-
-import {} from '@dsv-charts/data-structure';
-
-export type ArrayLike<T> = {
-  [key: number]: T;
-  length: number;
-};
+import {
+  DSArrayConfigType,
+  DsArrayThemeType,
+} from '@dsv-charts/data-structure';
+import { ArrayChart } from '@dsv-charts/charts';
 
 export type Chart = ArrayChart;
 export type ConfigType = DSArrayConfigType;
-export type ThemeType = ArrayChartThemeType;
+export type ThemeType = DsArrayThemeType;
 
 export * from './IChart';
 export * from './IChartLifeCircle';
+export * from './util';
+
+export * from './transition';

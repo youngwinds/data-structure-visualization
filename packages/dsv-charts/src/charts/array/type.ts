@@ -1,4 +1,4 @@
-import { IChart, IChartLifeCircle } from '@dsv-charts/types';
+import { IChart, IChartLifeCircle, TransitionType } from '@dsv-charts/types';
 
 import {
   Cartesian2Layout,
@@ -14,9 +14,7 @@ type ArrayChartConfigType = {
   type: 'array';
   data: ArrayChartDataType;
   layout?: Cartesian2LayoutConfigType;
-  transition?: {
-    duration?: number;
-  };
+  transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;
 };
 
