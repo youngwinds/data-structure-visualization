@@ -1,9 +1,9 @@
-import { DataType, IConfig, ChartType } from '@dsv-charts/typings';
-import { DsArray, DsStack, DsQueue } from '../charts';
-import { ArrayChart } from '@dsv-charts/re-charts';
+import { ArrayChartDataType, ArrayChart } from '@dsv-charts/charts';
+import { DsArray } from '@dsv-charts/data-structure';
+import { ConfigType, ThemeType } from '@dsv-charts/types';
 
 export class Dsv {
-  private map = new Map<ChartType, Function>();
+  private map = new Map<'array', Function>();
   private static instance: Dsv;
 
   static getInstance(addStateCallback) {
@@ -16,85 +16,77 @@ export class Dsv {
 
   init(addStateCallback) {
     this.initArray(addStateCallback);
-    this.initStack(addStateCallback);
-    this.initQueue(addStateCallback);
-    this.initArrayChart();
-  }
-
-  initArrayChart() {
-    return this.map.set('arrayChart', (config: IConfig) => {
-      const array = new ArrayChart(
-        'container',
-        {
-          ...config,
-        },
-        {}
-      );
-      return array;
-    });
+    // this.initStack(addStateCallback);
+    // this.initQueue(addStateCallback);
   }
 
   initArray(addStateCallback) {
-    return this.map.set('array', (config: IConfig) => {
+    return this.map.set('array', (config: ConfigType, theme: ThemeType) => {
       const array = new DsArray(
         {
           ...config,
           lifeCircle: {
-            afterInit: (data: DataType, instance: any) => {
+            chartDidChartInit: (
+              data: ArrayChartDataType,
+              instance: ArrayChart
+            ) => {
               addStateCallback(data, instance);
             },
-            afterSetData: (data: DataType, instance: any) => {
+            chartDidDataChanged: (
+              data: ArrayChartDataType,
+              instance: ArrayChart
+            ) => {
               addStateCallback(data, instance);
             },
           },
         },
-        {}
+        { ...theme }
       );
       return array;
     });
   }
 
-  initQueue(addStateCallback) {
-    return this.map.set('queue', (config: IConfig) => {
-      const array = new DsQueue(
-        {
-          ...config,
-          lifeCircle: {
-            afterInit: (data: DataType, instance: any) => {
-              addStateCallback(data, instance);
-            },
-            afterSetData: (data: DataType, instance: any) => {
-              addStateCallback(data, instance);
-            },
-          },
-        },
-        {}
-      );
-      return array;
-    });
-  }
+  // initQueue(addStateCallback) {
+  //   return this.map.set('queue', (config: IConfig) => {
+  //     const array = new DsQueue(
+  //       {
+  //         ...config,
+  //         lifeCircle: {
+  //           afterInit: (data: DataType, instance: any) => {
+  //             addStateCallback(data, instance);
+  //           },
+  //           afterSetData: (data: DataType, instance: any) => {
+  //             addStateCallback(data, instance);
+  //           },
+  //         },
+  //       },
+  //       {}
+  //     );
+  //     return array;
+  //   });
+  // }
 
-  initStack(addStateCallback) {
-    return this.map.set('stack', (config: IConfig) => {
-      const stack = new DsStack(
-        {
-          ...config,
-          lifeCircle: {
-            afterInit: (data: DataType, instance: any) => {
-              addStateCallback(data, instance);
-            },
-            afterSetData: (data: DataType, instance: any) => {
-              addStateCallback(data, instance);
-            },
-          },
-        },
-        {}
-      );
-      return stack;
-    });
-  }
+  // initStack(addStateCallback) {
+  //   return this.map.set('stack', (config: IConfig) => {
+  //     const stack = new DsStack(
+  //       {
+  //         ...config,
+  //         lifeCircle: {
+  //           afterInit: (data: DataType, instance: any) => {
+  //             addStateCallback(data, instance);
+  //           },
+  //           afterSetData: (data: DataType, instance: any) => {
+  //             addStateCallback(data, instance);
+  //           },
+  //         },
+  //       },
+  //       {}
+  //     );
+  //     return stack;
+  //   });
+  // }
 
-  create(config: IConfig) {
+  create(config: ConfigType) {
     const func = this.map.get(config.type);
     return func(config);
   }

@@ -89,7 +89,7 @@ export default {
       const { currentIndex, queue, isRunning } = state;
       const prevIndex = currentIndex - 1;
 
-      const [instance, data] = queue[prevIndex] as any;
+      const [instance, config] = queue[prevIndex] as any;
 
       yield put({
         type: 'update',
@@ -102,8 +102,7 @@ export default {
         },
       });
 
-      instance.setData(data, true);
-      yield instance.renderAsync();
+      yield instance.renderAsync(config.data);
     },
 
     *forward(action: any, { put, select }: any) {
@@ -114,7 +113,7 @@ export default {
 
       const nextIndex = currentIndex + 1;
 
-      const [instance, data] = queue[nextIndex] as any;
+      const [instance, config] = queue[nextIndex] as any;
 
       yield put({
         type: 'update',
@@ -127,8 +126,7 @@ export default {
         },
       });
 
-      instance.setData(data, true);
-      yield instance.renderAsync();
+      yield instance.renderAsync(config.data);
     },
   },
 

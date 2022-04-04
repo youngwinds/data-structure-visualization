@@ -1,4 +1,5 @@
-export * from './register';
+import { IArrayChartConfig } from './array';
+
+export type IConfig = IArrayChartConfig;
+
 export * from './array';
-export * from './stack';
-export * from './queue';

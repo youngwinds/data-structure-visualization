@@ -1,4 +1,4 @@
-import { IChart } from '@dsv-charts/re-charts/IChart';
+import { IChart, IChartLifeCircle } from '@dsv-charts/types';
 
 import {
   Cartesian2Layout,
@@ -17,6 +17,7 @@ type ArrayChartConfigType = {
   transition?: {
     duration?: number;
   };
+  lifeCircle?: IChartLifeCircle;
 };
 
 type ArrayChartThemeType = {
@@ -53,7 +54,7 @@ interface IArrayChart
   initGroup(): void;
 
   render(data?: ArrayChartDataType): this;
-  renderAsync(data?: ArrayChartDataType): this;
+  renderAsync(data?: ArrayChartDataType): Promise<true>;
   renderScale(): this;
   renderRectGroup(): this;
   renderTextGroup(): this;

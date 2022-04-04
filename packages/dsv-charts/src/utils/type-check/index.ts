@@ -1,4 +1,4 @@
-import { ArrayLike } from '@dsv-charts/re-types';
+import { ArrayLike } from '@dsv-charts/types';
 
 export function isNumber(value: any): value is number {
   return typeof value === 'number';

@@ -1,12 +1,12 @@
-// interface ILifeCircle {
-//   chartDidChartInit(): void;
-//   chartDidDataChanged(): void;
-//   chartWillDataChanged(): void;
-//   chartWillDestroyed(): void;
-//   chartDidDestroyed(): void;
-// }
+interface ILifeCircle {
+  chartDidChartInit(): void;
+  chartDidDataChanged(): void;
+  chartWillDataChanged(): void;
+  chartWillDestroyed(): void;
+  chartDidDestroyed(): void;
+}
 
-export interface IChart<DataType, ConfigType, ThemeType> {
+export interface IChart<DataType, ConfigType, ThemeType> extends ILifeCircle {
   dom: HTMLElement;
   selector: string | HTMLElement;
   config: any;
@@ -34,6 +34,6 @@ export interface IChart<DataType, ConfigType, ThemeType> {
   // theme getters by key
   getThemeByKey(themeKey: keyof ThemeType);
 
-  // destory
-  destory(): void;
+  // destroy
+  destroy(): void;
 }
