@@ -1,7 +1,15 @@
-import { Cartesian2LayoutType } from '@dsv-charts/typings/config';
 import { BaseLayout } from './base';
 
-type Cartesian2Rect = {
+export type Cartesian2LayoutConfigType = {
+  padding?: {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+  };
+};
+
+export type Cartesian2Rect = {
   width: number;
   height: number;
   center: [number, number];
@@ -11,7 +19,7 @@ type Cartesian2Rect = {
   bottom: number;
 };
 
-type Cartesian2InnerRect = {
+export type Cartesian2InnerRect = {
   innerWidth: number;
   innerHeight: number;
   innerCenter: [number, number];
@@ -25,7 +33,7 @@ export class Cartesian2Layout extends BaseLayout {
   private _cartesian2Rect: Cartesian2Rect;
   private _cartesian2InnerRect: Cartesian2InnerRect;
 
-  constructor(dom: HTMLElement, config: Cartesian2LayoutType) {
+  constructor(dom: HTMLElement, config: Cartesian2LayoutConfigType) {
     super(dom);
 
     this.calculateRect().calculateInnerRect(config);
@@ -34,7 +42,7 @@ export class Cartesian2Layout extends BaseLayout {
   /**
    * 更新接口
    */
-  public render(config: Cartesian2LayoutType) {
+  public render(config: Cartesian2LayoutConfigType) {
     this.calculateRect().calculateInnerRect(config);
   }
 
@@ -60,7 +68,7 @@ export class Cartesian2Layout extends BaseLayout {
   /**
    * 计算移除padding后的图表区域
    */
-  private calculateInnerRect(config: Cartesian2LayoutType) {
+  private calculateInnerRect(config: Cartesian2LayoutConfigType) {
     const rootRect = this.getRootRect();
     const { padding } = config;
 

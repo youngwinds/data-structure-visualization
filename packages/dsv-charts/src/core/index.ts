@@ -1,5 +1,6 @@
 import { DataType, IConfig, ChartType } from '@dsv-charts/typings';
 import { DsArray, DsStack, DsQueue } from '../charts';
+import { ArrayChart } from '@dsv-charts/re-charts';
 
 export class Dsv {
   private map = new Map<ChartType, Function>();
@@ -17,6 +18,20 @@ export class Dsv {
     this.initArray(addStateCallback);
     this.initStack(addStateCallback);
     this.initQueue(addStateCallback);
+    this.initArrayChart();
+  }
+
+  initArrayChart() {
+    return this.map.set('arrayChart', (config: IConfig) => {
+      const array = new ArrayChart(
+        'container',
+        {
+          ...config,
+        },
+        {}
+      );
+      return array;
+    });
   }
 
   initArray(addStateCallback) {
