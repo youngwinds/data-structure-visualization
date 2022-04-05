@@ -5,6 +5,14 @@ export type Cartesian2LayoutConfigType = {
     bottom?: number;
     left?: number;
   };
+  position?: 'absolute' | 'relative';
+  zIndex?: number;
+  width?: number;
+  height?: number;
+  left?: number;
+  top?: number;
+  right?: number;
+  bottom?: number;
 };
 
 export type Cartesian2Rect = {

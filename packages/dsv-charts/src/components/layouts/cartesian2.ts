@@ -10,7 +10,7 @@ export class Cartesian2Layout extends BaseLayout {
   private _cartesian2InnerRect: Cartesian2InnerRect;
 
   constructor(dom: HTMLElement, config: Cartesian2LayoutConfigType) {
-    super(dom);
+    super(dom, config);
 
     this.calculateRect().calculateInnerRect(config);
   }
