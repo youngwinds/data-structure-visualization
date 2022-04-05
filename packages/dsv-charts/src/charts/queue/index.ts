@@ -23,20 +23,20 @@ import {
 } from '@dsv-charts/types';
 
 import {
-  ArrayChartItemType,
-  ArrayChartDataType,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
-  IArrayChart,
+  QueueChartItemType,
+  QueueChartDataType,
+  QueueChartConfigType,
+  QueueChartThemeType,
+  IQueueChart,
 } from './type';
 
 import { defaultConfig, defaultTheme } from './default';
 
-class ArrayChart implements IArrayChart {
+class QueueChart implements IQueueChart {
   dom: HTMLElement;
   selector: string | HTMLElement;
-  config: ArrayChartConfigType;
-  theme: ArrayChartThemeType;
+  config: QueueChartConfigType;
+  theme: QueueChartThemeType;
 
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
@@ -47,8 +47,8 @@ class ArrayChart implements IArrayChart {
 
   constructor(
     selector: string | HTMLElement,
-    config: ArrayChartConfigType,
-    theme: ArrayChartThemeType
+    config: QueueChartConfigType,
+    theme: QueueChartThemeType
   ) {
     this.selector = selector;
     this.config = merge({}, defaultConfig, config);
@@ -67,7 +67,7 @@ class ArrayChart implements IArrayChart {
     ) as IChartLifeCircle;
 
     isFunction(chartDidChartInit) &&
-      chartDidChartInit(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidChartInit(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartDidDataChanged(): void {
@@ -75,7 +75,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartDidDataChanged) &&
-      chartDidDataChanged(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidDataChanged(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartWillDataChanged(): void {
@@ -83,7 +83,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartWillDataChanged) &&
-      chartWillDataChanged(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartWillDataChanged(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartWillDestroyed(): void {
@@ -91,7 +91,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartWillDestroyed) &&
-      chartWillDestroyed(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartWillDestroyed(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartDidDestroyed(): void {
@@ -99,10 +99,10 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartDidDestroyed) &&
-      chartDidDestroyed(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidDestroyed(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
-  render(data?: ArrayChartDataType): this {
+  render(data?: QueueChartDataType): this {
     if (data) {
       this.config.data = data;
     }
@@ -113,7 +113,7 @@ class ArrayChart implements IArrayChart {
     return this;
   }
 
-  async renderAsync(data?: ArrayChartDataType): Promise<true> {
+  async renderAsync(data?: QueueChartDataType): Promise<true> {
     if (data) {
       this.config.data = data;
     }
@@ -142,7 +142,7 @@ class ArrayChart implements IArrayChart {
       [0, innerRect.innerWidth]
     ).padding(0.5);
 
-    const maxValue = max(data, (d: ArrayChartItemType) =>
+    const maxValue = max(data, (d: QueueChartItemType) =>
       typeof d.value === 'number' ? d.value : 100
     );
 
@@ -163,7 +163,7 @@ class ArrayChart implements IArrayChart {
 
     this.rectGroup.call((g) => {
       g.selectAll('rect')
-        .data(data, (d: ArrayChartItemType) => d.key)
+        .data(data, (d: QueueChartItemType) => d.key)
         .join(
           (enter) =>
             enter
@@ -175,12 +175,12 @@ class ArrayChart implements IArrayChart {
               .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
               .transition()
               .duration(duration)
-              .attr('height', (d: ArrayChartItemType) =>
+              .attr('height', (d: QueueChartItemType) =>
                 typeof d.value === 'number' ? this.yScale(d.value) : 100
               )
               .attr(
                 'y',
-                (d: ArrayChartItemType) =>
+                (d: QueueChartItemType) =>
                   innerRect.innerTop +
                   innerRect.innerHeight -
                   (typeof d.value === 'number' ? this.yScale(d.value) : 100)
@@ -192,13 +192,13 @@ class ArrayChart implements IArrayChart {
               .duration(duration)
               .attr('fill', colorScheme[0])
               .attr('width', this.xScale.bandwidth())
-              .attr('height', (d: ArrayChartItemType) =>
+              .attr('height', (d: QueueChartItemType) =>
                 typeof d.value === 'number' ? this.yScale(d.value) : 100
               )
               .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
               .attr(
                 'y',
-                (d: ArrayChartItemType) =>
+                (d: QueueChartItemType) =>
                   innerRect.innerTop +
                   innerRect.innerHeight -
                   (typeof d.value === 'number' ? this.yScale(d.value) : 100)
@@ -229,7 +229,7 @@ class ArrayChart implements IArrayChart {
 
     this.textGroup.call((g) => {
       g.selectAll('text')
-        .data(data, (d: ArrayChartItemType) => d.key)
+        .data(data, (d: QueueChartItemType) => d.key)
         .join(
           (enter) =>
             enter
@@ -293,36 +293,36 @@ class ArrayChart implements IArrayChart {
     return this.dom;
   }
 
-  setData(data: ArrayChartDataType): this {
+  setData(data: QueueChartDataType): this {
     this.chartWillDataChanged();
     this.config.data = data;
     this.chartDidDataChanged();
     return this;
   }
 
-  getData(): ArrayChartDataType {
+  getData(): QueueChartDataType {
     return this.config.data;
   }
 
-  setConfig(config: ArrayChartConfigType): this {
+  setConfig(config: QueueChartConfigType): this {
     this.config = config;
     return this;
   }
 
-  getConfig(): ArrayChartConfigType {
+  getConfig(): QueueChartConfigType {
     return this.config;
   }
 
-  setTheme(theme: ArrayChartThemeType): this {
+  setTheme(theme: QueueChartThemeType): this {
     this.theme = theme;
     return this;
   }
 
-  getTheme(): ArrayChartThemeType {
+  getTheme(): QueueChartThemeType {
     return this.theme;
   }
 
-  getConfigByKey(key: keyof ArrayChartConfigType) {
+  getConfigByKey(key: keyof QueueChartConfigType) {
     if (key in this.config) {
       return this.config[key];
     }
@@ -330,7 +330,7 @@ class ArrayChart implements IArrayChart {
     throw new Error(`Key does not exist:${key}`);
   }
 
-  getThemeByKey(key: keyof ArrayChartThemeType) {
+  getThemeByKey(key: keyof QueueChartThemeType) {
     if (key in this.theme) {
       return this.theme[key];
     }
@@ -359,9 +359,9 @@ class ArrayChart implements IArrayChart {
 }
 
 export {
-  ArrayChart,
-  ArrayChartItemType,
-  ArrayChartDataType,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
+  QueueChart,
+  QueueChartItemType,
+  QueueChartDataType,
+  QueueChartConfigType,
+  QueueChartThemeType,
 };

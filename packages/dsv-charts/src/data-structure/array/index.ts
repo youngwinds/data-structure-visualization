@@ -6,7 +6,7 @@ import {
 
 import { merge } from 'lodash';
 import { isNumber, isString } from '@dsv-charts/utils/type-check';
-import { DSArrayConfigType, DsArrayThemeType } from './type';
+import { DsArrayConfigType, DsArrayThemeType } from './type';
 
 let key = 0;
 
@@ -33,7 +33,7 @@ const createArrayItem = (d: ArrayChartItemType | number | string) => {
 };
 
 class DsArray extends ArrayChart {
-  constructor(customConfig: DSArrayConfigType, customTheme: DsArrayThemeType) {
+  constructor(customConfig: DsArrayConfigType, customTheme: DsArrayThemeType) {
     super(
       'container',
       merge({}, customConfig, {
@@ -160,4 +160,4 @@ class DsArray extends ArrayChart {
   }
 }
 
-export { DsArray, DSArrayConfigType, DsArrayThemeType };
+export { DsArray, DsArrayConfigType, DsArrayThemeType };
