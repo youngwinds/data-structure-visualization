@@ -1,7 +1,7 @@
-import { ArrayChartConfigType, ArrayChartThemeType } from './type';
+import { QueueChartConfigType, QueueChartThemeType } from './type';
 
-export const defaultConfig: ArrayChartConfigType = {
-  type: 'array',
+export const defaultConfig: QueueChartConfigType = {
+  type: 'queue',
   data: [],
   layout: {
     padding: {
@@ -16,8 +16,8 @@ export const defaultConfig: ArrayChartConfigType = {
   },
 };
 
-export const defaultTheme: ArrayChartThemeType = {
-  type: 'array',
+export const defaultTheme: QueueChartThemeType = {
+  type: 'queue',
   colorScheme: [
     '#93b7e3',
     '#59c4e6',

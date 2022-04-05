@@ -1,6 +1,6 @@
 const code = `const stack = dsv.create({
   type: 'stack',
-  data: [1, 2, 3],
+  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   layout: {
     padding: {
       left: 300,
@@ -11,22 +11,8 @@ const code = `const stack = dsv.create({
   }
 })
 
-if (stack.isEmpty()) {
-  stack.push(1)
-} else {
-  stack.pop()
-}
-
-if (stack.isEmpty()) {
-  stack.push(2)
-} else {
-  stack.pop()
-}
-
-if (stack.isEmpty()) {
-  stack.push(3)
-} else {
-  stack.pop()
+while (stack.isEmpty() === false) {
+  stack.pop();
 }
 `;
 

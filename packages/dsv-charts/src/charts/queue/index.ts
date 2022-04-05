@@ -1,11 +1,4 @@
-import {
-  max,
-  Selection,
-  scaleBand,
-  scaleLinear,
-  ScaleBand,
-  ScaleLinear,
-} from 'd3';
+import { Selection, scaleBand, ScaleBand, ScaleLinear } from 'd3';
 import { merge, cloneDeep } from 'lodash';
 
 import { Cartesian2Layout } from '@dsv-charts/components';
@@ -19,36 +12,35 @@ import {
   IChartLifeCircle,
   TransitionType,
   Cartesian2LayoutConfigType,
-  Cartesian2InnerRect,
 } from '@dsv-charts/types';
 
 import {
-  ArrayChartItemType,
-  ArrayChartDataType,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
-  IArrayChart,
+  QueueChartItemType,
+  QueueChartDataType,
+  QueueChartConfigType,
+  QueueChartThemeType,
+  IQueueChart,
 } from './type';
 
 import { defaultConfig, defaultTheme } from './default';
 
-class ArrayChart implements IArrayChart {
+class QueueChart implements IQueueChart {
   dom: HTMLElement;
   selector: string | HTMLElement;
-  config: ArrayChartConfigType;
-  theme: ArrayChartThemeType;
+  config: QueueChartConfigType;
+  theme: QueueChartThemeType;
 
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
+  containerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   xScale: ScaleBand<string>;
-  yScale: ScaleLinear<number, number, never>;
 
   constructor(
     selector: string | HTMLElement,
-    config: ArrayChartConfigType,
-    theme: ArrayChartThemeType
+    config: QueueChartConfigType,
+    theme: QueueChartThemeType
   ) {
     this.selector = selector;
     this.config = merge({}, defaultConfig, config);
@@ -67,7 +59,7 @@ class ArrayChart implements IArrayChart {
     ) as IChartLifeCircle;
 
     isFunction(chartDidChartInit) &&
-      chartDidChartInit(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidChartInit(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartDidDataChanged(): void {
@@ -75,7 +67,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartDidDataChanged) &&
-      chartDidDataChanged(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidDataChanged(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartWillDataChanged(): void {
@@ -83,7 +75,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartWillDataChanged) &&
-      chartWillDataChanged(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartWillDataChanged(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartWillDestroyed(): void {
@@ -91,7 +83,7 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartWillDestroyed) &&
-      chartWillDestroyed(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartWillDestroyed(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
   chartDidDestroyed(): void {
@@ -99,21 +91,10 @@ class ArrayChart implements IArrayChart {
       'lifeCircle'
     ) as IChartLifeCircle;
     isFunction(chartDidDestroyed) &&
-      chartDidDestroyed(cloneDeep(this.getConfig()), this as ArrayChart);
+      chartDidDestroyed(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
-  render(data?: ArrayChartDataType): this {
-    if (data) {
-      this.config.data = data;
-    }
-    this.renderScale();
-    this.renderRectGroup();
-    this.renderTextGroup();
-
-    return this;
-  }
-
-  async renderAsync(data?: ArrayChartDataType): Promise<true> {
+  async renderAsync(data?: QueueChartDataType): Promise<true> {
     if (data) {
       this.config.data = data;
     }
@@ -134,57 +115,54 @@ class ArrayChart implements IArrayChart {
     });
   }
 
+  render(data?: QueueChartDataType): this {
+    if (data) {
+      this.config.data = data;
+    }
+    this.renderScale();
+    this.renderRectGroup();
+    this.renderTextGroup();
+    this.renderContainerGroup();
+
+    return this;
+  }
+
   renderScale() {
-    const innerRect: Cartesian2InnerRect = this.layout.getInnerRect();
+    const innerRect = this.layout.getInnerRect();
     const data = this.getData();
+
     this.xScale = scaleBand(
       data.map((d) => d.key),
       [0, innerRect.innerWidth]
-    ).padding(0.5);
-
-    const maxValue = max(data, (d: ArrayChartItemType) =>
-      typeof d.value === 'number' ? d.value : 100
-    );
-
-    this.yScale = scaleLinear(
-      [0, maxValue === 0 ? 1 : maxValue],
-      [0, innerRect.innerHeight]
-    );
+    ).padding(0.01);
 
     return this;
   }
 
   renderRectGroup() {
     const innerRect = this.layout.getInnerRect();
+    const data = this.getData();
+    const rect = this.layout.getRect();
     const colorScheme = this.getThemeByKey('colorScheme');
     const { duration } = this.getConfigByKey('transition') as TransitionType;
 
-    const data = this.getData();
-
     this.rectGroup.call((g) => {
       g.selectAll('rect')
-        .data(data, (d: ArrayChartItemType) => d.key)
+        .data(data, (d: QueueChartItemType) => d.key)
         .join(
           (enter) =>
             enter
               .append('rect')
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr('x', innerRect.innerRight)
               .attr('width', this.xScale.bandwidth())
-              .attr('height', 0)
+              .attr('height', 50)
               .attr('fill', colorScheme[0])
-              .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
+              .attr('y', () => rect.center[1] - 50)
               .transition()
               .duration(duration)
-              .attr('height', (d: ArrayChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
-              .attr(
-                'y',
-                (d: ArrayChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('height', 50)
+              .attr('y', () => rect.center[1] - 50)
+              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
               .selection(),
           (update) =>
             update
@@ -192,24 +170,18 @@ class ArrayChart implements IArrayChart {
               .duration(duration)
               .attr('fill', colorScheme[0])
               .attr('width', this.xScale.bandwidth())
-              .attr('height', (d: ArrayChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
+              .attr('height', 50)
               .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
-              .attr(
-                'y',
-                (d: ArrayChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('y', () => rect.center[1] - 50)
               .selection(),
           (exit) =>
             exit
+              .attr('opacity', 1)
               .transition()
               .duration(duration)
-              .attr('height', '0')
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
+              .attr('opacity', 0)
+              .attr('x', -rect.right)
+              .attr('y', rect.center[0] - 50)
               .transition()
               .remove()
         );
@@ -220,16 +192,16 @@ class ArrayChart implements IArrayChart {
 
   renderTextGroup() {
     const innerRect = this.layout.getInnerRect();
-    const { color: textColor } = this.getThemeByKey('text') as {
+    const data = this.getData();
+    const rect = this.layout.getRect();
+    const text = this.getThemeByKey('text') as {
       color?: string;
     };
     const { duration } = this.getConfigByKey('transition') as TransitionType;
 
-    const data = this.getData();
-
     this.textGroup.call((g) => {
       g.selectAll('text')
-        .data(data, (d: ArrayChartItemType) => d.key)
+        .data(data, (d: QueueChartItemType) => d.key)
         .join(
           (enter) =>
             enter
@@ -237,29 +209,64 @@ class ArrayChart implements IArrayChart {
               .attr('font-size', 20)
               .attr('text-anchor', 'middle')
               .attr('dx', this.xScale.bandwidth() / 2)
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
               .attr('dy', 20)
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight),
+              .attr('x', rect.right)
+              .attr('y', () => rect.center[1])
+              .transition()
+              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr('y', () => rect.center[1]),
           (update) => update,
           (exit) =>
             exit
               .transition()
               .duration(duration)
-              .attr('opacity', 0)
-              .selection()
+              .attr('x', -rect.right)
+              .attr('y', rect.center[1])
               .remove()
         )
         .transition()
         .duration(duration)
         .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
-        .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
+        .attr('y', () => rect.center[1])
         .attr('dx', this.xScale.bandwidth() / 2)
         .attr('dy', 20)
-        .attr('fill', textColor)
+        .attr('fill', text?.color)
         .selection()
         .html((d) => d.name);
     });
 
+    return this;
+  }
+
+  renderContainerGroup() {
+    const innerRect = this.layout.getInnerRect();
+    const rect = this.layout.getRect();
+
+    const arrow = this.getThemeByKey('arrow') as {
+      color?: string;
+      width?: number | string;
+    };
+
+    const { duration } = this.getConfigByKey('transition') as TransitionType;
+
+    const points = [
+      [innerRect.innerLeft + 25, rect.center[1] - 85 - 25].join(' '),
+      [innerRect.innerLeft, rect.center[1] - 75 - 25].join(' '),
+      [innerRect.innerLeft + 25, rect.center[1] - 65 - 25].join(' '),
+      [innerRect.innerLeft, rect.center[1] - 75 - 25].join(' '),
+      [innerRect.innerRight, rect.center[1] - 75 - 25].join(' '),
+    ].join(',');
+
+    this.containerGroup
+      .selectAll('polyline')
+      .data([points])
+      .join('polyline')
+      .transition()
+      .duration(duration)
+      .attr('points', (d) => d)
+      .attr('fill', 'transparent')
+      .attr('stroke-width', arrow.width)
+      .attr('stroke', arrow.color);
     return this;
   }
 
@@ -283,6 +290,7 @@ class ArrayChart implements IArrayChart {
   initGroup(): void {
     this.rectGroup = this.layout.addGroup();
     this.textGroup = this.layout.addGroup();
+    this.containerGroup = this.layout.addGroup();
   }
 
   getSelector(): string | HTMLElement {
@@ -293,36 +301,36 @@ class ArrayChart implements IArrayChart {
     return this.dom;
   }
 
-  setData(data: ArrayChartDataType): this {
+  setData(data: QueueChartDataType): this {
     this.chartWillDataChanged();
     this.config.data = data;
     this.chartDidDataChanged();
     return this;
   }
 
-  getData(): ArrayChartDataType {
+  getData(): QueueChartDataType {
     return this.config.data;
   }
 
-  setConfig(config: ArrayChartConfigType): this {
+  setConfig(config: QueueChartConfigType): this {
     this.config = config;
     return this;
   }
 
-  getConfig(): ArrayChartConfigType {
+  getConfig(): QueueChartConfigType {
     return this.config;
   }
 
-  setTheme(theme: ArrayChartThemeType): this {
+  setTheme(theme: QueueChartThemeType): this {
     this.theme = theme;
     return this;
   }
 
-  getTheme(): ArrayChartThemeType {
+  getTheme(): QueueChartThemeType {
     return this.theme;
   }
 
-  getConfigByKey(key: keyof ArrayChartConfigType) {
+  getConfigByKey(key: keyof QueueChartConfigType) {
     if (key in this.config) {
       return this.config[key];
     }
@@ -330,7 +338,7 @@ class ArrayChart implements IArrayChart {
     throw new Error(`Key does not exist:${key}`);
   }
 
-  getThemeByKey(key: keyof ArrayChartThemeType) {
+  getThemeByKey(key: keyof QueueChartThemeType) {
     if (key in this.theme) {
       return this.theme[key];
     }
@@ -345,7 +353,6 @@ class ArrayChart implements IArrayChart {
     this.rectGroup.remove();
 
     this.xScale = null;
-    this.yScale = null;
     this.textGroup = null;
     this.rectGroup = null;
 
@@ -359,9 +366,9 @@ class ArrayChart implements IArrayChart {
 }
 
 export {
-  ArrayChart,
-  ArrayChartItemType,
-  ArrayChartDataType,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
+  QueueChart,
+  QueueChartItemType,
+  QueueChartDataType,
+  QueueChartConfigType,
+  QueueChartThemeType,
 };

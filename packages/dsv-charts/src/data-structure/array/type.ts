@@ -1,15 +1,15 @@
 import { ArrayChartThemeType, ArrayChartDataType } from '@dsv-charts/charts';
-import { Cartesian2LayoutConfigType } from '@dsv-charts/components/layouts';
-import { IChartLifeCircle } from '@dsv-charts/types';
+import { Cartesian2LayoutConfigType } from '@dsv-charts/types';
+import { IChartLifeCircle, TransitionType } from '@dsv-charts/types';
 
-export type DSArrayConfigType = {
+type DsArrayConfigType = {
   type: 'array';
   data: ArrayChartDataType | number[] | string[];
   layout?: Cartesian2LayoutConfigType;
-  transition?: {
-    duration?: number;
-  };
+  transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;
 };
 
-export type DsArrayThemeType = ArrayChartThemeType;
+type DsArrayThemeType = ArrayChartThemeType;
+
+export { DsArrayConfigType, DsArrayThemeType };

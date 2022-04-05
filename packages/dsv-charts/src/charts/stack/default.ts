@@ -1,7 +1,7 @@
-import { ArrayChartConfigType, ArrayChartThemeType } from './type';
+import { StackChartConfigType, StackChartThemeType } from './type';
 
-export const defaultConfig: ArrayChartConfigType = {
-  type: 'array',
+export const defaultConfig: StackChartConfigType = {
+  type: 'stack',
   data: [],
   layout: {
     padding: {
@@ -16,8 +16,8 @@ export const defaultConfig: ArrayChartConfigType = {
   },
 };
 
-export const defaultTheme: ArrayChartThemeType = {
-  type: 'array',
+export const defaultTheme: StackChartThemeType = {
+  type: 'stack',
   colorScheme: [
     '#93b7e3',
     '#59c4e6',

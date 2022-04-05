@@ -8,20 +8,20 @@ import {
 
 import { Cartesian2Layout } from '@dsv-charts/components';
 
-type ArrayChartItemType = { key: string; name: string; value: string | number };
+type StackChartItemType = { key: string; name: string; value: string | number };
 
-type ArrayChartDataType = ArrayChartItemType[];
+type StackChartDataType = StackChartItemType[];
 
-type ArrayChartConfigType = {
-  type: 'array';
-  data: ArrayChartDataType;
+type StackChartConfigType = {
+  type: 'stack';
+  data: StackChartDataType;
   layout?: Cartesian2LayoutConfigType;
   transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;
 };
 
-type ArrayChartThemeType = {
-  type: 'array';
+type StackChartThemeType = {
+  type: 'stack';
   colorScheme?: string[];
   text?: {
     color?: string;
@@ -36,34 +36,35 @@ type ArrayChartThemeType = {
   };
 };
 
-interface IArrayChart
+interface IStackChart
   extends IChart<
-    ArrayChartDataType,
-    ArrayChartConfigType,
-    ArrayChartThemeType
+    StackChartDataType,
+    StackChartConfigType,
+    StackChartThemeType
   > {
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
+  containerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
-  xScale: ScaleBand<string>;
-  yScale: ScaleLinear<number, number, never>;
+  yScale: ScaleBand<string>;
 
   initDom(selector: string | HTMLElement): HTMLElement;
   initLayout(): Cartesian2Layout;
   initGroup(): void;
 
-  render(data?: ArrayChartDataType): this;
-  renderAsync(data?: ArrayChartDataType): Promise<true>;
+  render(data?: StackChartDataType): this;
+  renderAsync(data?: StackChartDataType): Promise<true>;
   renderScale(): this;
   renderRectGroup(): this;
   renderTextGroup(): this;
+  renderContainerGroup(): this;
 }
 
 export {
-  ArrayChartItemType,
-  ArrayChartDataType,
-  ArrayChartConfigType,
-  ArrayChartThemeType,
-  IArrayChart,
+  StackChartItemType,
+  StackChartDataType,
+  StackChartConfigType,
+  StackChartThemeType,
+  IStackChart,
 };
