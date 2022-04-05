@@ -9,7 +9,7 @@ import { merge } from 'lodash';
 
 let key = 0;
 
-const createQueueItem = (d: StackChartItemType | number | string) => {
+const createStackItem = (d: StackChartItemType | number | string) => {
   if (typeof d === 'number') {
     return {
       key: `__${key++}__`,
@@ -35,12 +35,8 @@ class DsStack extends StackChart {
   constructor(customConfig: DsStackConfigType, customTheme: DsStackThemeType) {
     super(
       'container',
-      merge(customConfig, {
-        data: customConfig.data.map((d) => {
-          if (typeof d === 'number') {
-            return createQueueItem(d);
-          }
-        }),
+      merge({}, customConfig, {
+        data: customConfig.data.map((d) => createStackItem(d)),
       }),
       customTheme
     );
@@ -63,7 +59,7 @@ class DsStack extends StackChart {
   }
 
   public push(...args: number[]) {
-    return this.warpMethod((data) => data.push(...args.map(createQueueItem)));
+    return this.warpMethod((data) => data.push(...args.map(createStackItem)));
   }
 
   public top() {

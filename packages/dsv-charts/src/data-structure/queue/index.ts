@@ -35,12 +35,8 @@ class DsQueue extends QueueChart {
   constructor(customConfig: DsQueueConfigType, customTheme: DsQueueThemeType) {
     super(
       'container',
-      merge(customConfig, {
-        data: customConfig.data.map((d) => {
-          if (typeof d === 'number') {
-            return createQueueItem(d);
-          }
-        }),
+      merge({}, customConfig, {
+        data: customConfig.data.map((d) => createQueueItem(d)),
       }),
       customTheme
     );

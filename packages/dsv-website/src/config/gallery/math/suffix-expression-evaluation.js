@@ -11,7 +11,7 @@ const code = `const stack = dsv.create({
   }
 })
 
-const tokens = ["2","1","+","3","*"]
+const tokens = ["1", "2", "+", "3", "4", "*", "*", "5", "+"];
 
 for (let i = 0; i < tokens.length; i++) {
   const token = tokens[i];
