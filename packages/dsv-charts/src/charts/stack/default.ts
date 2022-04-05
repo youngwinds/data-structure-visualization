@@ -27,7 +27,7 @@ export const defaultTheme: StackChartThemeType = {
     '#cbb0e3',
   ],
   text: {
-    textColor: '#212121',
+    color: '#212121',
   },
   border: {
     color: '#eeeeee',

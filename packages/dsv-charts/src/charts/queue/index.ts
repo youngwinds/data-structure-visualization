@@ -1,11 +1,4 @@
-import {
-  max,
-  Selection,
-  scaleBand,
-  scaleLinear,
-  ScaleBand,
-  ScaleLinear,
-} from 'd3';
+import { Selection, scaleBand, ScaleBand, ScaleLinear } from 'd3';
 import { merge, cloneDeep } from 'lodash';
 
 import { Cartesian2Layout } from '@dsv-charts/components';
@@ -19,7 +12,6 @@ import {
   IChartLifeCircle,
   TransitionType,
   Cartesian2LayoutConfigType,
-  Cartesian2InnerRect,
 } from '@dsv-charts/types';
 
 import {
@@ -41,9 +33,9 @@ class QueueChart implements IQueueChart {
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
+  containerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   xScale: ScaleBand<string>;
-  yScale: ScaleLinear<number, number, never>;
 
   constructor(
     selector: string | HTMLElement,
@@ -102,17 +94,6 @@ class QueueChart implements IQueueChart {
       chartDidDestroyed(cloneDeep(this.getConfig()), this as QueueChart);
   }
 
-  render(data?: QueueChartDataType): this {
-    if (data) {
-      this.config.data = data;
-    }
-    this.renderScale();
-    this.renderRectGroup();
-    this.renderTextGroup();
-
-    return this;
-  }
-
   async renderAsync(data?: QueueChartDataType): Promise<true> {
     if (data) {
       this.config.data = data;
@@ -134,32 +115,36 @@ class QueueChart implements IQueueChart {
     });
   }
 
+  render(data?: QueueChartDataType): this {
+    if (data) {
+      this.config.data = data;
+    }
+    this.renderScale();
+    this.renderRectGroup();
+    this.renderTextGroup();
+    this.renderContainerGroup();
+
+    return this;
+  }
+
   renderScale() {
-    const innerRect: Cartesian2InnerRect = this.layout.getInnerRect();
+    const innerRect = this.layout.getInnerRect();
     const data = this.getData();
+
     this.xScale = scaleBand(
       data.map((d) => d.key),
       [0, innerRect.innerWidth]
-    ).padding(0.5);
-
-    const maxValue = max(data, (d: QueueChartItemType) =>
-      typeof d.value === 'number' ? d.value : 100
-    );
-
-    this.yScale = scaleLinear(
-      [0, maxValue === 0 ? 1 : maxValue],
-      [0, innerRect.innerHeight]
-    );
+    ).padding(0.01);
 
     return this;
   }
 
   renderRectGroup() {
     const innerRect = this.layout.getInnerRect();
+    const data = this.getData();
+    const rect = this.layout.getRect();
     const colorScheme = this.getThemeByKey('colorScheme');
     const { duration } = this.getConfigByKey('transition') as TransitionType;
-
-    const data = this.getData();
 
     this.rectGroup.call((g) => {
       g.selectAll('rect')
@@ -168,23 +153,16 @@ class QueueChart implements IQueueChart {
           (enter) =>
             enter
               .append('rect')
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr('x', innerRect.innerRight)
               .attr('width', this.xScale.bandwidth())
-              .attr('height', 0)
+              .attr('height', 50)
               .attr('fill', colorScheme[0])
-              .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
+              .attr('y', () => rect.center[1] - 50)
               .transition()
               .duration(duration)
-              .attr('height', (d: QueueChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
-              .attr(
-                'y',
-                (d: QueueChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('height', 50)
+              .attr('y', () => rect.center[1] - 50)
+              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
               .selection(),
           (update) =>
             update
@@ -192,24 +170,18 @@ class QueueChart implements IQueueChart {
               .duration(duration)
               .attr('fill', colorScheme[0])
               .attr('width', this.xScale.bandwidth())
-              .attr('height', (d: QueueChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
+              .attr('height', 50)
               .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
-              .attr(
-                'y',
-                (d: QueueChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('y', () => rect.center[1] - 50)
               .selection(),
           (exit) =>
             exit
+              .attr('opacity', 1)
               .transition()
               .duration(duration)
-              .attr('height', '0')
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
+              .attr('opacity', 0)
+              .attr('x', -rect.right)
+              .attr('y', rect.center[0] - 50)
               .transition()
               .remove()
         );
@@ -220,12 +192,12 @@ class QueueChart implements IQueueChart {
 
   renderTextGroup() {
     const innerRect = this.layout.getInnerRect();
+    const data = this.getData();
+    const rect = this.layout.getRect();
     const text = this.getThemeByKey('text') as {
-      textColor?: string;
+      color?: string;
     };
     const { duration } = this.getConfigByKey('transition') as TransitionType;
-
-    const data = this.getData();
 
     this.textGroup.call((g) => {
       g.selectAll('text')
@@ -237,29 +209,64 @@ class QueueChart implements IQueueChart {
               .attr('font-size', 20)
               .attr('text-anchor', 'middle')
               .attr('dx', this.xScale.bandwidth() / 2)
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
               .attr('dy', 20)
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight),
+              .attr('x', rect.right)
+              .attr('y', () => rect.center[1])
+              .transition()
+              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr('y', () => rect.center[1]),
           (update) => update,
           (exit) =>
             exit
               .transition()
               .duration(duration)
-              .attr('opacity', 0)
-              .selection()
+              .attr('x', -rect.right)
+              .attr('y', rect.center[1])
               .remove()
         )
         .transition()
         .duration(duration)
         .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
-        .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
+        .attr('y', () => rect.center[1])
         .attr('dx', this.xScale.bandwidth() / 2)
         .attr('dy', 20)
-        .attr('fill', text?.textColor)
+        .attr('fill', text?.color)
         .selection()
         .html((d) => d.name);
     });
 
+    return this;
+  }
+
+  renderContainerGroup() {
+    const innerRect = this.layout.getInnerRect();
+    const rect = this.layout.getRect();
+
+    const arrow = this.getThemeByKey('arrow') as {
+      color?: string;
+      width?: number | string;
+    };
+
+    const { duration } = this.getConfigByKey('transition') as TransitionType;
+
+    const points = [
+      [innerRect.innerLeft + 25, rect.center[1] - 85 - 25].join(' '),
+      [innerRect.innerLeft, rect.center[1] - 75 - 25].join(' '),
+      [innerRect.innerLeft + 25, rect.center[1] - 65 - 25].join(' '),
+      [innerRect.innerLeft, rect.center[1] - 75 - 25].join(' '),
+      [innerRect.innerRight, rect.center[1] - 75 - 25].join(' '),
+    ].join(',');
+
+    this.containerGroup
+      .selectAll('polyline')
+      .data([points])
+      .join('polyline')
+      .transition()
+      .duration(duration)
+      .attr('points', (d) => d)
+      .attr('fill', 'transparent')
+      .attr('stroke-width', arrow.width)
+      .attr('stroke', arrow.color);
     return this;
   }
 
@@ -283,6 +290,7 @@ class QueueChart implements IQueueChart {
   initGroup(): void {
     this.rectGroup = this.layout.addGroup();
     this.textGroup = this.layout.addGroup();
+    this.containerGroup = this.layout.addGroup();
   }
 
   getSelector(): string | HTMLElement {
@@ -345,7 +353,6 @@ class QueueChart implements IQueueChart {
     this.rectGroup.remove();
 
     this.xScale = null;
-    this.yScale = null;
     this.textGroup = null;
     this.rectGroup = null;
 

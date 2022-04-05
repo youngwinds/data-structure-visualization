@@ -24,7 +24,7 @@ type ArrayChartThemeType = {
   type: 'array';
   colorScheme?: string[];
   text?: {
-    textColor?: string;
+    color?: string;
   };
   border?: {
     color?: string;

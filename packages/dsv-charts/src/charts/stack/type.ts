@@ -24,7 +24,7 @@ type StackChartThemeType = {
   type: 'stack';
   colorScheme?: string[];
   text?: {
-    textColor?: string;
+    color?: string;
   };
   border?: {
     color?: string;
@@ -45,9 +45,9 @@ interface IStackChart
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
+  containerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
-  xScale: ScaleBand<string>;
-  yScale: ScaleLinear<number, number, never>;
+  yScale: ScaleBand<string>;
 
   initDom(selector: string | HTMLElement): HTMLElement;
   initLayout(): Cartesian2Layout;
@@ -58,6 +58,7 @@ interface IStackChart
   renderScale(): this;
   renderRectGroup(): this;
   renderTextGroup(): this;
+  renderContainerGroup(): this;
 }
 
 export {

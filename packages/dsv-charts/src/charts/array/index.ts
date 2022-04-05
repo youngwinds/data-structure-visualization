@@ -220,8 +220,8 @@ class ArrayChart implements IArrayChart {
 
   renderTextGroup() {
     const innerRect = this.layout.getInnerRect();
-    const text = this.getThemeByKey('text') as {
-      textColor?: string;
+    const { color: textColor } = this.getThemeByKey('text') as {
+      color?: string;
     };
     const { duration } = this.getConfigByKey('transition') as TransitionType;
 
@@ -255,7 +255,7 @@ class ArrayChart implements IArrayChart {
         .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
         .attr('dx', this.xScale.bandwidth() / 2)
         .attr('dy', 20)
-        .attr('fill', text?.textColor)
+        .attr('fill', textColor)
         .selection()
         .html((d) => d.name);
     });
