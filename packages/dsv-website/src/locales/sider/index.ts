@@ -52,6 +52,11 @@ const algorithm = [
     'zh-CN': '动态规划',
     'en-US': 'Dynamic Programming',
   },
+  {
+    key: 'math',
+    'zh-CN': '数学',
+    'en-US': 'Math',
+  },
 ];
 
 export default [...dataStructure, ...algorithm];

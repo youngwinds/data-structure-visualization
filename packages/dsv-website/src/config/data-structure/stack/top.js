@@ -10,7 +10,7 @@ const code = `const stack = dsv.create({
     }
   }
 })
-  
+
 const topValue = stack.top()
 
 stack.push(topValue)

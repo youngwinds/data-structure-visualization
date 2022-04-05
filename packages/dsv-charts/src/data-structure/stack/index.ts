@@ -59,7 +59,7 @@ class DsStack extends StackChart {
   }
 
   public pop() {
-    return this.warpMethod((data) => data.pop());
+    return this.warpMethod((data) => data.pop().value);
   }
 
   public push(...args: number[]) {
