@@ -3,15 +3,33 @@ const code = `const stack = dsv.create({
     data: [],
     layout: {
         padding: {
-            left: 150,
-            right: 150,
+            left: 0,
+            right: 0,
             bottom: 50,
-            top: 50,
-        }
+            top: 0,
+        },
+        position: 'absolute',
+        width: 300,
+        left: 100
     }
 })
 
-const operatorStack = [];
+const operatorStack = dsv.create({
+    type: 'stack',
+    data: [],
+    layout: {
+        padding: {
+            left: 0,
+            right: 0,
+            bottom: 50,
+            top: 0,
+        },
+        position: 'absolute',
+        width: 300,
+        right: 100,
+    }
+})
+
 const tokens = ["(", "1", "+", "2", ")", "*", "3", "*", "4", "+", "5"]; // ( 1 + 2 ) * 3 * 4 + 5
 const legalOperator = ["(", ")", "+", "-", "*", "/"];
 
@@ -20,12 +38,12 @@ for (let ch of tokens) {
         if (ch === "(") {
             operatorStack.push(ch);
         } else if (ch === ")") {
-            while (operatorStack[operatorStack.length - 1] !== '(') {
+            while (operatorStack.top() !== '(') {
                 stack.push(operatorStack.pop())
             }
             operatorStack.pop()
         } else if (ch === "+" || ch === "-") {
-            while (["*", '/'].includes(operatorStack[operatorStack.length - 1])) {
+            while (["*", '/'].includes(operatorStack.top())) {
                 stack.push(operatorStack.pop());
             }
             operatorStack.push(ch);
