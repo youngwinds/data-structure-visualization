@@ -9,7 +9,7 @@ const code = `const stack = dsv.create({
             top: 0,
         },
         position: 'absolute',
-        width: 300,
+        width: 200,
         left: 100
     }
 })
@@ -25,7 +25,7 @@ const operatorStack = dsv.create({
             top: 0,
         },
         position: 'absolute',
-        width: 300,
+        width: 200,
         right: 100,
     }
 })
@@ -43,7 +43,8 @@ for (let ch of tokens) {
             }
             operatorStack.pop()
         } else if (ch === "+" || ch === "-") {
-            while (["*", '/'].includes(operatorStack.top())) {
+            console.log(operatorStack.top())
+            while (!operatorStack.isEmpty() && ["*", '/'].includes(operatorStack.top())) {
                 stack.push(operatorStack.pop());
             }
             operatorStack.push(ch);
@@ -55,7 +56,7 @@ for (let ch of tokens) {
     }
 }
 
-while (operatorStack.length) {
+while (!operatorStack.isEmpty()) {
     stack.push(operatorStack.pop())
 }`;
 
