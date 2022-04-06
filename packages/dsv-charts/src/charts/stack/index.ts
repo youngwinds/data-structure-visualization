@@ -1,35 +1,23 @@
 import { Selection, scaleBand, ScaleBand, easeCubic } from 'd3';
-import { merge, cloneDeep } from 'lodash';
+import { merge } from 'lodash';
 
 import { Cartesian2Layout } from '@dsv-charts/components';
-import {
-  isFunction,
-  isHTMLElement,
-  isObject,
-  isString,
-} from '@dsv-charts/utils/type-check';
-import {
-  IChartLifeCircle,
-  TransitionType,
-  Cartesian2LayoutConfigType,
-} from '@dsv-charts/types';
 
 import {
   StackChartItemType,
   StackChartDataType,
   StackChartConfigType,
   StackChartThemeType,
-  IStackChart,
 } from './type';
 
 import { defaultConfig, defaultTheme } from './default';
+import { BaseChart } from '../base';
 
-class StackChart implements IStackChart {
-  dom: HTMLElement;
-  selector: string | HTMLElement;
-  config: StackChartConfigType;
-  theme: StackChartThemeType;
-
+class StackChart extends BaseChart<
+  StackChartConfigType,
+  StackChartThemeType,
+  StackChartDataType
+> {
   layout: Cartesian2Layout;
   rectGroup: Selection<SVGGElement, unknown, null, undefined>;
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
@@ -42,69 +30,27 @@ class StackChart implements IStackChart {
     config: StackChartConfigType,
     theme: StackChartThemeType
   ) {
-    this.selector = selector;
-    this.config = merge({}, defaultConfig, config);
-    this.theme = merge({}, defaultTheme, theme);
+    super(
+      selector,
+      merge({}, defaultConfig, config),
+      merge({}, defaultTheme, theme)
+    );
 
-    this.dom = this.initDom(selector);
     this.layout = this.initLayout();
     this.initGroup();
-    this.chartDidChartInit();
-  }
-
-  // life circles
-  chartDidChartInit(): void {
-    const { chartDidChartInit } = this.getConfigByKey(
-      'lifeCircle'
-    ) as IChartLifeCircle;
-
-    isFunction(chartDidChartInit) &&
-      chartDidChartInit(cloneDeep(this.getConfig()), this as StackChart);
-  }
-
-  chartDidDataChanged(): void {
-    const { chartDidDataChanged } = this.getConfigByKey(
-      'lifeCircle'
-    ) as IChartLifeCircle;
-    isFunction(chartDidDataChanged) &&
-      chartDidDataChanged(cloneDeep(this.getConfig()), this as StackChart);
-  }
-
-  chartWillDataChanged(): void {
-    const { chartWillDataChanged } = this.getConfigByKey(
-      'lifeCircle'
-    ) as IChartLifeCircle;
-    isFunction(chartWillDataChanged) &&
-      chartWillDataChanged(cloneDeep(this.getConfig()), this as StackChart);
-  }
-
-  chartWillDestroyed(): void {
-    const { chartWillDestroyed } = this.getConfigByKey(
-      'lifeCircle'
-    ) as IChartLifeCircle;
-    isFunction(chartWillDestroyed) &&
-      chartWillDestroyed(cloneDeep(this.getConfig()), this as StackChart);
-  }
-
-  chartDidDestroyed(): void {
-    const { chartDidDestroyed } = this.getConfigByKey(
-      'lifeCircle'
-    ) as IChartLifeCircle;
-    isFunction(chartDidDestroyed) &&
-      chartDidDestroyed(cloneDeep(this.getConfig()), this as StackChart);
+    super.chartDidChartInit();
   }
 
   async renderAsync(data?: StackChartDataType): Promise<true> {
-    if (data) {
-      this.config.data = data;
-    }
+    data && super.updateData(data);
+
     return await new Promise((resolve) => {
       this.render().transitionEnd(resolve);
     });
   }
 
   private transitionEnd(resolve) {
-    const { duration } = this.getConfigByKey('transition') as TransitionType;
+    const { duration } = super.getConfigByKey('transition');
 
     return this.rectGroup.call((g) => {
       g.transition()
@@ -116,9 +62,8 @@ class StackChart implements IStackChart {
   }
 
   render(data?: StackChartDataType): this {
-    if (data) {
-      this.config.data = data;
-    }
+    data && super.updateData(data);
+
     this.renderScale();
     this.renderRectGroup();
     this.renderTextGroup();
@@ -128,8 +73,8 @@ class StackChart implements IStackChart {
   }
 
   renderScale() {
+    const data = super.getData();
     const innerRect = this.layout.getInnerRect();
-    const data = this.getData();
 
     this.yScale = scaleBand(data.map((d) => d.key).reverse(), [
       innerRect.innerTop,
@@ -140,10 +85,10 @@ class StackChart implements IStackChart {
   }
 
   renderRectGroup() {
+    const { duration } = super.getConfigByKey('transition');
+    const colorScheme = super.getThemeByKey('colorScheme');
+    const data = super.getData();
     const innerRect = this.layout.getInnerRect();
-    const data = this.getData();
-    const colorScheme = this.getThemeByKey('colorScheme');
-    const { duration } = this.getConfigByKey('transition') as TransitionType;
 
     this.rectGroup.call((g) => {
       g.selectAll('rect')
@@ -189,12 +134,10 @@ class StackChart implements IStackChart {
   }
 
   renderTextGroup() {
+    const { duration } = super.getConfigByKey('transition');
+    const text = super.getThemeByKey('text');
+    const data = super.getData();
     const innerRect = this.layout.getInnerRect();
-    const data = this.getData();
-    const text = this.getThemeByKey('text') as {
-      color?: string;
-    };
-    const { duration } = this.getConfigByKey('transition') as TransitionType;
 
     this.textGroup.call((g) => {
       g.selectAll('text')
@@ -241,13 +184,9 @@ class StackChart implements IStackChart {
   }
 
   renderContainerGroup() {
+    const { duration } = super.getConfigByKey('transition');
+    const border = super.getThemeByKey('border');
     const innerRect = this.layout.getInnerRect();
-    const border = this.getThemeByKey('border') as {
-      color?: string;
-      width?: number;
-    };
-
-    const { duration } = this.getConfigByKey('transition') as TransitionType;
 
     const points = [
       [innerRect.innerLeft, innerRect.innerTop].join(' '),
@@ -271,21 +210,8 @@ class StackChart implements IStackChart {
     return this;
   }
 
-  initDom(selector: string | HTMLElement): HTMLElement {
-    if (isString(selector) && isObject(window)) {
-      this.dom = window.document.querySelector(`#${selector}`);
-    } else if (isHTMLElement(selector)) {
-      this.dom = selector;
-    }
-
-    return this.dom;
-  }
-
   initLayout(): Cartesian2Layout {
-    return new Cartesian2Layout(
-      this.dom,
-      this.getConfigByKey('layout') as Cartesian2LayoutConfigType
-    );
+    return new Cartesian2Layout(super.getDom(), super.getConfigByKey('layout'));
   }
 
   initGroup(): void {
@@ -294,61 +220,8 @@ class StackChart implements IStackChart {
     this.containerGroup = this.layout.addGroup();
   }
 
-  getSelector(): string | HTMLElement {
-    return this.selector;
-  }
-
-  getDom(): HTMLElement {
-    return this.dom;
-  }
-
-  setData(data: StackChartDataType): this {
-    this.chartWillDataChanged();
-    this.config.data = data;
-    this.chartDidDataChanged();
-    return this;
-  }
-
-  getData(): StackChartDataType {
-    return this.config.data;
-  }
-
-  setConfig(config: StackChartConfigType): this {
-    this.config = config;
-    return this;
-  }
-
-  getConfig(): StackChartConfigType {
-    return this.config;
-  }
-
-  setTheme(theme: StackChartThemeType): this {
-    this.theme = theme;
-    return this;
-  }
-
-  getTheme(): StackChartThemeType {
-    return this.theme;
-  }
-
-  getConfigByKey(key: keyof StackChartConfigType) {
-    if (key in this.config) {
-      return this.config[key];
-    }
-
-    throw new Error(`Key does not exist:${key}`);
-  }
-
-  getThemeByKey(key: keyof StackChartThemeType) {
-    if (key in this.theme) {
-      return this.theme[key];
-    }
-
-    throw new Error(`Key does not exist:${key}`);
-  }
-
   destroy(): void {
-    this.chartWillDestroyed();
+    super.chartWillDestroyed();
     this.layout.destroy();
     this.textGroup.remove();
     this.rectGroup.remove();
@@ -358,11 +231,9 @@ class StackChart implements IStackChart {
     this.rectGroup = null;
 
     this.layout = null;
-    this.dom = null;
-    this.config = null;
-    this.theme = null;
-    this.selector = null;
-    this.chartDidDestroyed();
+
+    super.destroy();
+    super.chartDidDestroyed();
   }
 }
 
