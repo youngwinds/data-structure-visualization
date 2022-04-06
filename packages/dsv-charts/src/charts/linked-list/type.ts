@@ -3,13 +3,22 @@ import { TransitionType } from './../../types/transition/index';
 import { Cartesian2LayoutConfigType } from './../../types/layout/index';
 
 type LinkedNodeType = {
-  key: string;
+  key?: string;
   name: string;
   value: string | number;
-  next: LinkedNodeType;
+  x?: number;
+  y?: number;
 };
 
-type LinkedListDataType = LinkedNodeType;
+type LinkedLinkType = {
+  source: LinkedNodeType;
+  target: LinkedNodeType;
+};
+
+type LinkedListDataType = {
+  nodes: Array<LinkedNodeType>;
+  links: Array<LinkedLinkType>;
+};
 
 type LinkedListConfigType = {
   type: 'linkedList';
@@ -36,6 +45,7 @@ type LinkedListThemeType = {
 };
 
 export {
+  LinkedLinkType,
   LinkedNodeType,
   LinkedListDataType,
   LinkedListConfigType,

@@ -3,10 +3,8 @@ import { LinkedListConfigType, LinkedListThemeType } from './type';
 export const defaultConfig: LinkedListConfigType = {
   type: 'linkedList',
   data: {
-    key: '',
-    name: '',
-    value: '',
-    next: null,
+    nodes: [],
+    links: [],
   },
   layout: {
     padding: {
