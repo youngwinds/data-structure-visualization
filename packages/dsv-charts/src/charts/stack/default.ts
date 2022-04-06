@@ -10,6 +10,8 @@ export const defaultConfig: StackChartConfigType = {
       bottom: 50,
       top: 50,
     },
+    position: 'relative',
+    zIndex: 1,
   },
   transition: {
     duration: 500,

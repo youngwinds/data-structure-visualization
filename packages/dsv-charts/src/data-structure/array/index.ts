@@ -49,7 +49,7 @@ class DsArray extends ArrayChart {
   }
 
   private warpMethod(callback) {
-    const data: ArrayChartDataType = this.getData();
+    const data: ArrayChartDataType = super.getData();
     const returnValue = callback(data);
     super.setData(data);
     return returnValue;
@@ -150,12 +150,12 @@ class DsArray extends ArrayChart {
   }
 
   public get(index: number) {
-    const data = this.getConfigByKey('data') as ArrayChartDataType;
+    const data = super.getConfigByKey('data');
     return data[index].value;
   }
 
   public getSize() {
-    const data = this.getConfigByKey('data') as ArrayChartDataType;
+    const data = super.getConfigByKey('data');
     return data.length;
   }
 }
