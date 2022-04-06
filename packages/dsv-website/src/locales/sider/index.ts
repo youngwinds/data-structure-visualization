@@ -5,7 +5,7 @@ const dataStructure = [
     'en-US': 'Array',
   },
   {
-    key: 'linkedlist',
+    key: 'linked-list',
     'zh-CN': '链表',
     'en-US': 'LinkedList',
   },

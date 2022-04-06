@@ -49,7 +49,7 @@ class DsArray extends ArrayChart {
   }
 
   private warpMethod(callback) {
-    const data: ArrayChartDataType = super.getData();
+    const data = super.getData() as ArrayChartDataType;
     const returnValue = callback(data);
     super.setData(data);
     return returnValue;

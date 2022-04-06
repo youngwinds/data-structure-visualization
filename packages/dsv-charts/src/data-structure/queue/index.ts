@@ -48,7 +48,7 @@ class DsQueue extends QueueChart {
   }
 
   private warpMethod(callback) {
-    const data: QueueChartDataType = this.getData();
+    const data = this.getData() as QueueChartDataType;
     const returnValue = callback(data);
     super.setData(data);
     return returnValue;
@@ -63,12 +63,12 @@ class DsQueue extends QueueChart {
   }
 
   public element() {
-    const data: QueueChartDataType = this.getData();
+    const data = this.getData() as QueueChartDataType;
     return data[0].value;
   }
 
   public getSize() {
-    const data: QueueChartDataType = this.getData();
+    const data = this.getData() as QueueChartDataType;
 
     return data.length;
   }
