@@ -20,11 +20,12 @@ class LinkedListChart extends BaseChart<
   nodesGroup: Selection<SVGGElement, unknown, null, undefined>;
   linksGroup: Selection<SVGGElement, unknown, null, undefined>;
   markerGroup: Selection<SVGGElement, unknown, null, undefined>;
+  textGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   nodes: LinkedNodeType[] = [];
   links: LinkedLinkType[] = [];
 
-  radius: number = 10;
+  radius: number = 15;
 
   constructor(
     selector: string | HTMLElement,
@@ -48,6 +49,7 @@ class LinkedListChart extends BaseChart<
 
   initGroup(): void {
     this.linksGroup = this.layout.addGroup();
+    this.textGroup = this.layout.addGroup();
     this.nodesGroup = this.layout.addGroup();
     this.markerGroup = this.layout.addGroup();
   }
@@ -59,6 +61,7 @@ class LinkedListChart extends BaseChart<
     this.renderMarkerGroup();
     this.renderNodeGroup();
     this.renderLinksGroup();
+    this.renderTextGroup();
 
     return this;
   }
@@ -147,7 +150,7 @@ class LinkedListChart extends BaseChart<
     const marker = {
       id: 'arrow',
       viewBox: `0 ${-this.radius} ${this.radius * 2} ${this.radius * 2}`,
-      refX: `${this.radius}`,
+      refX: `10`,
       markerWidth: `${this.radius}`,
       markerHeight: `${this.radius}`,
       orient: 'auto',
@@ -176,6 +179,7 @@ class LinkedListChart extends BaseChart<
   renderNodeGroup() {
     const transition = super.getConfigByKey('transition');
     const colorScheme = super.getThemeByKey('colorScheme');
+    const innerRect = this.layout.getInnerRect();
 
     this.nodesGroup.call((g) => {
       g.selectAll('circle')
@@ -185,6 +189,7 @@ class LinkedListChart extends BaseChart<
             enter
               .append('circle')
               .attr('cy', (d) => d.y)
+              .attr('cx', innerRect.innerRight)
               .attr('fill', colorScheme[0])
               .transition()
               .duration(transition.duration)
@@ -245,6 +250,42 @@ class LinkedListChart extends BaseChart<
                 } as any)
               )
               .remove()
+        );
+    });
+  }
+
+  renderTextGroup() {
+    const transition = super.getConfigByKey('transition');
+    const text = super.getThemeByKey('text');
+    const innerRect = this.layout.getInnerRect();
+
+    this.nodesGroup.call((g) => {
+      g.selectAll('text')
+        .data(this.nodes)
+        .join(
+          (enter) =>
+            enter
+              .append('text')
+              .attr('y', (d) => d.y)
+              .attr('text-anchor', 'middle')
+              .attr('dominant-baseline', 'middle')
+              .attr('x', innerRect.innerRight)
+              .attr('fill', text.color)
+              .style('opacity', 0)
+              .transition()
+              .duration(transition.duration)
+              .attr('x', (d) => d.x)
+              .style('font-size', this.radius)
+              .style('opacity', 1)
+              .selection()
+              .html((d) => d.name),
+          (update) =>
+            update
+              .transition()
+              .duration(transition.duration)
+              .attr('x', (d) => d.x),
+          (exit) =>
+            exit.attr('opacity', 1).transition().attr('opacity', 0).remove()
         );
     });
   }
