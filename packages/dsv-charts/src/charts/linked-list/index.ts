@@ -19,9 +19,12 @@ class LinkedListChart extends BaseChart<
   layout: Cartesian2Layout;
   nodesGroup: Selection<SVGGElement, unknown, null, undefined>;
   linksGroup: Selection<SVGGElement, unknown, null, undefined>;
+  markerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   nodes: LinkedNodeType[] = [];
   links: LinkedLinkType[] = [];
+
+  radius: number = 10;
 
   constructor(
     selector: string | HTMLElement,
@@ -44,14 +47,16 @@ class LinkedListChart extends BaseChart<
   }
 
   initGroup(): void {
-    this.nodesGroup = this.layout.addGroup();
     this.linksGroup = this.layout.addGroup();
+    this.nodesGroup = this.layout.addGroup();
+    this.markerGroup = this.layout.addGroup();
   }
 
   render(data?: LinkedListDataType): this {
     data && super.updateData(data);
 
     this.recalculateLayout();
+    this.renderMarkerGroup();
     this.renderNodeGroup();
     this.renderLinksGroup();
 
@@ -106,38 +111,141 @@ class LinkedListChart extends BaseChart<
     return links.map((d) => {
       const sourceNode = this.nodes.find((node) => node.key === d.source.key);
       const targetNode = this.nodes.find((node) => node.key === d.target.key);
+
+      if (sourceNode.x < targetNode.x) {
+        return {
+          source: {
+            ...sourceNode,
+            x: sourceNode.x + this.radius,
+            y: sourceNode.y,
+          },
+          target: {
+            ...targetNode,
+            x: targetNode.x - this.radius,
+            y: targetNode.y,
+          },
+        };
+      }
+
       return {
-        source: { ...sourceNode, x: sourceNode.x, y: sourceNode.y },
-        target: { ...targetNode, x: targetNode.x, y: targetNode.y },
+        source: {
+          ...sourceNode,
+          x: sourceNode.x - this.radius,
+          y: sourceNode.y,
+        },
+        target: {
+          ...targetNode,
+          x: targetNode.x + this.radius,
+          y: targetNode.y,
+        },
       };
     });
   }
 
+  renderMarkerGroup() {
+    const arrow = this.getThemeByKey('arrow');
+    const marker = {
+      id: 'arrow',
+      viewBox: `0 ${-this.radius} ${this.radius * 2} ${this.radius * 2}`,
+      refX: `${this.radius}`,
+      markerWidth: `${this.radius}`,
+      markerHeight: `${this.radius}`,
+      orient: 'auto',
+    };
+    const path = {
+      d: 'M0,-5 L10,0 L0,5',
+    };
+    this.markerGroup.call((g) => {
+      g.selectAll('marker')
+        .data([marker])
+        .join('marker')
+        .attr('id', (d) => d.id)
+        .attr('viewBox', (d) => d.viewBox)
+        .attr('refX', (d) => d.refX)
+        .attr('markerWidth', (d) => d.markerWidth)
+        .attr('markerHeight', (d) => d.markerHeight)
+        .attr('orient', (d) => d.orient)
+        .selectAll('path')
+        .data([path])
+        .join('path')
+        .attr('d', (d) => d.d)
+        .attr('stroke', arrow.color);
+    });
+  }
+
   renderNodeGroup() {
+    const transition = super.getConfigByKey('transition');
+    const colorScheme = super.getThemeByKey('colorScheme');
+
     this.nodesGroup.call((g) => {
       g.selectAll('circle')
         .data(this.nodes)
-        .join('circle')
-        .transition()
-        .attr('cx', (d) => d.x)
-        .attr('cy', (d) => d.y)
-        .attr('r', 10);
+        .join(
+          (enter) =>
+            enter
+              .append('circle')
+              .attr('cy', (d) => d.y)
+              .attr('fill', colorScheme[0])
+              .transition()
+              .duration(transition.duration)
+              .attr('cx', (d) => d.x)
+              .attr('r', this.radius),
+          (update) =>
+            update
+              .transition()
+              .duration(transition.duration)
+              .attr('cx', (d) => d.x),
+          (exit) =>
+            exit.attr('opacity', 1).transition().attr('opacity', 0).remove()
+        );
     });
   }
 
   renderLinksGroup() {
+    const transition = super.getConfigByKey('transition');
+    const arrow = super.getThemeByKey('arrow');
+
     const link = linkHorizontal()
       .x((d: any) => d.x)
       .y((d: any) => d.y);
 
-    console.log(this.links);
     this.linksGroup.call((g) => {
       g.selectAll('path')
         .data(this.links)
-        .join('path')
-        .transition()
-        .attr('d', (d) => link(d as any))
-        .attr('stroke', '#212121');
+        .join(
+          (enter) =>
+            enter
+              .append('path')
+              .attr('style', 'marker-end: url("#arrow")')
+              .attr('stroke', arrow.color)
+              .attr('stroke-width', arrow.width)
+              .attr('d', (d) =>
+                link({
+                  source: d.source,
+                  target: d.source,
+                } as any)
+              )
+              .transition()
+              .duration(transition.duration)
+              .attr('d', (d) => link(d as any))
+              .attr('stroke', arrow.color)
+              .attr('stroke-width', arrow.width),
+          (update) =>
+            update
+              .transition()
+              .duration(transition.duration)
+              .attr('d', (d) => link(d as any)),
+          (exit) =>
+            exit
+              .transition()
+              .attr('d', (d) =>
+                link({
+                  source: d.source,
+                  target: d.source,
+                } as any)
+              )
+              .remove()
+        );
     });
   }
 

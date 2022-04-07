@@ -85,6 +85,12 @@ class DsLinkeNode {
     const newLinks = data.links.filter(
       (d) => d.source.key !== this.key && d.target.key !== this.key
     );
+
+    this.linkedList.setData({
+      nodes: data.nodes,
+      links: newLinks,
+    });
+
     const newNodes = data.nodes.filter((d) => d.key !== this.key);
 
     this.linkedList.setData({
