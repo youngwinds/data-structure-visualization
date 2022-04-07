@@ -1,3 +1,4 @@
+import { ConfigType, ThemeType, DataType } from '@dsv-charts/charts';
 import {
   isFunction,
   isString,
@@ -6,48 +7,15 @@ import {
 } from '@dsv-charts/utils';
 import { cloneDeep } from 'lodash';
 
-import {
-  ArrayChartConfigType,
-  ArrayChartThemeType,
-  ArrayChartDataType,
-} from './array';
-
-import {
-  QueueChartConfigType,
-  QueueChartThemeType,
-  QueueChartDataType,
-} from './queue';
-
-import {
-  StackChartConfigType,
-  StackChartThemeType,
-  StackChartDataType,
-} from './stack';
-
-export type ConfigType =
-  | ArrayChartConfigType
-  | QueueChartConfigType
-  | StackChartConfigType;
-
-export type ThemeType =
-  | ArrayChartThemeType
-  | QueueChartThemeType
-  | StackChartThemeType;
-
-export type DataType =
-  | ArrayChartDataType
-  | QueueChartDataType
-  | StackChartDataType;
-
 export abstract class BaseChart<
   ConfigT extends ConfigType,
   ThemeT extends ThemeType,
   DataT extends DataType
 > {
-  protected selector: string | HTMLElement;
-  protected config: ConfigT;
-  protected theme: ThemeT;
-  protected dom: HTMLElement;
+  private selector: string | HTMLElement;
+  private config: ConfigT;
+  private theme: ThemeT;
+  private dom: HTMLElement;
 
   constructor(selector: string | HTMLElement, config: ConfigT, theme: ThemeT) {
     this.selector = selector;
@@ -66,19 +34,11 @@ export abstract class BaseChart<
   }
 
   public getConfigByKey<T extends keyof ConfigType>(key: T) {
-    if (key in this.config) {
-      return this.config[key];
-    }
-
-    throw new Error(`Key does not exist:${key}`);
+    return this.config[key];
   }
 
-  public getThemeByKey<T extends keyof ThemeT>(key: T) {
-    if (key in this.theme) {
-      return this.theme[key];
-    }
-
-    throw new Error(`Key does not exist:${key}`);
+  public getThemeByKey<T extends keyof ThemeType>(key: T) {
+    return this.theme[key];
   }
 
   public getDom(): HTMLElement {
@@ -101,7 +61,7 @@ export abstract class BaseChart<
     return this;
   }
 
-  public getData(): ArrayChartDataType {
+  public getData() {
     return this.config.data;
   }
 
@@ -110,7 +70,7 @@ export abstract class BaseChart<
     return this;
   }
 
-  public getConfig(): ConfigT {
+  public getConfig(): ConfigType {
     return this.config;
   }
 

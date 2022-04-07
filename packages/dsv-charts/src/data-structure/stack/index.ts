@@ -48,7 +48,7 @@ class DsStack extends StackChart {
   }
 
   private warpMethod(callback) {
-    const data: StackChartDataType = this.getData();
+    const data = this.getData() as StackChartDataType;
     const returnValue = callback(data);
     super.setData(data);
     return returnValue;
@@ -63,12 +63,12 @@ class DsStack extends StackChart {
   }
 
   public top() {
-    const data = this.getData();
+    const data = this.getData() as StackChartDataType;
     return data[data.length - 1].value;
   }
 
   public isEmpty() {
-    const data = this.getData();
+    const data = this.getData() as StackChartDataType;
     return !data.length;
   }
 }

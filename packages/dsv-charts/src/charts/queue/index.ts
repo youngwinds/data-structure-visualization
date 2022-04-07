@@ -74,7 +74,7 @@ class QueueChart extends BaseChart<
 
   renderScale() {
     const innerRect = this.layout.getInnerRect();
-    const data = super.getData();
+    const data = super.getData() as QueueChartDataType;
 
     this.xScale = scaleBand(
       data.map((d) => d.key),
@@ -87,7 +87,7 @@ class QueueChart extends BaseChart<
   renderRectGroup() {
     const { duration } = super.getConfigByKey('transition');
     const colorScheme = super.getThemeByKey('colorScheme');
-    const data = super.getData();
+    const data = super.getData() as QueueChartDataType;
     const innerRect = this.layout.getInnerRect();
     const rect = this.layout.getRect();
 
@@ -107,7 +107,11 @@ class QueueChart extends BaseChart<
               .duration(duration)
               .attr('height', 50)
               .attr('y', () => rect.center[1] - 50)
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr(
+                'x',
+                (d: QueueChartItemType) =>
+                  this.xScale(d.key) + innerRect.innerLeft
+              )
               .selection(),
           (update) =>
             update
@@ -116,7 +120,11 @@ class QueueChart extends BaseChart<
               .attr('fill', colorScheme[0])
               .attr('width', this.xScale.bandwidth())
               .attr('height', 50)
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr(
+                'x',
+                (d: QueueChartItemType) =>
+                  this.xScale(d.key) + innerRect.innerLeft
+              )
               .attr('y', () => rect.center[1] - 50)
               .selection(),
           (exit) =>
@@ -138,7 +146,7 @@ class QueueChart extends BaseChart<
   renderTextGroup() {
     const { duration } = super.getConfigByKey('transition');
     const text = super.getThemeByKey('text');
-    const data = super.getData();
+    const data = super.getData() as QueueChartDataType;
     const rect = this.layout.getRect();
     const innerRect = this.layout.getInnerRect();
 
@@ -156,7 +164,11 @@ class QueueChart extends BaseChart<
               .attr('x', rect.right)
               .attr('y', () => rect.center[1])
               .transition()
-              .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+              .attr(
+                'x',
+                (d: QueueChartItemType) =>
+                  this.xScale(d.key) + innerRect.innerLeft
+              )
               .attr('y', () => rect.center[1]),
           (update) => update,
           (exit) =>
@@ -169,13 +181,16 @@ class QueueChart extends BaseChart<
         )
         .transition()
         .duration(duration)
-        .attr('x', (d) => this.xScale(d.key) + innerRect.innerLeft)
+        .attr(
+          'x',
+          (d: QueueChartItemType) => this.xScale(d.key) + innerRect.innerLeft
+        )
         .attr('y', () => rect.center[1])
         .attr('dx', this.xScale.bandwidth() / 2)
         .attr('dy', 20)
         .attr('fill', text?.color)
         .selection()
-        .html((d) => d.name);
+        .html((d: QueueChartItemType) => d.name);
     });
 
     return this;

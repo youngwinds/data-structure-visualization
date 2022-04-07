@@ -82,7 +82,8 @@ class ArrayChart extends BaseChart<
 
   renderScale() {
     const innerRect: Cartesian2InnerRect = this.layout.getInnerRect();
-    const data = super.getData();
+    const data = super.getData() as ArrayChartDataType;
+
     this.xScale = scaleBand(
       data.map((d) => d.key),
       [0, innerRect.innerWidth]
@@ -104,7 +105,7 @@ class ArrayChart extends BaseChart<
     const innerRect = this.layout.getInnerRect();
     const colorScheme = super.getThemeByKey('colorScheme');
     const { duration } = super.getConfigByKey('transition');
-    const data = super.getData();
+    const data = super.getData() as ArrayChartDataType;
 
     this.rectGroup.call((g) => {
       g.selectAll('rect')
@@ -175,7 +176,7 @@ class ArrayChart extends BaseChart<
     const innerRect = this.layout.getInnerRect();
     const { color: textColor } = super.getThemeByKey('text');
     const { duration } = super.getConfigByKey('transition');
-    const data = super.getData();
+    const data = super.getData() as ArrayChartDataType;
 
     this.textGroup.call((g) => {
       g.selectAll('text')
@@ -241,7 +242,6 @@ class ArrayChart extends BaseChart<
     this.rectGroup = null;
 
     this.layout = null;
-    this.dom = null;
 
     super.destroy();
     super.chartDidDestroyed();

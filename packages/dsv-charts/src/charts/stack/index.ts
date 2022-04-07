@@ -23,7 +23,7 @@ class StackChart extends BaseChart<
   textGroup: Selection<SVGGElement, unknown, null, undefined>;
   containerGroup: Selection<SVGGElement, unknown, null, undefined>;
 
-  yScale: ScaleBand<string>;
+  yScale: ScaleBand<{ toString(): string }>;
 
   constructor(
     selector: string | HTMLElement,
@@ -73,7 +73,7 @@ class StackChart extends BaseChart<
   }
 
   renderScale() {
-    const data = super.getData();
+    const data = super.getData() as StackChartDataType;
     const innerRect = this.layout.getInnerRect();
 
     this.yScale = scaleBand(data.map((d) => d.key).reverse(), [
@@ -87,7 +87,7 @@ class StackChart extends BaseChart<
   renderRectGroup() {
     const { duration } = super.getConfigByKey('transition');
     const colorScheme = super.getThemeByKey('colorScheme');
-    const data = super.getData();
+    const data = super.getData() as StackChartDataType;
     const innerRect = this.layout.getInnerRect();
 
     this.rectGroup.call((g) => {
@@ -114,7 +114,7 @@ class StackChart extends BaseChart<
               .transition()
               .duration(duration)
               .attr('x', innerRect.innerLeft)
-              .attr('y', (d) => this.yScale(d.key))
+              .attr('y', (d: StackChartItemType) => this.yScale(d.key))
               .attr('fill', colorScheme[0])
               .attr('height', this.yScale.bandwidth())
               .attr('width', innerRect.innerWidth)
@@ -136,7 +136,7 @@ class StackChart extends BaseChart<
   renderTextGroup() {
     const { duration } = super.getConfigByKey('transition');
     const text = super.getThemeByKey('text');
-    const data = super.getData();
+    const data = super.getData() as StackChartDataType;
     const innerRect = this.layout.getInnerRect();
 
     this.textGroup.call((g) => {
@@ -153,22 +153,22 @@ class StackChart extends BaseChart<
               .ease(easeCubic)
               .duration(duration)
               .attr('dx', () => innerRect.innerWidth / 2)
-              .attr('y', (d) => this.yScale(d.key))
+              .attr('y', (d: StackChartItemType) => this.yScale(d.key))
               .attr('dy', () => this.yScale.bandwidth() / 2)
               .attr('fill', text.color)
               .selection()
-              .html((d) => d.name),
+              .html((d: StackChartItemType) => d.name),
           (update) =>
             update
               .transition()
               .duration(duration)
               .attr('x', () => innerRect.innerLeft)
               .attr('dx', () => innerRect.innerWidth / 2)
-              .attr('y', (d) => this.yScale(d.key))
+              .attr('y', (d: StackChartItemType) => this.yScale(d.key))
               .attr('dy', () => this.yScale.bandwidth() / 2)
               .attr('fill', text.color)
               .selection()
-              .html((d) => d.name),
+              .html((d: StackChartItemType) => d.name),
           (exit) =>
             exit
               .transition()

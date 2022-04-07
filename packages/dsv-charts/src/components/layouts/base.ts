@@ -18,7 +18,7 @@ export class BaseLayout {
   }
 
   public addGroup() {
-    return this._svg.append('g').style('border', '1px');
+    return this._svg.append('g');
   }
 
   private initRect() {
