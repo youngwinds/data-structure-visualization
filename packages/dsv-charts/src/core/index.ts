@@ -9,6 +9,8 @@ import {
   StackChartConfigType,
   LinkedListChart,
   LinkedListConfigType,
+  TreeChart,
+  TreeConfigType,
 } from '@dsv-charts/charts';
 
 import {
@@ -24,10 +26,16 @@ import {
   DsStack,
   DsStackConfigType,
   DsStackThemeType,
+  DsTree,
+  DsTreeConfigType,
+  DsTreeThemeType,
 } from '@dsv-charts/data-structure';
 
 export class Dsv {
-  private map = new Map<'array' | 'stack' | 'queue' | 'linkedList', Function>();
+  private map = new Map<
+    'array' | 'stack' | 'queue' | 'linkedList' | 'tree',
+    Function
+  >();
   private static instance: Dsv;
 
   static getInstance(addStateCallback) {
@@ -43,6 +51,7 @@ export class Dsv {
     this.initStack(addStateCallback);
     this.initQueue(addStateCallback);
     this.initLinkedList(addStateCallback);
+    this.initTree(addStateCallback);
   }
 
   initArray(addStateCallback) {
@@ -54,16 +63,16 @@ export class Dsv {
             ...config,
             lifeCircle: {
               chartDidChartInit: (
-                data: ArrayChartConfigType,
+                config: ArrayChartConfigType,
                 instance: ArrayChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
               chartDidDataChanged: (
-                data: ArrayChartConfigType,
+                config: ArrayChartConfigType,
                 instance: ArrayChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
             },
           },
@@ -83,16 +92,16 @@ export class Dsv {
             ...config,
             lifeCircle: {
               chartDidChartInit: (
-                data: QueueChartConfigType,
+                config: QueueChartConfigType,
                 instance: QueueChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
               chartDidDataChanged: (
-                data: QueueChartConfigType,
+                config: QueueChartConfigType,
                 instance: QueueChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
             },
           },
@@ -112,16 +121,16 @@ export class Dsv {
             ...config,
             lifeCircle: {
               chartDidChartInit: (
-                data: StackChartConfigType,
+                config: StackChartConfigType,
                 instance: StackChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
               chartDidDataChanged: (
-                data: StackChartConfigType,
+                config: StackChartConfigType,
                 instance: StackChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
             },
           },
@@ -141,22 +150,51 @@ export class Dsv {
             ...config,
             lifeCircle: {
               chartDidChartInit: (
-                data: LinkedListConfigType,
+                config: LinkedListConfigType,
                 instance: LinkedListChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
               chartDidDataChanged: (
-                data: LinkedListConfigType,
+                config: LinkedListConfigType,
                 instance: LinkedListChart
               ) => {
-                addStateCallback(data, instance);
+                addStateCallback(config, instance);
               },
             },
           },
           { ...theme }
         );
         return stack;
+      }
+    );
+  }
+
+  initTree(addStateCallback) {
+    return this.map.set(
+      'tree',
+      (config: DsTreeConfigType, theme: DsTreeThemeType) => {
+        const tree = new DsTree(
+          {
+            ...config,
+            lifeCircle: {
+              chartDidChartInit: (
+                config: TreeConfigType,
+                instance: TreeChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+              chartDidDataChanged: (
+                config: TreeConfigType,
+                instance: TreeChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+            },
+          },
+          { ...theme }
+        );
+        return tree;
       }
     );
   }
