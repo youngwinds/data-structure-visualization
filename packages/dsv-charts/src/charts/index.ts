@@ -12,28 +12,38 @@ import {
   LinkedListConfigType,
   LinkedListThemeType,
 } from './linked-list';
+import { TreeChart, TreeConfigType, TreeThemeType, TreeDataType } from './tree';
 
-export type ChartType = ArrayChart | StackChart | QueueChart | LinkedListChart;
+export type ChartType =
+  | ArrayChart
+  | StackChart
+  | QueueChart
+  | LinkedListChart
+  | TreeChart;
 
 export type ConfigType =
   | ArrayChartConfigType
   | StackChartConfigType
   | QueueChartConfigType
-  | LinkedListConfigType;
+  | LinkedListConfigType
+  | TreeConfigType;
 
 export type ThemeType =
   | ArrayChartThemeType
   | StackChartThemeType
   | QueueChartThemeType
-  | LinkedListThemeType;
+  | LinkedListThemeType
+  | TreeThemeType;
 
 export type DataType =
   | ArrayChartDataType
   | StackChartDataType
   | QueueChartDataType
-  | LinkedListDataType;
+  | LinkedListDataType
+  | TreeDataType;
 
 export * from './array';
 export * from './queue';
 export * from './stack';
 export * from './linked-list';
+export * from './tree';
