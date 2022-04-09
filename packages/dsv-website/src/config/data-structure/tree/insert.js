@@ -10,15 +10,15 @@ const E = tree.createNode({ name: 'E', value: 1 });
 const F = tree.createNode({ name: 'F', value: 1 });
 const G = tree.createNode({ name: 'G', value: 1 });
 
-A.append(B).append(C).append(D)
+A.insert(B).insert(C).insert(D)
 
-A.append(E)
-A.append(F)
-A.append(G, B)
+A.insert(E)
+A.insert(F)
+A.insert(G, B)
 `;
 
 module.exports = {
-  'zh-CN': 'append',
-  'en-US': 'append',
+  'zh-CN': 'insert',
+  'en-US': 'insert',
   code: code,
 };
