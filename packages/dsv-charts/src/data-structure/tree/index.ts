@@ -31,31 +31,84 @@ class DsTreeNode {
     this.dsTree = dsTree;
   }
 
-  append(node: DsTreeNode): DsTreeNode {
+  append(node: DsTreeNode, targetNode: DsTreeNode): DsTreeNode {
     const data = this.dsTree.getConfigByKey('data');
-
     if (this.dsTree.isExit(data, node.key)) {
       throw new Error(`Adding duplicate nodes is not allowed: ${node}`);
     }
 
     const currentNode = this.dsTree.getTreeNodeByKey(data, this.key);
-    if (currentNode !== null) {
-      currentNode.children.push(this.dsTree.serializeDsTreeNode(node));
+    if (arguments.length === 1) {
+      if (currentNode !== null) {
+        currentNode.children.push(this.dsTree.serializeDsTreeNode(node));
+      }
+      this.dsTree.setData(data);
+      this.children.push(node);
+      return node;
+    } else if (arguments.length === 2) {
+      const index = currentNode.children.findIndex(
+        (d) => d.key === targetNode.key
+      );
+      if (index === -1) {
+        throw new Error(`could't find index of ${targetNode}`);
+      }
+
+      currentNode.children.splice(
+        index + 1,
+        0,
+        this.dsTree.serializeDsTreeNode(node)
+      );
+      this.dsTree.setData(data);
+      this.children.splice(index + 1, 0, node);
+      return node;
     }
-    this.dsTree.setData(data);
-    this.children.push(node);
-    return node;
+
+    throw new Error('append error');
   }
 
-  insertBefote(node: DsTreeNode, targetNode: DsTreeNode): DsTreeNode {
-    return node;
-  }
+  insert(node: DsTreeNode, targetNode: DsTreeNode): DsTreeNode {
+    const data = this.dsTree.getConfigByKey('data');
+    if (this.dsTree.isExit(data, node.key)) {
+      throw new Error(`Adding duplicate nodes is not allowed: ${node}`);
+    }
 
-  insertAfter(node: DsTreeNode) {}
+    const currentNode = this.dsTree.getTreeNodeByKey(data, this.key);
+    if (arguments.length === 1) {
+      if (currentNode !== null) {
+        currentNode.children.unshift(this.dsTree.serializeDsTreeNode(node));
+      }
+      this.dsTree.setData(data);
+      this.children.unshift(node);
+      return node;
+    } else if (arguments.length === 2) {
+      const index = currentNode.children.findIndex(
+        (d) => d.key === targetNode.key
+      );
+
+      console.log(currentNode.children, index);
+      if (index === -1) {
+        throw new Error(`could't find index of ${targetNode}`);
+      }
+
+      currentNode.children.splice(
+        index,
+        0,
+        this.dsTree.serializeDsTreeNode(node)
+      );
+      this.dsTree.setData(data);
+
+      this.children.splice(index, 0, node);
+      return node;
+    }
+
+    throw new Error('insert error');
+  }
 
   swap(node: DsTreeNode) {}
 
-  remove() {}
+  remove() {
+    
+  }
 
   clear(): this {
     const data = this.dsTree.getConfigByKey('data');
