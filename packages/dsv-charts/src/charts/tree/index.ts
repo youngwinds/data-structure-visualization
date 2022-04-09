@@ -4,6 +4,7 @@ import {
   HierarchyPointNode,
   tree,
   linkVertical,
+  HierarchyPointLink,
 } from 'd3';
 import { Cartesian2Layout } from '@dsv-charts/components';
 import { merge } from 'lodash';
@@ -20,7 +21,6 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
   layout: Cartesian2Layout;
   nodesGroup: Selection<SVGGElement, unknown, null, undefined>;
   linksGroup: Selection<SVGGElement, unknown, null, undefined>;
-  markerGroup: Selection<SVGGElement, unknown, null, undefined>;
   textsGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   rootData: HierarchyPointNode<TreeNodeType>;
@@ -39,6 +39,7 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
 
     this.layout = this.initLayout();
     this.initGroup();
+    super.chartDidChartInit();
   }
 
   initLayout(): Cartesian2Layout {
@@ -64,7 +65,6 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
 
   async renderAsync(data?: TreeDataType): Promise<true> {
     data && super.updateData(data);
-
     return await new Promise((resolve) => {
       this.render().transitionEnd(resolve);
     });
@@ -97,20 +97,40 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
   renderNodes() {
     const colorScheme = this.getThemeByKey('colorScheme');
     const innerRect = this.layout.getInnerRect();
-
     this.nodesGroup.call((g) => {
       g.selectAll('circle')
-        .data(this.rootData.descendants())
-        .join('circle')
-        .attr(
-          'transform',
-          (d) =>
-            `translate(${d.x + innerRect.innerLeft},${
-              d.y + innerRect.innerTop
-            })`
+        .data(
+          this.rootData.descendants(),
+          (d: HierarchyPointNode<TreeNodeType>) => d.data.key
         )
-        .attr('r', this.radius)
-        .attr('fill', colorScheme[0]);
+        .join(
+          (enter) =>
+            enter
+              .append('circle')
+              .attr(
+                'transform',
+                (d) =>
+                  `translate(${d.x + innerRect.innerLeft},${
+                    d.y + innerRect.innerTop
+                  })`
+              )
+              .attr('r', this.radius)
+              .attr('fill', colorScheme[0])
+              .attr('opacity', 0)
+              .transition()
+              .attr('opacity', 1),
+          (update) =>
+            update
+              .transition()
+              .attr(
+                'transform',
+                (d) =>
+                  `translate(${d.x + innerRect.innerLeft},${
+                    d.y + innerRect.innerTop
+                  })`
+              ),
+          (exit) => exit.transition().attr('opacity', 0).remove()
+        );
     });
   }
 
@@ -120,20 +140,43 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
 
     this.textsGroup.call((g) => {
       g.selectAll('text')
-        .data(this.rootData.descendants())
-        .join('text')
-        .attr(
-          'transform',
-          (d) =>
-            `translate(${d.x + innerRect.innerLeft},${
-              d.y + innerRect.innerTop
-            })`
+        .data(
+          this.rootData.descendants(),
+          (d: HierarchyPointNode<TreeNodeType>) => d.data.key
         )
-        .attr('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .attr('fill', text.color)
-        .attr('font-size', this.radius)
-        .html((d) => d.data.name);
+        .join(
+          (enter) =>
+            enter
+              .append('text')
+              .attr(
+                'transform',
+                (d) =>
+                  `translate(${d.x + innerRect.innerLeft},${
+                    d.y + innerRect.innerTop
+                  })`
+              )
+              .attr('text-anchor', 'middle')
+              .attr('dominant-baseline', 'middle')
+              .attr('fill', text.color)
+              .attr('font-size', this.radius)
+              .attr('opacity', 0)
+              .html((d) => d.data.name)
+              .transition()
+              .attr('opacity', 1),
+          (update) =>
+            update
+              .transition()
+              .attr(
+                'transform',
+                (d) =>
+                  `translate(${d.x + innerRect.innerLeft},${
+                    d.y + innerRect.innerTop
+                  })`
+              )
+              .selection()
+              .html((d) => d.data.name),
+          (exit) => exit.transition().attr('opacity', 0).remove()
+        );
     });
   }
 
@@ -148,14 +191,44 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
     this.linksGroup.call((g) => {
       return g
         .selectAll('path')
-        .data(this.rootData.links())
-        .join('path')
-        .attr('d', link as any)
-        .attr('r', this.radius)
-        .attr('fill', 'none')
-        .attr('stroke', arrow.color)
-        .attr('stroke-width', arrow.width);
+        .data(
+          this.rootData.links(),
+          (d: HierarchyPointLink<TreeNodeType>) =>
+            d.source.data.key + d.target.data.key
+        )
+        .join(
+          (enter) =>
+            enter
+              .append('path')
+              .attr('d', (d) =>
+                link({ source: d.source, target: d.source } as any)
+              )
+              .transition()
+              .attr('d', link as any)
+              .attr('r', this.radius)
+              .attr('fill', 'none')
+              .attr('stroke', arrow.color)
+              .attr('stroke-width', arrow.width),
+          (update) => update.transition().attr('d', link as any),
+          (exit) =>
+            exit
+              .transition()
+              .attr('d', (d) =>
+                link({ source: d.source, target: d.source } as any)
+              )
+              .remove()
+        );
     });
+  }
+
+  destroy() {
+    this.nodesGroup.remove();
+    this.linksGroup.remove();
+    this.textsGroup.remove();
+    this.rootData = null;
+    this.radius = null;
+    this.layout.destroy();
+    super.destroy();
   }
 }
 
