@@ -104,10 +104,24 @@ class DsTreeNode {
     throw new Error('insert error');
   }
 
-  swap(node: DsTreeNode) {}
+  swap(target: DsTreeNode) {
+    const root = this.dsTree.getConfigByKey('data');
+    const n1 = this.dsTree.getTreeNodeByKey(root, target.key);
+    const n2 = this.dsTree.getTreeNodeByKey(root, this.key);
+
+    const temp = { ...n1 };
+    n1.key = n2.key;
+    n1.name = n2.name;
+    n1.value = n2.value;
+
+    n2.key = temp.key;
+    n2.value = temp.value;
+    n2.name = temp.name;
+    this.dsTree.setData(root);
+  }
 
   remove() {
-    
+    this.dsTree.delete(this);
   }
 
   clear(): this {
@@ -138,6 +152,7 @@ class DsTree extends TreeChart {
    */
   createNode(node: DsTreeValueType): DsTreeNode {
     const data = this.getConfigByKey('data');
+    console.log(data);
     if (!data) {
       super.setData({
         key: String(++this.size),
@@ -226,6 +241,37 @@ class DsTree extends TreeChart {
     }
 
     return result;
+  }
+
+  delete(node: DsTreeNode): void {
+    const root = this.getConfigByKey('data');
+    if (node.key === root.key) {
+      throw new Error(
+        `Due to implementation problems, not support to delete the Root Node temporarily! rootNode: ${node}`
+      );
+    }
+
+    const deleteDfs = (root: TreeNodeType, targetNode: DsTreeNode) => {
+      if (!root.children) {
+        return false;
+      }
+      for (let i = 0; i < root.children.length; i++) {
+        const child = root.children[i];
+
+        if (child.key === targetNode.key) {
+          root.children.splice(i, 1);
+          return true;
+        } else {
+          deleteDfs(child, targetNode);
+        }
+      }
+    };
+    let res = deleteDfs(root, node);
+    if (res === false) {
+      throw new Error(`could't find delte ${node}`);
+    } else {
+      super.setData(root);
+    }
   }
 }
 

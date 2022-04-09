@@ -2,7 +2,7 @@ const code = `const tree = dsv.create({
   type: 'tree'
 })
 
-const Root = tree.createNode({ name: 'Root', value: 1 });
+const Root = tree.createNode({ name: 'Root', value: 1 })
 const A = tree.createNode({ name: 'A', value: 1 });
 const B = tree.createNode({ name: 'B', value: 1 });
 const C = tree.createNode({ name: 'C', value: 1 });
@@ -16,10 +16,15 @@ Root.append(A).append(B).append(C).append(D)
 A.append(E)
 A.append(F)
 A.append(G, B)
+
+A.swap(G)
+B.swap(A)
+C.swap(D)
+Root.swap(C)
 `;
 
 module.exports = {
-  'zh-CN': 'append',
-  'en-US': 'append',
+  'zh-CN': 'swap',
+  'en-US': 'swap',
   code: code,
 };

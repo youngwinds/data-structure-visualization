@@ -21,7 +21,6 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
   layout: Cartesian2Layout;
   nodesGroup: Selection<SVGGElement, unknown, null, undefined>;
   linksGroup: Selection<SVGGElement, unknown, null, undefined>;
-  markerGroup: Selection<SVGGElement, unknown, null, undefined>;
   textsGroup: Selection<SVGGElement, unknown, null, undefined>;
 
   rootData: HierarchyPointNode<TreeNodeType>;
@@ -66,7 +65,6 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
 
   async renderAsync(data?: TreeDataType): Promise<true> {
     data && super.updateData(data);
-
     return await new Promise((resolve) => {
       this.render().transitionEnd(resolve);
     });
@@ -219,6 +217,16 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
               .remove()
         );
     });
+  }
+
+  destroy() {
+    this.nodesGroup.remove();
+    this.linksGroup.remove();
+    this.textsGroup.remove();
+    this.rootData = null;
+    this.radius = null;
+    this.layout.destroy();
+    super.destroy();
   }
 }
 
