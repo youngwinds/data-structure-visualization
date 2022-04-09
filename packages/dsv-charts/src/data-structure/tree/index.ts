@@ -19,7 +19,6 @@ class DsTreeNode {
   key: string = '';
   name: string = '';
   value: string | number = '';
-  next: DsTreeNode = null;
   children: DsTreeNode[] = [];
   dsTree: DsTree = null;
 
@@ -133,6 +132,32 @@ class DsTreeNode {
     return this;
   }
 
+  getData() {
+    return {
+      name: this.name,
+      value: this.value,
+    };
+  }
+
+  getChildren() {
+    const root = this.dsTree.getConfigByKey('data');
+    const node = this.dsTree.getTreeNodeByKey(root, this.key);
+    return node.children;
+  }
+
+  setData({ name, value }: { name?: string; value: number | string }) {
+    const root = this.dsTree.getConfigByKey('data');
+    const node = this.dsTree.getTreeNodeByKey(root, this.key);
+
+    name && (node.name = name);
+    value && (node.value = value);
+
+    this.dsTree.setData(root);
+
+    this.name = name;
+    this.value = value;
+  }
+
   toString() {
     return JSON.stringify(this.dsTree.serializeDsTreeNode(this));
   }
@@ -152,7 +177,6 @@ class DsTree extends TreeChart {
    */
   createNode(node: DsTreeValueType): DsTreeNode {
     const data = this.getConfigByKey('data');
-    console.log(data);
     if (!data) {
       super.setData({
         key: String(++this.size),

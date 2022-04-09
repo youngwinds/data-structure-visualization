@@ -172,7 +172,9 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
                   `translate(${d.x + innerRect.innerLeft},${
                     d.y + innerRect.innerTop
                   })`
-              ),
+              )
+              .selection()
+              .html((d) => d.data.name),
           (exit) => exit.transition().attr('opacity', 0).remove()
         );
     });

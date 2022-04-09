@@ -14,26 +14,18 @@ const G = tree.createNode({ name: 'G', value: 1 });
 Root.append(A).append(B).append(C).append(D)
 
 A.append(E)
-
-A.swap(B)
-A.swap(C)
-A.swap(E)
-Root.swap(E)
-E.swap(A)
-E.swap(Root)
-
-B.remove()
-
 A.append(F)
-F.insert(G)
+A.append(G, B)
 
-F.swap(G)
-G.swap(F)
-F.swap(A)
+A.swap(B);
+
+console.log(A.getChildren())
+console.log(B.getChildren())
+console.log(E.getChildren())
 `;
 
 module.exports = {
-  'zh-CN': 'swap',
-  'en-US': 'swap',
+  'zh-CN': 'getChildren',
+  'en-US': 'getChildren',
   code: code,
 };
