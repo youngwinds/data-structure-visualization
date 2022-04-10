@@ -187,7 +187,9 @@ class DsTree extends TreeChart {
   }
 
   createTree(node: TreeNodeType) {
-    return this.serializeTreeNode(node);
+    const root = this.serializeTreeNode(node);
+    super.setData(this.serializeTreeNode(root));
+    return root;
   }
 
   /**
