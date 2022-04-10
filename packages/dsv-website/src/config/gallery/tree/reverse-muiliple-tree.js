@@ -1,6 +1,6 @@
 const code = `const tree = dsv.create({
   type: 'tree'
-})
+});
 
 const data = {
   name: '1',
@@ -38,15 +38,29 @@ const data = {
 
 const root = tree.createTree(data);
 
-const a = tree.createNode({ name: 'a' })
+const dfs = (node) => {
+  if (!node) {
+    return;
+  }
+  if (!node.children) {
+    return;
+  }
 
-root.append(a)
+  if (node.children.length > 1)
+    node.reverse();
 
+  for (let ch of node.children) {
+    if (ch.children && ch.children.length !== 0) {
+      dfs(ch)
+    }
+  }
+}
 
+dfs(root)
 `;
 
 module.exports = {
-  'zh-CN': 'swap',
-  'en-US': 'swap',
+  'zh-CN': '翻转多叉树',
+  'en-US': 'Reverse Muiltiple Tree',
   code: code,
 };

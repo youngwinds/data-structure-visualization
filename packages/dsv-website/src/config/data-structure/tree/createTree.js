@@ -36,8 +36,11 @@ const data = {
   ]
 }
 
-const Root = tree.createTree(data)
+const root = tree.createTree(data);
 
+const a = tree.createNode({ name: 'a' })
+
+root.append(a)
 `;
 
 module.exports = {

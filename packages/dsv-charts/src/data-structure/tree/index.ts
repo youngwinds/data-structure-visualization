@@ -188,7 +188,7 @@ class DsTree extends TreeChart {
 
   createTree(node: TreeNodeType) {
     const root = this.serializeTreeNode(node);
-    super.setData(this.serializeTreeNode(root));
+    super.setData(this.serializeDsTreeNode(root));
     return root;
   }
 
@@ -294,6 +294,7 @@ class DsTree extends TreeChart {
       { name: node.name, key: String(++this.size), value: node.value },
       this
     );
+
     if (node.children)
       for (const child of node.children) {
         root.children.push(this.serializeTreeNode(child));
