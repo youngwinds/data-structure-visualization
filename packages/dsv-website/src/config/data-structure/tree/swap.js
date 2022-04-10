@@ -8,20 +8,20 @@ const data = {
     {
       name: '2',
       children: [
-        { name: '3' },
-        { name: '4' },
         {
-          name: '5', children: [
+          name: '3', children: [
             {
-              name: '6',
+              name: '4',
               children: [
+                { name: '5' },
+                { name: '6' },
                 { name: '7' },
-                { name: '8' },
-                { name: '9' },
               ]
             }
           ]
         },
+        { name: '8' },
+        { name: '9' },
       ]
     },
     {
@@ -42,8 +42,11 @@ const a = tree.createNode({ name: 'a' })
 
 root.append(a)
 
+root.swap(a);
 
-`;
+for (let ch of a.children) {
+  ch.reverse();
+}`;
 
 module.exports = {
   'zh-CN': 'swap',

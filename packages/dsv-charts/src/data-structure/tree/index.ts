@@ -117,9 +117,12 @@ class DsTreeNode {
     n2.name = temp.name;
     this.dsTree.setData(root);
 
-    const tempChildren = this.children;
-    this.children = target.children;
-    target.children = tempChildren;
+    const sroot = this.dsTree.serializeTreeNode(root);
+    const sthis = this.dsTree.getDsTreeNodeByKey(sroot, this.key);
+    const starget = this.dsTree.getDsTreeNodeByKey(sroot, target.key);
+
+    this.children = sthis.children;
+    target.children = starget.children;
   }
 
   remove() {
@@ -272,6 +275,27 @@ class DsTree extends TreeChart {
     return null;
   }
 
+  getDsTreeNodeByKey(dsTreeNode: DsTreeNode, key: string): DsTreeNode | null {
+    if (!dsTreeNode) {
+      return null;
+    }
+    if (dsTreeNode.key === key) {
+      return dsTreeNode;
+    }
+    if (!dsTreeNode.children) {
+      return null;
+    }
+
+    for (let child of dsTreeNode.children) {
+      const res = this.getDsTreeNodeByKey(child, key);
+      if (res !== null && res.key === key) {
+        return res;
+      }
+    }
+
+    return null;
+  }
+
   serializeDsTreeNode(dsTreeNode: DsTreeNode): TreeNodeType {
     const result: TreeNodeType = {
       key: dsTreeNode.key,
@@ -291,7 +315,11 @@ class DsTree extends TreeChart {
 
   serializeTreeNode(node: TreeNodeType): DsTreeNode {
     const root = new DsTreeNode(
-      { name: node.name, key: String(++this.size), value: node.value },
+      {
+        name: node.name,
+        key: node.key ?? String(++this.size),
+        value: node.value,
+      },
       this
     );
 
