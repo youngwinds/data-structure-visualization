@@ -292,10 +292,10 @@ class DsTree extends TreeChart {
       { name: node.name, key: String(++this.size), value: node.value },
       this
     );
-
-    for (const child of node.children) {
-      root.children.push(this.serializeTreeNode(child));
-    }
+    if (node.children)
+      for (const child of node.children) {
+        root.children.push(this.serializeTreeNode(child));
+      }
 
     return root;
   }
