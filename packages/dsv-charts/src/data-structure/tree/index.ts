@@ -84,7 +84,6 @@ class DsTreeNode {
         (d) => d.key === targetNode.key
       );
 
-      console.log(currentNode.children, index);
       if (index === -1) {
         throw new Error(`could't find index of ${targetNode}`);
       }
@@ -117,6 +116,10 @@ class DsTreeNode {
     n2.value = temp.value;
     n2.name = temp.name;
     this.dsTree.setData(root);
+
+    const tempChildren = this.children;
+    this.children = target.children;
+    target.children = tempChildren;
   }
 
   remove() {
@@ -140,9 +143,22 @@ class DsTreeNode {
   }
 
   getChildren() {
+    if (this.children) {
+      return this.children;
+    }
+
     const root = this.dsTree.getConfigByKey('data');
     const node = this.dsTree.getTreeNodeByKey(root, this.key);
     return node.children;
+  }
+
+  reverse() {
+    const data = this.dsTree.getConfigByKey('data');
+    const currentNode = this.dsTree.getTreeNodeByKey(data, this.key);
+    currentNode.children.reverse();
+    this.dsTree.setData(data);
+    this.children.reverse();
+    return this;
   }
 
   setData({ name, value }: { name?: string; value: number | string }) {
@@ -168,6 +184,10 @@ class DsTree extends TreeChart {
 
   constructor(customConfig: DsTreeConfigType, customTheme: DsTreeThemeType) {
     super('container', merge({}, customConfig), merge({}, customTheme));
+  }
+
+  createTree(node: TreeNodeType) {
+    return this.serializeTreeNode(node);
   }
 
   /**
@@ -265,6 +285,19 @@ class DsTree extends TreeChart {
     }
 
     return result;
+  }
+
+  serializeTreeNode(node: TreeNodeType): DsTreeNode {
+    const root = new DsTreeNode(
+      { name: node.name, key: String(++this.size), value: node.value },
+      this
+    );
+
+    for (const child of node.children) {
+      root.children.push(this.serializeTreeNode(child));
+    }
+
+    return root;
   }
 
   delete(node: DsTreeNode): void {
