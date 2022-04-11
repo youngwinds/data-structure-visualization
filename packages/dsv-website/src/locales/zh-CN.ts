@@ -4,6 +4,7 @@ import navbar from './menu';
 import ds from './data-structure';
 import ga from './gallery';
 import bc from './backtracking';
+import hm from './home';
 
 export default {
   ...generatorLocaleByLanguage(sider, 'zh-CN'),
@@ -11,4 +12,5 @@ export default {
   ...generatorLocaleByLanguage(ds, 'zh-CN'),
   ...generatorLocaleByLanguage(ga, 'zh-CN'),
   ...generatorLocaleByLanguage(bc, 'zh-CN'),
+  ...generatorLocaleByLanguage(hm, 'zh-CN'),
 };

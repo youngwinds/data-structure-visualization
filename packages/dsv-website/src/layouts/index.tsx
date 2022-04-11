@@ -22,7 +22,7 @@ export default function GlobalLayout({ children }: IRouteComponentProps) {
         </Row>
       </Header>
       <Content>{children}</Content>
-      <Footer className={styles.footer}>youngwind.top ©2022 Created</Footer>
+      <Footer className={styles.footer}> {`Copyright ©${new Date().getFullYear()} youngwind.top`} </Footer>
     </Layout>
   );
 }

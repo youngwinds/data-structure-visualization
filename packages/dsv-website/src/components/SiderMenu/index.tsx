@@ -56,7 +56,7 @@ export function SiderMenu({ menu }: ISiderMenu) {
     <Sider
       style={{
         overflow: 'auto',
-        height: 'calc(100vh - 64px)',
+        height: 'calc(100vh - 64px - 48px)',
       }}
       width={200}
       theme="light"
