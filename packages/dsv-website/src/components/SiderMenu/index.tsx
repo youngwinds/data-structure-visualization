@@ -54,6 +54,10 @@ export function SiderMenu({ menu }: ISiderMenu) {
 
   return (
     <Sider
+      style={{
+        overflow: 'auto',
+        height: 'calc(100vh - 64px)',
+      }}
       width={200}
       theme="light"
       collapsible
