@@ -19,4 +19,9 @@ export default [
     'zh-CN': '算法画廊',
     'en-US': 'Algorithm Gallery',
   },
+  {
+    key: 'Languages',
+    'zh-CN': '语言',
+    'en-US': 'Languages',
+  },
 ];

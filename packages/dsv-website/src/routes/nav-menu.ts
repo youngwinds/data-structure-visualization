@@ -18,8 +18,8 @@ export const navMenu: IMenu = [
     key: 'gallery',
     locale: 'Gallery',
   },
-  {
-    key: 'about',
-    locale: 'About',
-  },
+  // {
+  //   key: 'about',
+  //   locale: 'About',
+  // },
 ];
