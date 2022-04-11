@@ -4,6 +4,7 @@ import navbar from './menu';
 import ds from './data-structure';
 import ga from './gallery';
 import bc from './backtracking';
+import hm from './home';
 
 export default {
   ...generatorLocaleByLanguage(sider, 'en-US'),
@@ -11,4 +12,5 @@ export default {
   ...generatorLocaleByLanguage(ds, 'en-US'),
   ...generatorLocaleByLanguage(ga, 'en-US'),
   ...generatorLocaleByLanguage(bc, 'en-US'),
+  ...generatorLocaleByLanguage(hm, 'en-US'),
 };

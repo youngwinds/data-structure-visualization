@@ -1,15 +1,14 @@
-import { getLocale, setLocale } from 'umi';
+import { getLocale, setLocale, useIntl } from 'umi';
 
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Space } from 'antd';
 
 import { ReactComponent as Icon } from '@dsv-website/assets/icons/language.svg';
-import { useReducer } from 'react';
 
 export function LocaleIcon() {
-  const [, forceUpdate] = useReducer((v) => v + 1, 0);
   const handleLocaleChange = ({ key }: any) => {
     setLocale(key, true);
   };
+  const intl = useIntl();
 
   return (
     <Dropdown
@@ -22,7 +21,10 @@ export function LocaleIcon() {
         </Menu>
       }
     >
-      <Icon />
+      <Space>
+        <Icon style={{ position: 'relative', top: '5px' }} />
+        {intl.formatMessage({ id: 'Languages' })}
+      </Space>
     </Dropdown>
   );
 }
