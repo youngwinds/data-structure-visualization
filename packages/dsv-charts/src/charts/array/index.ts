@@ -1,3 +1,4 @@
+import { isNumber } from '@dsv-charts/utils/type-check';
 import {
   max,
   Selection,
@@ -44,7 +45,7 @@ class ArrayChart extends BaseChart<
       merge({}, defaultConfig, config),
       merge({}, defaultTheme, theme)
     );
-
+    console.log(theme);
     this.layout = this.initLayout();
     this.initGroup();
     super.chartDidChartInit();
@@ -82,7 +83,7 @@ class ArrayChart extends BaseChart<
 
   renderScale() {
     const innerRect: Cartesian2InnerRect = this.layout.getInnerRect();
-    const data = super.getData() as ArrayChartDataType;
+    const data = super.getConfigByKey('data');
 
     this.xScale = scaleBand(
       data.map((d) => d.key),
@@ -90,7 +91,7 @@ class ArrayChart extends BaseChart<
     ).padding(0.5);
 
     const maxValue = max(data, (d: ArrayChartItemType) =>
-      typeof d.value === 'number' ? d.value : 100
+      isNumber(d.value) ? d.value : 100
     );
 
     this.yScale = scaleLinear(
@@ -105,7 +106,33 @@ class ArrayChart extends BaseChart<
     const innerRect = this.layout.getInnerRect();
     const colorScheme = super.getThemeByKey('colorScheme');
     const { duration } = super.getConfigByKey('transition');
-    const data = super.getData() as ArrayChartDataType;
+    const data = super.getConfigByKey('data');
+
+    const fill = (d: ArrayChartItemType) => {
+      if (d.state) {
+        return d.state;
+      }
+      return colorScheme[0];
+    };
+
+    const height = (d: ArrayChartItemType) => {
+      if (isNumber(d.value)) {
+        return this.yScale(d.value);
+      }
+
+      return 100;
+    };
+
+    const width = () => {
+      return this.xScale.bandwidth();
+    };
+
+    const x = (d: ArrayChartItemType) =>
+      this.xScale(d.key) + innerRect.innerLeft;
+
+    const y = (d: ArrayChartItemType) => {
+      return innerRect.innerTop + innerRect.innerHeight - height(d);
+    };
 
     this.rectGroup.call((g) => {
       g.selectAll('rect')
@@ -114,57 +141,32 @@ class ArrayChart extends BaseChart<
           (enter) =>
             enter
               .append('rect')
-              .attr(
-                'x',
-                (d: ArrayChartItemType) =>
-                  this.xScale(d.key) + innerRect.innerLeft
-              )
-              .attr('width', this.xScale.bandwidth())
+              .attr('fill', fill)
+              .attr('x', x)
+              .attr('y', innerRect.innerHeight + innerRect.innerTop)
+              .attr('width', width)
               .attr('height', 0)
-              .attr('fill', colorScheme[0])
-              .attr('y', () => innerRect.innerHeight + innerRect.innerTop)
               .transition()
               .duration(duration)
-              .attr('height', (d: ArrayChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
-              .attr(
-                'y',
-                (d: ArrayChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('height', height)
+              .attr('y', y)
               .selection(),
           (update) =>
             update
               .transition()
               .duration(duration)
-              .attr('fill', colorScheme[0])
-              .attr('width', this.xScale.bandwidth())
-              .attr('height', (d: ArrayChartItemType) =>
-                typeof d.value === 'number' ? this.yScale(d.value) : 100
-              )
-              .attr(
-                'x',
-                (d: ArrayChartItemType) =>
-                  this.xScale(d.key) + innerRect.innerLeft
-              )
-              .attr(
-                'y',
-                (d: ArrayChartItemType) =>
-                  innerRect.innerTop +
-                  innerRect.innerHeight -
-                  (typeof d.value === 'number' ? this.yScale(d.value) : 100)
-              )
+              .attr('fill', fill)
+              .attr('x', x)
+              .attr('y', y)
+              .attr('width', width)
+              .attr('height', height)
               .selection(),
           (exit) =>
             exit
               .transition()
               .duration(duration)
               .attr('height', '0')
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
-              .transition()
+              .attr('y', innerRect.innerTop + innerRect.innerHeight)
               .remove()
         );
     });
@@ -174,9 +176,16 @@ class ArrayChart extends BaseChart<
 
   renderTextGroup() {
     const innerRect = this.layout.getInnerRect();
-    const { color: textColor } = super.getThemeByKey('text');
+    const text = super.getThemeByKey('text');
     const { duration } = super.getConfigByKey('transition');
-    const data = super.getData() as ArrayChartDataType;
+    const data = super.getConfigByKey('data');
+
+    const x = (d: ArrayChartItemType) => {
+      return this.xScale(d.key) + innerRect.innerLeft;
+    };
+    const y = () => {
+      return innerRect.innerTop + innerRect.innerHeight;
+    };
 
     this.textGroup.call((g) => {
       g.selectAll('text')
@@ -185,37 +194,25 @@ class ArrayChart extends BaseChart<
           (enter) =>
             enter
               .append('text')
-              .attr('font-size', 20)
-              .attr('text-anchor', 'middle')
-              .attr('dx', this.xScale.bandwidth() / 2)
-              .attr(
-                'x',
-                (d: ArrayChartItemType) =>
-                  this.xScale(d.key) + innerRect.innerLeft
-              )
+              .attr('x', x)
+              .attr('y', y)
               .attr('dy', 20)
-              .attr('y', () => innerRect.innerTop + innerRect.innerHeight),
-          (update) => update,
-          (exit) =>
-            exit
+              .attr('dx', this.xScale.bandwidth() / 2)
+              .attr('fill', text.color)
+              .attr('font-size', text.size)
+              .attr('text-anchor', 'middle')
+              .html((d: ArrayChartItemType) => d.name),
+          (update) =>
+            update
               .transition()
               .duration(duration)
-              .attr('opacity', 0)
+              .attr('x', x)
+              .attr('y', y)
               .selection()
-              .remove()
-        )
-        .transition()
-        .duration(duration)
-        .attr(
-          'x',
-          (d: ArrayChartItemType) => this.xScale(d.key) + innerRect.innerLeft
-        )
-        .attr('y', () => innerRect.innerTop + innerRect.innerHeight)
-        .attr('dx', this.xScale.bandwidth() / 2)
-        .attr('dy', 20)
-        .attr('fill', textColor)
-        .selection()
-        .html((d: ArrayChartItemType) => d.name);
+              .html((d: ArrayChartItemType) => d.name),
+          (exit) =>
+            exit.attr('opacity', 1).transition().attr('opacity', 0).remove()
+        );
     });
 
     return this;
