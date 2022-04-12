@@ -1,3 +1,4 @@
+import { isString } from '@dsv-charts/utils/type-check';
 import {
   Selection,
   hierarchy,
@@ -96,7 +97,23 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
 
   renderNodes() {
     const colorScheme = this.getThemeByKey('colorScheme');
+    const transition = this.getConfigByKey('transition');
     const innerRect = this.layout.getInnerRect();
+
+    const transform = (d: HierarchyPointNode<TreeNodeType>) => {
+      return `translate(${d.x + innerRect.innerLeft},${
+        d.y + innerRect.innerTop
+      })`;
+    };
+
+    const fill = (d: HierarchyPointNode<TreeNodeType>) => {
+      if (isString(d.data.state)) {
+        return d.data.state;
+      }
+
+      return colorScheme[0];
+    };
+
     this.nodesGroup.call((g) => {
       g.selectAll('circle')
         .data(
@@ -107,29 +124,18 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
           (enter) =>
             enter
               .append('circle')
-              .attr(
-                'transform',
-                (d) =>
-                  `translate(${d.x + innerRect.innerLeft},${
-                    d.y + innerRect.innerTop
-                  })`
-              )
-              .attr('r', this.radius)
-              .attr('fill', colorScheme[0])
-              .attr('opacity', 0)
+              .attr('transform', transform)
+              .attr('fill', fill)
+              .attr('r', 0)
               .transition()
-              .attr('opacity', 1),
+              .duration(transition.duration)
+              .attr('r', this.radius),
           (update) =>
             update
               .transition()
-              .attr(
-                'transform',
-                (d) =>
-                  `translate(${d.x + innerRect.innerLeft},${
-                    d.y + innerRect.innerTop
-                  })`
-              ),
-          (exit) => exit.transition().attr('opacity', 0).remove()
+              .duration(transition.duration)
+              .attr('transform', transform),
+          (exit) => exit.transition().duration(transition.duration).attr('r', 0).remove()
         );
     });
   }
@@ -137,6 +143,13 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
   renderTexts() {
     const text = this.getThemeByKey('text');
     const innerRect = this.layout.getInnerRect();
+    const transition = this.getConfigByKey('transition');
+
+    const transform = (d: HierarchyPointNode<TreeNodeType>) => {
+      return `translate(${d.x + innerRect.innerLeft},${
+        d.y + innerRect.innerTop
+      })`;
+    };
 
     this.textsGroup.call((g) => {
       g.selectAll('text')
@@ -148,40 +161,30 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
           (enter) =>
             enter
               .append('text')
-              .attr(
-                'transform',
-                (d) =>
-                  `translate(${d.x + innerRect.innerLeft},${
-                    d.y + innerRect.innerTop
-                  })`
-              )
+              .attr('transform', transform)
               .attr('text-anchor', 'middle')
               .attr('dominant-baseline', 'middle')
               .attr('fill', text.color)
-              .attr('font-size', this.radius)
-              .attr('opacity', 0)
               .html((d) => d.data.name)
+              .attr('font-size', 0)
               .transition()
-              .attr('opacity', 1),
+              .duration(transition.duration)
+              .attr('font-size', this.radius),
           (update) =>
             update
               .transition()
-              .attr(
-                'transform',
-                (d) =>
-                  `translate(${d.x + innerRect.innerLeft},${
-                    d.y + innerRect.innerTop
-                  })`
-              )
+              .duration(transition.duration)
+              .attr('transform', transform)
               .selection()
               .html((d) => d.data.name),
-          (exit) => exit.transition().attr('opacity', 0).remove()
+          (exit) => exit.transition().duration(transition.duration).attr('font-size', 0).remove()
         );
     });
   }
 
   renderLinks() {
     const arrow = this.getThemeByKey('arrow');
+    const transition = this.getConfigByKey('transition');
     const innerRect = this.layout.getInnerRect();
 
     const link = linkVertical()
@@ -204,15 +207,21 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
                 link({ source: d.source, target: d.source } as any)
               )
               .transition()
+              .duration(transition.duration)
               .attr('d', link as any)
               .attr('r', this.radius)
               .attr('fill', 'none')
               .attr('stroke', arrow.color)
               .attr('stroke-width', arrow.width),
-          (update) => update.transition().attr('d', link as any),
+          (update) =>
+            update
+              .transition()
+              .duration(transition.duration)
+              .attr('d', link as any),
           (exit) =>
             exit
               .transition()
+              .duration(transition.duration)
               .attr('d', (d) =>
                 link({ source: d.source, target: d.source } as any)
               )
