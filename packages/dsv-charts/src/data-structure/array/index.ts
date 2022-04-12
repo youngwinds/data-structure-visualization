@@ -5,7 +5,7 @@ import {
 } from '@dsv-charts/charts';
 
 import { merge } from 'lodash';
-import { isNumber, isString } from '@dsv-charts/utils/type-check';
+import { isNumber, isString, isArray } from '@dsv-charts/utils/type-check';
 import { DsArrayConfigType, DsArrayThemeType } from './type';
 
 let key = 0;
@@ -36,23 +36,21 @@ class DsArray extends ArrayChart {
   constructor(customConfig: DsArrayConfigType, customTheme: DsArrayThemeType) {
     super(
       'container',
-      merge({}, customConfig, {
-        data: customConfig.data.map((d) => createArrayItem(d)),
-      }),
+      merge(
+        {
+          state: {
+            getSize: '#edafda',
+            get: '#a5e7f0',
+          },
+        },
+        customConfig,
+        {
+          data: customConfig.data.map((d) => createArrayItem(d)),
+        }
+      ),
       customTheme
     );
     super.render();
-  }
-
-  public destroy(): void {
-    super.destroy();
-  }
-
-  private warpMethod(callback) {
-    const data = super.getData() as ArrayChartDataType;
-    const returnValue = callback(data);
-    super.setData(data);
-    return returnValue;
   }
 
   public fill(value, start?: number, end?: number) {
@@ -150,11 +148,75 @@ class DsArray extends ArrayChart {
   }
 
   public get(index: number) {
-    const data = super.getConfigByKey('data');
+    this.setState(index, 'get');
+    const data = this.getConfigByKey('data');
+    this.removeVisual(index);
     return data[index].value;
   }
 
+  public setVisual(index: number | number[], visual: string | string[]): void {
+    if (isArray(index) && isArray(visual)) {
+      this.warpMethod((data) => {
+        index.forEach((i, j) => {
+          data[i].state = visual[j];
+          console.log(data[i], visual[j], visual);
+        });
+      });
+    } else if (isArray(index) && isString(visual)) {
+      this.warpMethod((data) => {
+        index.forEach((i) => {
+          data[i].state = visual;
+        });
+      });
+    } else if (isNumber(index) && isString(visual)) {
+      this.warpMethod((data) => {
+        data[index].state = visual;
+      });
+    }
+  }
+
+  public removeVisual(index: number): void {
+    const data = super.getConfigByKey('data');
+
+    if (isNumber(index) && isString(data[index].state)) {
+      if (isString(data[index].state)) {
+        this.warpMethod((data) => {
+          data[index].state = undefined;
+        });
+      }
+    } else if (isArray(index)) {
+      this.warpMethod((data) => {
+        index.forEach((i) => {
+          data[i].state = undefined;
+        });
+      });
+    }
+  }
+
+  public setState(index: number, key: string) {
+    const state = super.getConfigByKey('state');
+    if (isString(state[key])) {
+      return this.setVisual(index, state[key]);
+    }
+  }
+
   public getSize() {
+    const data = super.getConfigByKey('data');
+    return data.length;
+  }
+
+  public destroy(): void {
+    super.destroy();
+  }
+
+  private warpMethod(callback: (data: ArrayChartDataType) => any) {
+    const data = super.getConfigByKey('data');
+    const returnValue = callback(data);
+    super.setData(data);
+    return returnValue;
+  }
+
+  get length() {
     const data = super.getConfigByKey('data');
     return data.length;
   }

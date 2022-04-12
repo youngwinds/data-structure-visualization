@@ -3,13 +3,13 @@ const code = `const array = dsv.create({
   data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9]
 })
 
-const size = array.getSize();
+const length = array.length;
 
-array.push(size, length)
+array.push(length)
 `;
 
 module.exports = {
-  'zh-CN': 'getSize',
-  'en-US': 'getSize',
+  'zh-CN': 'length',
+  'en-US': 'length',
   code: code,
 };

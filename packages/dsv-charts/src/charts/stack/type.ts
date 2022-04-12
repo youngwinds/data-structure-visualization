@@ -1,3 +1,4 @@
+import { StateType } from './../../types/state/index';
 import {
   IChartLifeCircle,
   TransitionType,
@@ -11,6 +12,7 @@ type StackChartDataType = StackChartItemType[];
 type StackChartConfigType = {
   type: 'stack';
   data: StackChartDataType;
+  state?: StateType;
   layout?: Cartesian2LayoutConfigType;
   transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;
