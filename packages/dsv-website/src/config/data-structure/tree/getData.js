@@ -2,11 +2,14 @@ const code = `const tree = dsv.create({
   type: 'tree'
 })
 
-const Root = tree.createNode({ name: 'Root', value: 1 });
+const root = tree.createNode({ name: 'A' });
 
-Root.setData({ name: 'R', value: 10 })
 
-console.log(Root.getData());
+const node = tree.createNode(root.getData());
+
+root.setData({ name: 'B', value: 10 })
+
+root.append(node);
 `;
 
 module.exports = {
