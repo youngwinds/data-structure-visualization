@@ -1,4 +1,4 @@
-import { DsConfigType } from '@dsv-charts/data-structure';
+import { DsConfigType, DsThemeType } from '@dsv-charts/data-structure';
 
 import {
   ArrayChart,
@@ -199,8 +199,8 @@ export class Dsv {
     );
   }
 
-  create(config: DsConfigType) {
+  create(config: DsConfigType, theme: DsThemeType) {
     const func = this.map.get(config.type);
-    return func(config);
+    return func(config, theme);
   }
 }
