@@ -30,6 +30,7 @@ export const defaultTheme: ArrayChartThemeType = {
   ],
   text: {
     color: '#212121',
+    size: 20,
   },
   border: {
     color: '#eeeeee',
