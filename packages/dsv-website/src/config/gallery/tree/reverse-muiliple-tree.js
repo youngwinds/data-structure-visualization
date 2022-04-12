@@ -46,6 +46,8 @@ const dfs = (node) => {
     return;
   }
 
+  node.setVisual('#edafda')
+
   if (node.children.length > 1)
     node.reverse();
 

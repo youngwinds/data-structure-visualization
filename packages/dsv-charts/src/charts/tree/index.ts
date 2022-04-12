@@ -110,7 +110,7 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
       if (isString(d.data.state)) {
         return d.data.state;
       }
-
+      
       return colorScheme[0];
     };
 
@@ -134,6 +134,7 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
             update
               .transition()
               .duration(transition.duration)
+              .attr('fill', fill)
               .attr('transform', transform),
           (exit) => exit.transition().duration(transition.duration).attr('r', 0).remove()
         );

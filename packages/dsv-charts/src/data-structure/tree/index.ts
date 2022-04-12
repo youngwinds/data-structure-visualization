@@ -18,6 +18,7 @@ type DsTreeNodeType = {
 class DsTreeNode {
   key: string = '';
   name: string = '';
+  state: string = '';
   value: string | number = '';
   children: DsTreeNode[] = [];
   dsTree: DsTree = null;
@@ -175,6 +176,28 @@ class DsTreeNode {
 
     this.name = name;
     this.value = value;
+  }
+
+  setVisual(visual: string) {
+    const root = this.dsTree.getConfigByKey('data');
+    const node = this.dsTree.getTreeNodeByKey(root, this.key);
+
+    node.state = visual;
+
+    this.dsTree.setData(root);
+
+    this.state = visual;
+  }
+
+  removeVisual() {
+    const root = this.dsTree.getConfigByKey('data');
+    const node = this.dsTree.getTreeNodeByKey(root, this.key);
+
+    node.state = undefined;
+
+    this.dsTree.setData(root);
+
+    this.state = undefined;
   }
 
   toString() {
