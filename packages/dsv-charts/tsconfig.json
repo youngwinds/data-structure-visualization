@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
       "@dsv-charts/*": ["./src/*"]

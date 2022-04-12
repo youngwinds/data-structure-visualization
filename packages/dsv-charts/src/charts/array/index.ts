@@ -45,7 +45,6 @@ class ArrayChart extends BaseChart<
       merge({}, defaultConfig, config),
       merge({}, defaultTheme, theme)
     );
-    console.log(theme);
     this.layout = this.initLayout();
     this.initGroup();
     super.chartDidChartInit();

@@ -1,4 +1,5 @@
 import {
+  StateType,
   IChartLifeCircle,
   TransitionType,
   Cartesian2LayoutConfigType,
@@ -16,9 +17,7 @@ type ArrayChartDataType = ArrayChartItemType[];
 type ArrayChartConfigType = {
   type: 'array';
   data: ArrayChartDataType;
-  state?: {
-    [stateName: string]: string;
-  };
+  state?: StateType;
   layout?: Cartesian2LayoutConfigType;
   transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;

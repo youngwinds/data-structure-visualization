@@ -3,10 +3,10 @@ const code = `const array = dsv.create({
   data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9]
 })
 
-array.setVisual(1,'red');
+array.setVisual([0, 1, 2, 3, 4, 5], 'red');
 
-array.removeVisual(1);
-
+array.removeVisual(0);
+array.removeVisual([1, 2, 3, 4, 5]);
 `;
 
 module.exports = {
