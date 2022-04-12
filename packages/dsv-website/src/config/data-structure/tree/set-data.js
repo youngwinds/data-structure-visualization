@@ -3,14 +3,15 @@ const code = `const tree = dsv.create({
 })
 
 const Root = tree.createNode({ name: 'Root', value: 1 });
+const A = tree.createNode({ name: 'A', value: 1 });
 
 Root.setData({ name: 'R', value: 10 })
-
-console.log(Root.getData());
+Root.append(A);
+A.swap(Root)
 `;
 
 module.exports = {
-  'zh-CN': 'getData',
-  'en-US': 'getData',
+  'zh-CN': 'setData',
+  'en-US': 'setData',
   code: code,
 };

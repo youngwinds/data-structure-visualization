@@ -38,11 +38,11 @@ const data = {
 
 const root = tree.createTree(data);
 
-root.reverse();
+root.getChildren().forEach((d) => d.clear());
 `;
 
 module.exports = {
-  'zh-CN': 'reverse',
-  'en-US': 'reverse',
+  'zh-CN': 'getChildren',
+  'en-US': 'getChildren',
   code: code,
 };

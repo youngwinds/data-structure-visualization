@@ -2,25 +2,21 @@ const code = `const tree = dsv.create({
   type: 'tree'
 })
 
-const Root = tree.createNode({ name: 'Root', value: 1 });
-const A = tree.createNode({ name: 'A', value: 1 });
-const B = tree.createNode({ name: 'B', value: 1 });
-const C = tree.createNode({ name: 'C', value: 1 });
-const D = tree.createNode({ name: 'D', value: 1 });
-const E = tree.createNode({ name: 'E', value: 1 });
-const F = tree.createNode({ name: 'F', value: 1 });
-const G = tree.createNode({ name: 'G', value: 1 });
+const root = tree.createTree({
+  name: 'Root', children: [
+    { name: '1', children: [{ name: '11', children: [{ name: '111' }] }] },
+    { name: '2', children: [{ name: '22', children: [{ name: '222' }] }] },
+    { name: '3', children: [{ name: '33', children: [{ name: '333' }] }] },
+    { name: '4', children: [{ name: '44', children: [{ name: '444' }] }] },
+    { name: '5', children: [{ name: '55', children: [{ name: '555' }] }] },
+  ]
+});
 
-Root.append(A);
-A.append(B)
-A.append(C)
-
-C.append(D)
-C.append(E)
-
-C.clear()
-C.append(F)
-C.append(G)
+for (let ch of root.children) {
+  if (ch.children) {
+    ch.children.forEach(d => d.clear());
+  }
+}
 `;
 
 module.exports = {

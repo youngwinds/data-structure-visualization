@@ -7,6 +7,7 @@ type TreeNodeType = {
   key: string;
   name: string;
   value: string | number;
+  state?: string;
   children: TreeNodeType[];
 };
 
