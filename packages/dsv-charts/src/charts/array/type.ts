@@ -16,6 +16,9 @@ type ArrayChartDataType = ArrayChartItemType[];
 type ArrayChartConfigType = {
   type: 'array';
   data: ArrayChartDataType;
+  state?: {
+    [stateName: string]: string;
+  };
   layout?: Cartesian2LayoutConfigType;
   transition?: TransitionType;
   lifeCircle?: IChartLifeCircle;

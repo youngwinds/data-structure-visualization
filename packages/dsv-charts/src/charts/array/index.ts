@@ -1,4 +1,4 @@
-import { isNumber } from '@dsv-charts/utils/type-check';
+import { isNumber, isString } from '@dsv-charts/utils/type-check';
 import {
   max,
   Selection,
@@ -109,7 +109,7 @@ class ArrayChart extends BaseChart<
     const data = super.getConfigByKey('data');
 
     const fill = (d: ArrayChartItemType) => {
-      if (d.state) {
+      if (isString(d.state)) {
         return d.state;
       }
       return colorScheme[0];

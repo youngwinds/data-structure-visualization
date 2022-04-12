@@ -44,17 +44,6 @@ class DsArray extends ArrayChart {
     super.render();
   }
 
-  public destroy(): void {
-    super.destroy();
-  }
-
-  private warpMethod(callback) {
-    const data = super.getData() as ArrayChartDataType;
-    const returnValue = callback(data);
-    super.setData(data);
-    return returnValue;
-  }
-
   public fill(value, start?: number, end?: number) {
     return this.warpMethod((data: ArrayChartDataType) => {
       start = start ? start : 0;
@@ -154,9 +143,34 @@ class DsArray extends ArrayChart {
     return data[index].value;
   }
 
+  public setVisual(index: number, state: string) {
+    this.warpMethod((data) => {
+      data[index].state = state;
+      return data[index];
+    });
+  }
+
+  public removeVisual(index: number) {
+    this.warpMethod((data) => {
+      data[index].state = undefined;
+      return data[index];
+    });
+  }
+
   public getSize() {
     const data = super.getConfigByKey('data');
     return data.length;
+  }
+
+  public destroy(): void {
+    super.destroy();
+  }
+
+  private warpMethod(callback: (data: ArrayChartDataType) => any) {
+    const data = super.getConfigByKey('data');
+    const returnValue = callback(data);
+    super.setData(data);
+    return returnValue;
   }
 }
 
