@@ -4,7 +4,12 @@ import {
   Cartesian2LayoutConfigType,
 } from '@dsv-charts/types';
 
-type ArrayChartItemType = { key: string; name: string; value: string | number };
+type ArrayChartItemType = {
+  key: string;
+  name: string;
+  value: string | number;
+  state?: string;
+};
 
 type ArrayChartDataType = ArrayChartItemType[];
 
@@ -21,6 +26,7 @@ type ArrayChartThemeType = {
   colorScheme?: string[];
   text?: {
     color?: string;
+    size?: number;
   };
   border?: {
     color?: string;
