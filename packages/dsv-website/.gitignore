@@ -22,5 +22,7 @@
 # generators
 /src/locales/data-structure
 /src/locales/gallery
+/src/locales/api
 /src/routes/data-structure
 /src/routes/gallery
+/src/routes/api

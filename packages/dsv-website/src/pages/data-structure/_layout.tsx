@@ -1,5 +1,5 @@
 import { IRouteComponentProps } from 'umi';
-import { Layout, Row, Col } from 'antd';
+import { Layout } from 'antd';
 import { SiderMenu } from '@dsv-website/components/SiderMenu';
 import { dataStructureMenu } from '@dsv-website/routes/data-structure';
 const { Content } = Layout;

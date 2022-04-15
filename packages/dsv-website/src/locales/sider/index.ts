@@ -48,14 +48,39 @@ const algorithm = [
     'en-US': 'Sorting',
   },
   {
+    key: 'math',
+    'zh-CN': '数学',
+    'en-US': 'Math',
+  },
+  {
     key: 'dynamic-programming',
     'zh-CN': '动态规划',
     'en-US': 'Dynamic Programming',
   },
   {
-    key: 'math',
-    'zh-CN': '数学',
-    'en-US': 'Math',
+    key: 'backtracking',
+    'zh-CN': '回溯',
+    'en-US': 'Backtracking',
+  },
+  {
+    key: 'brute-force',
+    'zh-CN': '蛮力',
+    'en-US': 'Brute Force',
+  },
+  {
+    key: 'divide-and-conquer',
+    'zh-CN': '分治',
+    'en-US': 'Divide And Conquer',
+  },
+  {
+    key: 'decrease-and-conquer',
+    'zh-CN': '减治',
+    'en-US': 'Decrease And Conquer',
+  },
+  {
+    key: 'greedy',
+    'zh-CN': '贪心',
+    'en-US': 'Greedy',
   },
 ];
 

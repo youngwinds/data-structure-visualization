@@ -10,6 +10,11 @@ export default [
     'en-US': 'About',
   },
   {
+    key: 'Api',
+    'zh-CN': '接口文档',
+    'en-US': 'API',
+  },
+  {
     key: 'DataStructure',
     'zh-CN': '数据结构',
     'en-US': 'DataStructure',
@@ -23,5 +28,10 @@ export default [
     key: 'Languages',
     'zh-CN': '语言',
     'en-US': 'Languages',
+  },
+  {
+    key: 'algorithms',
+    'zh-CN': '算法',
+    'en-US': 'Algorithms',
   },
 ];

@@ -33,7 +33,6 @@ export function SiderMenu({ menu }: ISiderMenu) {
           </SubMenu>
         );
       }
-      console.log();
 
       return (
         <Menu.Item key={item.key}>

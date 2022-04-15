@@ -11,6 +11,10 @@ export const navMenu: IMenu = [
     locale: 'Home',
   },
   {
+    key: 'api',
+    locale: 'Api',
+  },
+  {
     key: 'data-structure',
     locale: 'DataStructure',
   },
@@ -18,8 +22,4 @@ export const navMenu: IMenu = [
     key: 'gallery',
     locale: 'Gallery',
   },
-  // {
-  //   key: 'about',
-  //   locale: 'About',
-  // },
 ];
