@@ -62,3 +62,4 @@ function run(folderName, fileName) {
 
 run('/data-structure', 'dataStructureMenu');
 run('/gallery', 'galleryMenu');
+run('/api', 'apiMenu');
