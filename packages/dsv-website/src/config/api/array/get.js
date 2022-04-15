@@ -22,4 +22,5 @@ module.exports = {
   'zh-CN': 'get',
   'en-US': 'get',
   code: code,
+  path: '/docs/api/array/get',
 };

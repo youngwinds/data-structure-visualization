@@ -15,4 +15,5 @@ module.exports = {
   'zh-CN': 'setVisual',
   'en-US': 'setVisual',
   code: code,
+  path: '/docs/api/array/set-visual',
 };

@@ -13,4 +13,5 @@ module.exports = {
   'zh-CN': 'swap',
   'en-US': 'swap',
   code: code,
+  path: '/docs/api/array/swap',
 };

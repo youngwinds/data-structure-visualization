@@ -12,4 +12,5 @@ module.exports = {
   'zh-CN': 'getSize',
   'en-US': 'getSize',
   code: code,
+  path: '/docs/api/array/get-size',
 };

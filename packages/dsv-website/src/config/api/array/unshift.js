@@ -15,4 +15,5 @@ module.exports = {
   'zh-CN': 'unshift',
   'en-US': 'unshift',
   code: code,
+  path: '/docs/api/array/unshift',
 };

@@ -12,4 +12,5 @@ module.exports = {
   'zh-CN': 'splice',
   'en-US': 'splice',
   code: code,
+  path: '/docs/api/array/splice',
 };

@@ -37,12 +37,12 @@ export function Content() {
         <ul>
           {dataStructureMenu.map(({ key, children }) => {
             return (
-              <li>
+              <li key={key}>
                 {intl.formatMessage({ id: key })}
                 <ul>
                   {children?.map((child) => {
                     return (
-                      <li>
+                      <li key={'data_structure_' + child.key}>
                         <Link to={child.path}>
                           {intl.formatMessage({
                             id: 'data_structure_' + child.key,
@@ -75,12 +75,12 @@ export function Content() {
         <ul>
           {galleryMenu.map(({ key, children }) => {
             return (
-              <li>
+              <li key={key}>
                 {intl.formatMessage({ id: key })}
                 <ul>
                   {children?.map((child) => {
                     return (
-                      <li>
+                      <li key={'gallery_' + child.key}>
                         <Link to={child.path}>
                           {intl.formatMessage({
                             id: 'gallery_' + child.key,

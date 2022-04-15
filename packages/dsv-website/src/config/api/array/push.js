@@ -14,4 +14,5 @@ module.exports = {
   'zh-CN': 'push',
   'en-US': 'push',
   code: code,
+  path: '/docs/api/array/push',
 };

@@ -3,10 +3,8 @@ import { resolve, join } from 'path';
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 export default defineConfig({
-  publicPath:
-    process.env.NODE_ENV === 'production'
-      ? '/data-structure-visualization/'
-      : '/',
+  publicPath: '/data-structure-visualization/',
+  runtimePublicPath: true,
   outputPath: 'dist',
   nodeModulesTransform: {
     type: 'none',

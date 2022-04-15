@@ -12,4 +12,5 @@ module.exports = {
   'zh-CN': 'sort',
   'en-US': 'sort',
   code: code,
+  path: '/docs/api/array/sort',
 };

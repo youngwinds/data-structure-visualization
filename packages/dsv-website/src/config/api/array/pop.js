@@ -12,4 +12,5 @@ module.exports = {
   'zh-CN': 'pop',
   'en-US': 'pop',
   code: code,
+  path: '/docs/api/array/pop',
 };

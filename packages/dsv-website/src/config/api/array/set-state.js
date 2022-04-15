@@ -13,4 +13,5 @@ module.exports = {
   'zh-CN': 'setState',
   'en-US': 'setState',
   code: code,
+  path: '/docs/api/array/set-state',
 };

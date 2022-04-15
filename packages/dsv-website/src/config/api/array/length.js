@@ -12,4 +12,5 @@ module.exports = {
   'zh-CN': 'length',
   'en-US': 'length',
   code: code,
+  path: '/docs/api/array/length',
 };
