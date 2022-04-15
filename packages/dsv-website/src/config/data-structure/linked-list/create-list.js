@@ -18,4 +18,5 @@ module.exports = {
   'zh-CN': '创建单链表',
   'en-US': 'createSingleLinkedList',
   code: code,
+  path: '/docs/data-structure/linked-list/create-list',
 };

@@ -15,7 +15,8 @@ for (let i = 3; i < stairsSize; i++) {
 `;
 
 module.exports = {
-  'zh-CN': '爬楼梯',
-  'en-US': 'Climb Stairs',
+  'zh-CN': '三步问题',
+  'en-US': 'Three Steps Problem',
   code: code,
+  path: '/docs/gallery/dynamic-programming/three-steps-problem',
 };

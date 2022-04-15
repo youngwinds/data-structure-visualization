@@ -21,6 +21,7 @@ for (let i = 1; i <= array.length; i++) {
 
 module.exports = {
   'zh-CN': '冒泡排序',
-  'en-US': 'Bublle Sort',
+  'en-US': 'Bubble Sort',
   code: code,
+  path: '/docs/data-structure/array/bubble-sort',
 };
