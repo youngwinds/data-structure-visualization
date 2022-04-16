@@ -4,6 +4,9 @@ import { Skeleton } from 'antd';
 import { useBoolean } from 'ahooks';
 import * as monaco from 'monaco-editor';
 import { runCode } from '@dsv-website/utils/run-code';
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+
 interface ICodeEditor {
   path: string;
 }
@@ -21,7 +24,12 @@ export function CodeEditor({ path }: ICodeEditor) {
       `${location.origin}/data-structure-visualization${path}/code.js`,
     );
     const data = await response.text();
-    setCode(data);
+    setCode(
+      prettier.format(data, {
+        parser: 'babel',
+        plugins: [parserBabel],
+      }),
+    );
     setFalse();
     return data;
   }, [path]);
