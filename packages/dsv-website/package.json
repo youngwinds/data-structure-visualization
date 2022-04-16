@@ -7,6 +7,7 @@
     "prestart": "yarn generate",
     "start": "umi dev",
     "build": "yarn generate && umi build",
+    "build:COMPRESSNONE": "yarn generate && COMPRESS=none umi build",
     "postinstall": "umi generate tmp",
     "generate": "node ./scripts/generators/routes.js && node ./scripts/generators/locales.js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
