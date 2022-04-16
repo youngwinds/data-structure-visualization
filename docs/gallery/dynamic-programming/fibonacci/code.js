@@ -1,1 +1,16 @@
-const dp=dsv.create({type:"array",data:[],transition:{duration:100}});dp.push(1,1);const n=7;for(let t=2;t<n;t++)dp.push(dp.get(t-1)+dp.get(t-2));
+const dp = dsv.create({
+  type: 'array',
+  data: [],
+  transition: {
+    duration: 100,
+  },
+});
+
+dp.push(1, 1);
+
+// const n = 12;
+const n = 7;
+
+for (let i = 2; i < n; i++) {
+  dp.push(dp.get(i - 1) + dp.get(i - 2));
+}

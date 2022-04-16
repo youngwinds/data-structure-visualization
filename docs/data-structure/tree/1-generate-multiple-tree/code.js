@@ -1,1 +1,61 @@
-const tree=dsv.create({type:"tree"}),data={name:"1",children:[{name:"2",children:[{name:"3",children:[{name:"4",children:[{name:"5"}]},{name:"6"}]},{name:"7",children:[{name:"8"}]}]},{name:"9",children:[{name:"10"},{name:"11",children:[{name:"12"},{name:"13"},{name:"14"}]}]}]},generate=e=>{if(!e)return null;const n=tree.createNode({name:e.name});if(e.children)for(let a of e.children)n.append(generate(a));return n},root=generate(data);
+const tree = dsv.create({
+  type: 'tree',
+});
+
+const data = {
+  name: '1',
+  children: [
+    {
+      name: '2',
+      children: [
+        {
+          name: '3',
+          children: [
+            {
+              name: '4',
+              children: [{ name: '5' }],
+            },
+            {
+              name: '6',
+            },
+          ],
+        },
+        {
+          name: '7',
+          children: [
+            {
+              name: '8',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '9',
+      children: [
+        { name: '10' },
+        {
+          name: '11',
+          children: [{ name: '12' }, { name: '13' }, { name: '14' }],
+        },
+      ],
+    },
+  ],
+};
+
+const generate = (data) => {
+  if (!data) {
+    return null;
+  }
+  const node = tree.createNode({ name: data.name });
+
+  if (data.children) {
+    for (let childData of data.children) {
+      node.append(generate(childData));
+    }
+  }
+
+  return node;
+};
+
+const root = generate(data);

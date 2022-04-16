@@ -1,1 +1,38 @@
-const array=dsv.create({type:"array",data:[10,8,6,4,2,1,3,5,7,9],state:{end:"#edafda",pivot:"#d87c7c"},transition:{duration:100}});function partition(t,a,r){let e=t.get(r);t.setState(r,"pivot");let i=a-1;for(let n=a;n<=r-1;n++)t.get(n)<e&&(i++,t.swap(i,n));return t.swap(i+1,r),t.setState(i+1,"end"),i+1}function quickSort(t,a,r){if(a<=r){let e=partition(t,a,r);quickSort(t,a,e-1),quickSort(t,e+1,r)}}quickSort(array,0,array.length-1);
+const array = dsv.create({
+  type: 'array',
+  data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9],
+  state: {
+    end: '#edafda',
+    pivot: '#d87c7c',
+  },
+  transition: {
+    duration: 100,
+  },
+});
+
+function partition(arr, low, high) {
+  let pivot = arr.get(high);
+  arr.setState(high, 'pivot');
+  let i = low - 1;
+
+  for (let j = low; j <= high - 1; j++) {
+    if (arr.get(j) < pivot) {
+      i++;
+      arr.swap(i, j);
+    }
+  }
+  arr.swap(i + 1, high);
+  arr.setState(i + 1, 'end');
+  return i + 1;
+}
+
+function quickSort(arr, low, high) {
+  if (low <= high) {
+    let pi = partition(arr, low, high);
+
+    quickSort(arr, low, pi - 1);
+    quickSort(arr, pi + 1, high);
+  }
+}
+
+quickSort(array, 0, array.length - 1);

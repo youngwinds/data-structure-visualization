@@ -1,1 +1,52 @@
-const tree=dsv.create({type:"tree"}),data={name:"1",children:[{name:"2",children:[{name:"3"},{name:"4"},{name:"5",children:[{name:"6",children:[{name:"7"},{name:"8"},{name:"9"}]}]}]},{name:"10",children:[{name:"11"},{name:"12"},{name:"13"}]}]},root=tree.createTree(data),dfs=e=>{if(e&&e.children){e.setVisual("#edafda"),e.children.length>1&&e.reverse();for(let n of e.children)n.children&&0!==n.children.length&&dfs(n)}};dfs(root);
+const tree = dsv.create({
+  type: 'tree',
+});
+
+const data = {
+  name: '1',
+  children: [
+    {
+      name: '2',
+      children: [
+        { name: '3' },
+        { name: '4' },
+        {
+          name: '5',
+          children: [
+            {
+              name: '6',
+              children: [{ name: '7' }, { name: '8' }, { name: '9' }],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '10',
+      children: [{ name: '11' }, { name: '12' }, { name: '13' }],
+    },
+  ],
+};
+
+const root = tree.createTree(data);
+
+const dfs = (node) => {
+  if (!node) {
+    return;
+  }
+  if (!node.children) {
+    return;
+  }
+
+  node.setVisual('#edafda');
+
+  if (node.children.length > 1) node.reverse();
+
+  for (let ch of node.children) {
+    if (ch.children && ch.children.length !== 0) {
+      dfs(ch);
+    }
+  }
+};
+
+dfs(root);
