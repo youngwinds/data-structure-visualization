@@ -11,6 +11,5 @@ array.splice(2, 0, 9, 8, 7, 6)
 module.exports = {
   'zh-CN': 'splice',
   'en-US': 'splice',
-  code: code,
   path: '/docs/api/array/splice',
 };

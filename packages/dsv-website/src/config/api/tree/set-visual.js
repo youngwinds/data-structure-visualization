@@ -10,5 +10,5 @@ root.setVisual('#edafda')
 module.exports = {
   'zh-CN': 'setVisual',
   'en-US': 'setVisual',
-  code: code,
+  path: '/docs/api/tree/set-visual',
 };

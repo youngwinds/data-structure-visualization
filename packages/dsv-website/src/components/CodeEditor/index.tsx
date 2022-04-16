@@ -1,22 +1,36 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'umi';
 import * as monaco from 'monaco-editor';
 import { runCode } from '@dsv-website/utils/run-code';
 interface ICodeEditor {
-  initValue: string;
+  path: string;
 }
 
-export function CodeEditor({ initValue }: ICodeEditor) {
+export function CodeEditor({ path }: ICodeEditor) {
   const dispatch = useDispatch();
   const refContainer = useRef<HTMLDivElement>(null);
   const refEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const [code, setCode] = useState('');
+  useEffect(() => {
+    fetch(`http://localhost:8000/data-structure-visualization${path}/code.js`)
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (data) {
+        console.log(data);
+        setCode(data);
+      })
+      .catch(function (e) {
+        console.log(e);
+      });
+  }, [path]);
 
   useEffect(() => {
     if (refContainer.current === null) {
       return () => {};
     }
     const editor = monaco.editor.create(refContainer.current, {
-      value: initValue,
+      value: code,
       language: 'javascript',
     });
 
@@ -32,10 +46,10 @@ export function CodeEditor({ initValue }: ICodeEditor) {
     return () => {
       editor.dispose();
     };
-  }, [initValue]);
+  }, [code]);
 
   useEffect(() => {
-    runCode(initValue, (state: any, instance: any) => {
+    runCode(code, (state: any, instance: any) => {
       dispatch({
         type: 'backtracking/push',
         payload: [instance, state],
@@ -45,7 +59,7 @@ export function CodeEditor({ initValue }: ICodeEditor) {
     dispatch({
       type: 'backtracking/init',
     });
-  }, [initValue]);
+  }, [code]);
 
   return (
     <div style={{ height: '100%', width: '100%' }} ref={refContainer}></div>

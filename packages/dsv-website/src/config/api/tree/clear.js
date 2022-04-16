@@ -22,5 +22,5 @@ for (let ch of root.children) {
 module.exports = {
   'zh-CN': 'clear',
   'en-US': 'clear',
-  code: code,
+  path: '/docs/api/tree/clear',
 };

@@ -12,6 +12,5 @@ array.removeVisual([1, 2, 3, 4, 5]);
 module.exports = {
   'zh-CN': 'removeVisual',
   'en-US': 'removeVisual',
-  code: code,
   path: '/docs/api/array/remove-visual',
 };

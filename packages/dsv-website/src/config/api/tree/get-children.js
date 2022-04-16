@@ -44,5 +44,5 @@ root.getChildren().forEach((d) => d.clear());
 module.exports = {
   'zh-CN': 'getChildren',
   'en-US': 'getChildren',
-  code: code,
+  path: '/docs/api/tree/get-children',
 };

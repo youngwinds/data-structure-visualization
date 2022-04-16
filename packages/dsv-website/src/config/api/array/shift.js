@@ -11,6 +11,5 @@ array.shift()
 module.exports = {
   'zh-CN': 'shift',
   'en-US': 'shift',
-  code: code,
   path: '/docs/api/array/shift',
 };

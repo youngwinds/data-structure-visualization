@@ -21,5 +21,5 @@ A.append(G, B)
 module.exports = {
   'zh-CN': 'append',
   'en-US': 'append',
-  code: code,
+  path: '/docs/api/tree/append',
 };

@@ -8,7 +8,6 @@ import styles from './index.less';
 
 export default function Detail(props: IRouteComponentProps) {
   const pathName = props.location.pathname.replace('_', '/');
-  const code = require(`../../../config${pathName}`).code;
   const path = require(`../../../config${pathName}`).path;
 
   return (
@@ -27,10 +26,10 @@ export default function Detail(props: IRouteComponentProps) {
         </div>
         <div className={styles.right}>
           <div className={styles.backtracking}>
-            <Backtracking initValue={code} />
+            <Backtracking path={path} />
           </div>
           <div className={styles.editor}>
-            <CodeEditor initValue={code} />
+            <CodeEditor path={path} />
           </div>
         </div>
       </div>

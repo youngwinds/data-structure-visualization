@@ -22,4 +22,5 @@ module.exports = {
   'zh-CN': 'insert',
   'en-US': 'insert',
   code: code,
+  path: '/docs/api/tree/insert',
 };

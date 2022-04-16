@@ -12,5 +12,5 @@ Root.append(A).append(B);
 module.exports = {
   'zh-CN': 'createNode',
   'en-US': 'createNode',
-  code: code,
+  path: '/docs/api/tree/create-node',
 };

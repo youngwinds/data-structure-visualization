@@ -13,6 +13,5 @@ array.set(2,1)
 module.exports = {
   'zh-CN': 'set',
   'en-US': 'set',
-  code: code,
   path: '/docs/api/array/set',
 };

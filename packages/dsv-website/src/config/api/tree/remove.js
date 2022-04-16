@@ -29,5 +29,5 @@ A.remove();
 module.exports = {
   'zh-CN': 'remove',
   'en-US': 'remove',
-  code: code,
+  path: '/docs/api/tree/remove',
 };

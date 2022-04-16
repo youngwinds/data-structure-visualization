@@ -11,10 +11,10 @@ import {
 
 import styles from './index.less';
 interface IBacktracking {
-  initValue: string;
+  path: string;
 }
 
-export function Backtracking({ initValue }: IBacktracking) {
+export function Backtracking({ path }: IBacktracking) {
   const intl = useIntl();
   const dispatch = useDispatch();
   const {
@@ -31,26 +31,26 @@ export function Backtracking({ initValue }: IBacktracking) {
       type: 'backtracking/build',
       payload: {},
     });
-  }, [initValue]);
+  }, [path]);
 
   const handleRun = useCallback(() => {
     dispatch({
       type: 'backtracking/run',
       payload: {},
     });
-  }, [initValue]);
+  }, [path]);
 
   const handleBackward = useCallback(() => {
     dispatch({
       type: 'backtracking/backward',
     });
-  }, [initValue]);
+  }, [path]);
 
   const handleForward = useCallback(() => {
     dispatch({
       type: 'backtracking/forward',
     });
-  }, [initValue]);
+  }, [path]);
 
   useEffect(() => {
     return () => {
@@ -58,7 +58,7 @@ export function Backtracking({ initValue }: IBacktracking) {
         type: 'backtracking/destroy',
       });
     };
-  }, [initValue]);
+  }, [path]);
 
   return (
     <Space className={styles.backtracking}>

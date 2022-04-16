@@ -14,6 +14,5 @@ array.unshift(4, 5, 6)
 module.exports = {
   'zh-CN': 'unshift',
   'en-US': 'unshift',
-  code: code,
   path: '/docs/api/array/unshift',
 };

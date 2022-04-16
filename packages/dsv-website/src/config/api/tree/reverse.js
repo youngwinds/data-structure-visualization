@@ -44,5 +44,5 @@ root.reverse();
 module.exports = {
   'zh-CN': 'reverse',
   'en-US': 'reverse',
-  code: code,
+  path: '/docs/api/tree/reverse',
 };

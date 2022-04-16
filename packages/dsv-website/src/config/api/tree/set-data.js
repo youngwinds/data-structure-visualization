@@ -13,5 +13,5 @@ A.swap(Root)
 module.exports = {
   'zh-CN': 'setData',
   'en-US': 'setData',
-  code: code,
+  path: '/docs/api/tree/set-data',
 };
