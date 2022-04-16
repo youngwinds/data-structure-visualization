@@ -23,13 +23,12 @@ export function CodeEditor({ path }: ICodeEditor) {
     const response = await fetch(
       `${location.origin}/data-structure-visualization${path}/code.js`,
     );
-    const data = await response.text();
-    setCode(
-      prettier.format(data, {
-        parser: 'babel',
-        plugins: [parserBabel],
-      }),
-    );
+    const text = await response.text();
+    const data = prettier.format(text, {
+      parser: 'babel',
+      plugins: [parserBabel],
+    });
+    setCode(data);
     setFalse();
     return data;
   }, [path]);
