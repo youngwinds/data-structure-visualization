@@ -64,6 +64,12 @@ export default {
       });
 
       for (let i = currentIndex; i < queue.length - 1; i++) {
+        const newState: IBacktrackingState = yield select(
+          (store: any) => store.backtracking,
+        );
+        if (newState.currentIndex !== i) {
+          break;
+        }
         yield put.resolve({
           type: 'forward',
         });

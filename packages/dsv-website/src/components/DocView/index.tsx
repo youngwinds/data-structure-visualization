@@ -18,15 +18,15 @@ export function DocView({ path }: IDocView) {
   const [content, setContent] = useState('');
   useEffect(() => {
     setTrue();
-
     fetch(
-      `http://localhost:8000/data-structure-visualization${path}/doc.${getLocale()}.md`,
+      `${
+        location.origin
+      }/data-structure-visualization${path}/doc.${getLocale()}.md`,
     )
       .then(function (response) {
         return response.text();
       })
       .then(function (data) {
-        console.log(data);
         setContent(data);
         setFalse();
       })

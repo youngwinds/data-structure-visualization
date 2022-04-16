@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'umi';
+import { Skeleton } from 'antd';
+import { useBoolean } from 'ahooks';
 import * as monaco from 'monaco-editor';
 import { runCode } from '@dsv-website/utils/run-code';
 interface ICodeEditor {
@@ -11,44 +13,55 @@ export function CodeEditor({ path }: ICodeEditor) {
   const refContainer = useRef<HTMLDivElement>(null);
   const refEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const [code, setCode] = useState('');
-  useEffect(() => {
-    fetch(`http://localhost:8000/data-structure-visualization${path}/code.js`)
-      .then(function (response) {
-        return response.text();
-      })
-      .then(function (data) {
-        console.log(data);
-        setCode(data);
-      })
-      .catch(function (e) {
-        console.log(e);
-      });
+  const [isLoading, { setFalse, setTrue }] = useBoolean();
+
+  const fetchCode = useCallback(async () => {
+    setTrue();
+    const response = await fetch(
+      `${location.origin}/data-structure-visualization${path}/code.js`,
+    );
+    const data = await response.text();
+    setCode(data);
+    setFalse();
+    return data;
   }, [path]);
 
   useEffect(() => {
-    if (refContainer.current === null) {
-      return () => {};
-    }
-    const editor = monaco.editor.create(refContainer.current, {
-      value: code,
-      language: 'javascript',
-    });
+    const asyncFunc = async () => {
+      const code = await fetchCode();
 
-    refEditor.current = editor;
+      if (refContainer.current === null || code.length === 0) {
+        return () => {};
+      }
 
-    dispatch({
-      type: 'monaco/setEditor',
-      payload: {
-        editor,
-      },
-    });
+      const editor = monaco.editor.create(refContainer.current, {
+        value: code,
+        language: 'javascript',
+      });
+
+      refEditor.current = editor;
+
+      dispatch({
+        type: 'monaco/setEditor',
+        payload: {
+          editor,
+        },
+      });
+    };
+
+    asyncFunc();
 
     return () => {
-      editor.dispose();
+      if (refEditor.current) {
+        refEditor.current.dispose();
+      }
     };
-  }, [code]);
+  }, [path]);
 
   useEffect(() => {
+    if (code.length === 0) {
+      return () => {};
+    }
     runCode(code, (state: any, instance: any) => {
       dispatch({
         type: 'backtracking/push',
@@ -59,9 +72,17 @@ export function CodeEditor({ path }: ICodeEditor) {
     dispatch({
       type: 'backtracking/init',
     });
+
+    return () => {
+      dispatch({
+        type: 'backtracking/destroy',
+      });
+    };
   }, [code]);
 
   return (
-    <div style={{ height: '100%', width: '100%' }} ref={refContainer}></div>
+    <Skeleton active loading={isLoading}>
+      <div style={{ height: '100%', width: '100%' }} ref={refContainer}></div>
+    </Skeleton>
   );
 }

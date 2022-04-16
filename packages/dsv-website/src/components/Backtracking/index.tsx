@@ -52,14 +52,6 @@ export function Backtracking({ path }: IBacktracking) {
     });
   }, [path]);
 
-  useEffect(() => {
-    return () => {
-      dispatch({
-        type: 'backtracking/destroy',
-      });
-    };
-  }, [path]);
-
   return (
     <Space className={styles.backtracking}>
       <Tooltip
