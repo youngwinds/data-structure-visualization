@@ -13,6 +13,5 @@ array.push(40, 50, 60)
 module.exports = {
   'zh-CN': 'push',
   'en-US': 'push',
-  code: code,
   path: '/docs/api/array/push',
 };

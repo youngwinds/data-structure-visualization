@@ -13,6 +13,5 @@ array.fill(30)
 module.exports = {
   'zh-CN': 'fill',
   'en-US': 'fill',
-  code: code,
   path: '/docs/api/array/fill',
 };

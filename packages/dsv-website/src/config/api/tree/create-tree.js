@@ -46,5 +46,5 @@ root.append(a)
 module.exports = {
   'zh-CN': 'createTree',
   'en-US': 'createTree',
-  code: code,
+  path: '/docs/api/tree/create-tree',
 };

@@ -11,5 +11,5 @@ root.removeVisual();
 module.exports = {
   'zh-CN': 'removeVisual',
   'en-US': 'removeVisual',
-  code: code,
+  path: '/docs/api/tree/remove-visual',
 };
