@@ -206,7 +206,9 @@ class ArrayChart extends BaseChart<
               .transition()
               .duration(duration)
               .attr('x', x)
+              .attr('dx', this.xScale.bandwidth() / 2)
               .attr('y', y)
+              .attr('dy', 20)
               .selection()
               .html((d: ArrayChartItemType) => d.name),
           (exit) =>
