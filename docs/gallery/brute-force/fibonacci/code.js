@@ -1,0 +1,1 @@
+const tree=dsv.create({type:"tree",transition:{duration:100}}),n=7;function threeStepsProblem(e,t){let r=null;return e?e&&(r=tree.createNode({name:String(t)}),e.append(r)):r=tree.createNode({name:t.toString()}),2===t||1===t?1:threeStepsProblem(r,t-1)+threeStepsProblem(r,t-2)}const result=threeStepsProblem(void 0,n);console.log(result);
