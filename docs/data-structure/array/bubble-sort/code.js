@@ -1,0 +1,1 @@
+const array=dsv.create({type:"array",data:[10,8,6,4,2,1,3,5,7,9],state:{end:"#edafda"},transition:{duration:100}});for(let a=1;a<=array.length;a++){for(let r=0;r<array.length-a;r++)array.get([r])>array.get([r+1])&&array.swap(r,r+1);array.setState(array.length-a,"end")}

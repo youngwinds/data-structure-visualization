@@ -1,0 +1,1 @@
+const stairsSize=10,dp=dsv.create({type:"array",data:new Array(stairsSize).fill(0)});dp.set(0,1),dp.set(1,2),dp.set(2,4);for(let e=3;e<stairsSize;e++)dp.set(e,dp.get(e-1)+dp.get(e-2)+dp.get(e-3));

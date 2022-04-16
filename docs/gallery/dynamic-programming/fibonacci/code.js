@@ -1,0 +1,1 @@
+const dp=dsv.create({type:"array",data:[]});dp.push(1,1);const maxSize=10;for(let e=2;e<maxSize;e++)dp.push(dp.get(e-1)+dp.get(e-2));

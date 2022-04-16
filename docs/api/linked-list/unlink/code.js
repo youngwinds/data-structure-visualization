@@ -1,0 +1,1 @@
+const linkedList=dsv.create({type:"linkedList"}),A=linkedList.createNode({name:"A",value:1}),B=linkedList.createNode({name:"B",value:1}),C=linkedList.createNode({name:"C",value:1});B.link(A),B.link(C),B.unlink(),B.link(A),B.link(C),B.unlink(A),B.unlink(C);

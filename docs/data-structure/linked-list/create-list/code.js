@@ -1,0 +1,1 @@
+const linkedList=dsv.create({type:"linkedList"}),head=linkedList.createNode({name:"0",value:1});let temp=head;const length=10;for(let e=1;e<length;e++){const t=linkedList.createNode({name:String(e),value:1});temp.link(t),temp=t}

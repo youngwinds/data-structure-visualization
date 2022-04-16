@@ -1,0 +1,1 @@
+const tree=dsv.create({type:"tree"}),root=tree.createNode({name:"A"}),node=tree.createNode(root.getData());root.setData({name:"B",value:10}),root.append(node);
