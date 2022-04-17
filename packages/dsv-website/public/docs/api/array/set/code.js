@@ -3,8 +3,6 @@ const array = dsv.create({
   data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9],
 });
 
-array.set(0, 1);
+const value = array.set(0, 20);
 
-array.set(1, 10);
-
-array.set(2, 1);
+array.set(1, value);

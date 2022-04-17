@@ -3,7 +3,14 @@ const array = dsv.create({
   data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9],
 });
 
-array.setVisual([0, 1, 2, 3, 4, 5], 'red');
+array.setVisual(0, 'red');
 
 array.removeVisual(0);
-array.removeVisual([1, 2, 3, 4, 5]);
+
+array.setVisual([0, 1, 2, 3], 'red');
+
+array.removeVisual([0, 1]);
+
+array.setVisual([0, 1], 'red');
+
+array.removeVisual();

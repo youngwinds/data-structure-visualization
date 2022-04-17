@@ -5,6 +5,6 @@ const array = dsv.create({
 
 array.unshift(1);
 
-array.unshift(2, 3);
+const length = array.unshift(2, 3, 4);
 
-array.unshift(4, 5, 6);
+array.unshift(length);
