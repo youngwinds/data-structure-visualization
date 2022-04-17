@@ -17,7 +17,7 @@ const tempArray = dsv.create({
 
 const array = dsv.create({
   type: 'array',
-  data: [10, 9, 8, 7, 6, 10, 9, 8, 7, 6],
+  data: [10, 8, 6, 4, 2, 1, 3, 9, 7, 5],
   state: {
     end: '#edafda',
     pivot: '#d87c7c',
