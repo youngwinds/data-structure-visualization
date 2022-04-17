@@ -1,10 +1,10 @@
 const array = dsv.create({
   type: 'array',
-  data: [10, 8, 6, 4, 2, 1, 3, 5, 7, 9],
+  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 });
 
-array.push(15);
+array.push(1);
 
-array.push(20, 30);
+const length = array.push(2);
 
-array.push(40, 50, 60);
+array.push(length);

@@ -5,4 +5,8 @@ const array = dsv.create({
 
 array.sort((a, b) => a - b);
 
-array.sort((a, b) => b - a);
+const values = array.sort((a, b) => b - a);
+
+for (let ch of values) {
+  array.push(ch.value);
+}

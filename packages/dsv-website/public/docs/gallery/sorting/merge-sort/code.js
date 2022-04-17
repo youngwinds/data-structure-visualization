@@ -20,7 +20,7 @@ const array = dsv.create({
   data: [10, 8, 6, 4, 2, 1, 3, 9, 7, 5],
   state: {
     end: '#edafda',
-    pivot: '#d87c7c',
+    pivot: '#ffdd00',
   },
   transition: {
     duration: 100,

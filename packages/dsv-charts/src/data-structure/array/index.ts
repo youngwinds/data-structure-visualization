@@ -4,7 +4,7 @@ import {
   ArrayChartItemType,
 } from '@dsv-charts/charts';
 
-import { merge } from 'lodash';
+import { merge, cloneDeep } from 'lodash';
 import { isNumber, isString, isArray } from '@dsv-charts/utils/type-check';
 import { DsArrayConfigType, DsArrayThemeType } from './type';
 
@@ -55,8 +55,8 @@ class DsArray extends ArrayChart {
 
   public fill(value, start?: number, end?: number) {
     return this.warpMethod((data: ArrayChartDataType) => {
-      start = start ? start : 0;
-      end = end ? end : data.length;
+      start = start ?? 0;
+      end = end ?? data.length;
 
       for (let i = start; i < end; i++) {
         data[i].value = value;
@@ -108,20 +108,22 @@ class DsArray extends ArrayChart {
       }
     };
     return this.warpMethod((data: ArrayChartDataType) => {
-      return data.sort((a: ArrayChartItemType, b: ArrayChartItemType) => {
-        return cf(a.value, b.value);
-      });
+      return cloneDeep(
+        data.sort((a: ArrayChartItemType, b: ArrayChartItemType) => {
+          return cf(a.value, b.value);
+        })
+      );
     });
   }
 
   public splice(start = 0, deleteCount?: number, ...items: number[]) {
     if (arguments.length === 1) {
       return this.warpMethod((data) => {
-        data.splice(start);
+        return data.splice(start);
       });
     } else if (arguments.length === 2) {
       return this.warpMethod((data) => {
-        data.splice(start, deleteCount);
+        return data.splice(start, deleteCount);
       });
     } else {
       const newItems = items.map((d) => createArrayItem(d));
