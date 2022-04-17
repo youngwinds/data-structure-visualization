@@ -148,13 +148,18 @@ class DsArray extends ArrayChart {
   }
 
   public get(index: number) {
-    this.setState(index, 'get');
+    const isChanged = this.setState(index, 'get');
     const data = this.getConfigByKey('data');
-    this.removeVisual(index);
+    if (isChanged) {
+      this.removeVisual(index);
+    }
     return data[index].value;
   }
 
-  public setVisual(index: number | number[], visual: string | string[]): void {
+  public setVisual(
+    index: number | number[],
+    visual: string | string[]
+  ): boolean {
     if (isArray(index) && isArray(visual)) {
       this.warpMethod((data) => {
         index.forEach((i, j) => {
@@ -162,17 +167,22 @@ class DsArray extends ArrayChart {
           console.log(data[i], visual[j], visual);
         });
       });
+      return true;
     } else if (isArray(index) && isString(visual)) {
       this.warpMethod((data) => {
         index.forEach((i) => {
           data[i].state = visual;
         });
       });
+      return true;
     } else if (isNumber(index) && isString(visual)) {
       this.warpMethod((data) => {
         data[index].state = visual;
       });
+      return true;
     }
+
+    return false;
   }
 
   public removeVisual(index: number): void {
@@ -190,6 +200,12 @@ class DsArray extends ArrayChart {
           data[i].state = undefined;
         });
       });
+    } else {
+      this.warpMethod((data) => {
+        data.forEach((_, i) => {
+          data[i].state = undefined;
+        });
+      });
     }
   }
 
@@ -198,6 +214,7 @@ class DsArray extends ArrayChart {
     if (isString(state[key])) {
       return this.setVisual(index, state[key]);
     }
+    return false;
   }
 
   public getSize() {
