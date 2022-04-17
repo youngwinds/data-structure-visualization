@@ -22,18 +22,23 @@ const home = [
       'My main goal is algorithm visualization, but it is not easy to visualize the execution process of the Algorithm. I try to find a general solution. After a lot of exploration, suddenly on that day, I realized! To visualize the Algorithm, must visualize the Data Structure that the Algorithm depends on!',
   },
   {
-    key: 'DataStructureContent',
+    key: 'ApiContent',
     'zh-CN':
       '根据我的设计目标，算法可视化之前，需要将数据结构可视化。我罗列了我已经实现的数据结构与接口。在这里可以直观的明白每一个接口该如何使用。在多数情况下，每一行代码的执行都会有动画效果，以帮助大家理解结构的变化。',
     'en-US':
       'According to my design goals, before the algorithm can be visualized, the data structure needs to be visualized firstly. I have listed the data structures and interfaces I have implemented. Here you can intuitively understand how to use each interface. In most cases, the execution of each line of code is animated to help you understand the change in structure.',
   },
   {
-    key: 'GalleryContent',
-    'zh-CN':
-      '如我的设计目标所言，基于已经可视化的数据结构可以可视化相关的算法。因此我会尽可能的把我掌握的算法展示在这里（算法画廊）。',
+    key: 'DataStructureContent',
+    'zh-CN': '以下是按数据结构类别，尽可能地对算法进行分类',
     'en-US':
-      'As my design goals say, related algorithms can be visualized based on already visualized data structures. Therefore, I will try my best to show the algorithms that I have mastered here (algorithms gallery).',
+      'The following is a classification of algorithms by data structure category as much as possible.',
+  },
+  {
+    key: 'GalleryContent',
+    'zh-CN': '以下是按算法类型，尽可能地对算法进行分类',
+    'en-US':
+      'The following is a classification of algorithms by algorithm type as much as possible.',
   },
   {
     key: 'Precautions',
