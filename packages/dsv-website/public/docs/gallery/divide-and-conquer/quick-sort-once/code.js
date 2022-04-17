@@ -26,13 +26,4 @@ function partition(arr, low, high) {
   return i + 1;
 }
 
-function quickSort(arr, low, high) {
-  if (low <= high) {
-    let pi = partition(arr, low, high);
-
-    quickSort(arr, low, pi - 1);
-    quickSort(arr, pi + 1, high);
-  }
-}
-
-quickSort(array, 0, array.length - 1);
+partition(array, 0, array.length - 1);
