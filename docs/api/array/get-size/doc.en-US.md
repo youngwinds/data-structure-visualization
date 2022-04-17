@@ -1,7 +1,11 @@
 # DsArray.getSize()
 
-# Introduce
+## Introduce
 
-`getSize()` 方法可以取得数组的长度。
+The `getSize()` method can get the length of the array。
 
-等同于 `DsArray.length`属性。
+Equivalent to the `DsArray.length` property.
+
+## Return Value
+
+The length of array
