@@ -134,7 +134,7 @@ class QueueChart extends BaseChart<
               .duration(duration)
               .attr('opacity', 0)
               .attr('x', -rect.right)
-              .attr('y', rect.center[0] - 50)
+              .attr('y', rect.center[1] - 50)
               .transition()
               .remove()
         );
