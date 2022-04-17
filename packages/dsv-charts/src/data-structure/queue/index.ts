@@ -26,7 +26,7 @@ const createQueueItem = (d: QueueChartItemType | number | string) => {
     return {
       key: `__${key++}__`,
       value: d.value,
-      name: String(d.value),
+      name: String(d.name),
     };
   }
 };
@@ -58,7 +58,7 @@ class DsQueue extends QueueChart {
     return this.warpMethod((data) => data.shift().value);
   }
 
-  public add(...args: number[]) {
+  public add(...args) {
     return this.warpMethod((data) => data.push(...args.map(createQueueItem)));
   }
 
@@ -68,6 +68,12 @@ class DsQueue extends QueueChart {
   }
 
   public getSize() {
+    const data = this.getData() as QueueChartDataType;
+
+    return data.length;
+  }
+
+  get length() {
     const data = this.getData() as QueueChartDataType;
 
     return data.length;

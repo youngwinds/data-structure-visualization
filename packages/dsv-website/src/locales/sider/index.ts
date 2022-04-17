@@ -48,6 +48,11 @@ const algorithm = [
     'en-US': 'Sorting',
   },
   {
+    key: 'searching',
+    'zh-CN': '搜索',
+    'en-US': 'Searching',
+  },
+  {
     key: 'math',
     'zh-CN': '数学',
     'en-US': 'Math',
