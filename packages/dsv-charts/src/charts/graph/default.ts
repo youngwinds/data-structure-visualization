@@ -44,6 +44,6 @@ export const defaultTheme: GraphThemeType = {
   },
   arrow: {
     color: '#212121',
-    width: 2,
+    width: 1,
   },
 };

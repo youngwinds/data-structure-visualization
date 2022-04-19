@@ -5,13 +5,17 @@ import { Cartesian2LayoutConfigType } from './../../types/layout/index';
 
 type GraphNodeType = {
   key?: string;
+  index?: number;
   name: string;
   value: string | number;
   x?: number;
   y?: number;
+  vs?: number;
+  vy?: number;
 };
 
 type GraphLinkType = {
+  index?: number;
   source: GraphNodeType;
   target: GraphNodeType;
 };
