@@ -39,6 +39,11 @@ const dataStructure = [
     'zh-CN': '堆',
     'en-US': 'Heap',
   },
+  {
+    key: 'graph',
+    'zh-CN': '图',
+    'en-US': 'Graph',
+  },
 ];
 
 const algorithm = [

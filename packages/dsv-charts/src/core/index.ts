@@ -11,6 +11,7 @@ import {
   LinkedListConfigType,
   TreeChart,
   TreeConfigType,
+  GraphChart,
 } from '@dsv-charts/charts';
 
 import {
@@ -33,7 +34,7 @@ import {
 
 export class Dsv {
   private map = new Map<
-    'array' | 'stack' | 'queue' | 'linkedList' | 'tree',
+    'array' | 'stack' | 'queue' | 'linkedList' | 'tree' | 'graph',
     Function
   >();
   private static instance: Dsv;
@@ -52,6 +53,7 @@ export class Dsv {
     this.initQueue(addStateCallback);
     this.initLinkedList(addStateCallback);
     this.initTree(addStateCallback);
+    this.initGraph(addStateCallback);
   }
 
   initArray(addStateCallback) {
@@ -197,6 +199,12 @@ export class Dsv {
         return tree;
       }
     );
+  }
+
+  initGraph(addStateCallback) {
+    this.map.set('graph', (config, theme) => {
+      return new GraphChart('container', config, theme);
+    });
   }
 
   create(config: DsConfigType, theme: DsThemeType) {
