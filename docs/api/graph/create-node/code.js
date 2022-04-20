@@ -7,17 +7,15 @@ const B = graph.createNode({ name: 'B' });
 const C = graph.createNode({ name: 'C' });
 const D = graph.createNode({ name: 'D' });
 const E = graph.createNode({ name: 'E' });
-const F = graph.createNode({ name: 'F' });
-const G = graph.createNode({ name: 'G' });
-const H = graph.createNode({ name: 'H' });
-const I = graph.createNode({ name: 'J' });
-const J = graph.createNode({ name: 'K' });
-const K = graph.createNode({ name: 'L' });
 
-A.addAdjacencyLink(B);
+A.addAdjacencyLink(B).addAdjacencyLink(C).addAdjacencyLink(D);
 
-A.addAdjacencyLink(C);
+B.addAdjacencyLink(C).addAdjacencyLink(D);
 
-B.addAdjacencyLink(C);
+C.addAdjacencyLink(D);
+
+D.addAdjacencyLink(E);
+
+E.addAdjacencyLink(A);
 
 graph.startLayout();
