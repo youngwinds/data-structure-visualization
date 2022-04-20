@@ -28,29 +28,24 @@ class DsGraphNode {
   }
 
   addAdjacencyLink(node: DsGraphNode): this {
+    const newNode = {
+      name: node.name,
+      value: node.value,
+      state: node.state,
+    };
+
     if (this.next === null) {
-      // head
-      this.next = node.getData();
+      this.next = newNode;
     } else {
-      // next
       let p = this.next;
       while (p.next) {
         p = p.next;
       }
-      p.next = node.getData();
+      p.next = newNode;
     }
 
     this.dsGraph.setData();
     return this;
-  }
-
-  getData() {
-    return {
-      value: this.value,
-      name: this.name,
-      state: this.state,
-      next: this.next,
-    };
   }
 
   setVisual(color: string) {

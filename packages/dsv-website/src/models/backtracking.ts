@@ -138,8 +138,6 @@ export default {
 
   reducers: {
     push(state: IBacktrackingState, { payload }: any) {
-      console.log('push');
-
       const [instance, chartState] = payload;
       return {
         ...state,
