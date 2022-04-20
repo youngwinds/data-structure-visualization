@@ -16,10 +16,10 @@ export default defineConfig({
     '@dsv-charts': resolve(__dirname, '../dsv-charts/src'),
   },
   locale: {
-    default: 'zh-CN',
+    default: 'en-US',
     antd: false,
     title: true,
-    baseNavigator: true,
+    baseNavigator: false,
     baseSeparator: '-',
   },
   fastRefresh: {},
