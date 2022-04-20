@@ -40,10 +40,10 @@ export const defaultTheme: GraphThemeType = {
   },
   border: {
     color: '#eeeeee',
-    width: 10,
+    width: 5,
   },
   arrow: {
     color: '#212121',
-    width: 1,
+    width: 2,
   },
 };

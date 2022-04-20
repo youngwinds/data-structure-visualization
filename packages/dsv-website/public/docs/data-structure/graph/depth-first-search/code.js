@@ -20,19 +20,21 @@ D.addAdjacencyLink(E);
 
 const visitedSet = new Set();
 
-function dfs(node) {
-  visitedSet.add(node.name);
-  console.log(node.name);
-  let pointer = graph.findNode(node.name).next;
+function dfs(rootNodeName) {
+  visitedSet.add(rootNodeName);
+  const dsNode = graph.findNode(rootNodeName);
+  dsNode.setVisual('#edafda');
+  let pointer = dsNode.next;
+
   while (pointer !== null) {
     if (!visitedSet.has(pointer.name)) {
-      dfs(pointer);
+      dfs(pointer.name);
     }
 
     pointer = pointer.next;
   }
 }
 
-dfs(A);
+dfs('A');
 
 graph.startLayout();
