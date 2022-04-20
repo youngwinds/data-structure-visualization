@@ -7,25 +7,29 @@ import {
   DsLinkedListThemeType,
 } from './linked-list';
 import { DsTreeConfigType, DsTreeThemeType } from './tree';
+import { DsGraph, DsGraphConfigType, DsGraphThemeType } from './graph';
 
-export type DsChartType = DsArray | DsStack | DsQueue | DsLinkedList;
+export type DsChartType = DsArray | DsStack | DsQueue | DsLinkedList | DsGraph;
 
 export type DsConfigType =
   | DsArrayConfigType
   | DsStackConfigType
   | DsQueueConfigType
   | DsLinkedListConfigType
-  | DsTreeConfigType;
+  | DsTreeConfigType
+  | DsGraphConfigType;
 
 export type DsThemeType =
   | DsArrayThemeType
   | DsStackThemeType
   | DsQueueThemeType
   | DsLinkedListThemeType
-  | DsTreeThemeType;
+  | DsTreeThemeType
+  | DsGraphThemeType;
 
 export * from './array';
 export * from './queue';
 export * from './stack';
 export * from './linked-list';
 export * from './tree';
+export * from './graph';

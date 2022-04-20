@@ -18,7 +18,7 @@ const initState: IBacktrackingState = {
   queue: [],
   currentIndex: 0,
   disableBackward: true,
-  disableForward: false,
+  disableForward: true,
   disablePlay: false,
   disableBuild: false,
   isRunning: false,
@@ -139,10 +139,12 @@ export default {
   reducers: {
     push(state: IBacktrackingState, { payload }: any) {
       const [instance, chartState] = payload;
-
       return {
         ...state,
+        disableForward: Math.floor(100 * (1 / state.queue.length)) >= 100,
         queue: [...state.queue, [instance, chartState]],
+        percent: Math.floor(100 * (1 / state.queue.length)),
+        progressFormat: `${1}/${state.queue.length}`,
       };
     },
 
@@ -153,6 +155,7 @@ export default {
     init(state: IBacktrackingState) {
       return {
         ...state,
+        disableForward: Math.floor(100 * (1 / state.queue.length)) >= 100,
         percent: Math.floor(100 * (1 / state.queue.length)),
         progressFormat: `${1}/${state.queue.length}`,
       };

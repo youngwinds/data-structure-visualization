@@ -11,6 +11,8 @@ import {
   LinkedListConfigType,
   TreeChart,
   TreeConfigType,
+  GraphChart,
+  GraphConfigType,
 } from '@dsv-charts/charts';
 
 import {
@@ -29,11 +31,14 @@ import {
   DsTree,
   DsTreeConfigType,
   DsTreeThemeType,
+  DsGraph,
+  DsGraphConfigType,
+  DsGraphThemeType,
 } from '@dsv-charts/data-structure';
 
 export class Dsv {
   private map = new Map<
-    'array' | 'stack' | 'queue' | 'linkedList' | 'tree',
+    'array' | 'stack' | 'queue' | 'linkedList' | 'tree' | 'graph',
     Function
   >();
   private static instance: Dsv;
@@ -52,6 +57,7 @@ export class Dsv {
     this.initQueue(addStateCallback);
     this.initLinkedList(addStateCallback);
     this.initTree(addStateCallback);
+    this.initGraph(addStateCallback);
   }
 
   initArray(addStateCallback) {
@@ -195,6 +201,35 @@ export class Dsv {
           { ...theme }
         );
         return tree;
+      }
+    );
+  }
+
+  initGraph(addStateCallback) {
+    return this.map.set(
+      'graph',
+      (config: DsGraphConfigType, theme: DsGraphThemeType) => {
+        const graph = new DsGraph(
+          {
+            ...config,
+            lifeCircle: {
+              chartDidChartInit: (
+                config: GraphConfigType,
+                instance: GraphChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+              chartDidDataChanged: (
+                config: GraphConfigType,
+                instance: GraphChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+            },
+          },
+          { ...theme }
+        );
+        return graph;
       }
     );
   }

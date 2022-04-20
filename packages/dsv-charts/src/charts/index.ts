@@ -1,49 +1,75 @@
 import {
+  ArrayChart,
+  ArrayChartConfigType,
+  ArrayChartThemeType,
   ArrayChartDataType,
+} from './array';
+
+import {
+  StackChart,
+  StackChartConfigType,
+  StackChartThemeType,
   StackChartDataType,
+} from './stack';
+
+import {
+  QueueChart,
+  QueueChartConfigType,
+  QueueChartThemeType,
   QueueChartDataType,
-  LinkedListDataType,
-} from '@dsv-charts/charts';
-import { ArrayChart, ArrayChartConfigType, ArrayChartThemeType } from './array';
-import { StackChart, StackChartConfigType, StackChartThemeType } from './stack';
-import { QueueChart, QueueChartConfigType, QueueChartThemeType } from './queue';
+} from './queue';
+
 import {
   LinkedListChart,
   LinkedListConfigType,
   LinkedListThemeType,
+  LinkedListDataType,
 } from './linked-list';
+
 import { TreeChart, TreeConfigType, TreeThemeType, TreeDataType } from './tree';
+
+import {
+  GraphChart,
+  GraphConfigType,
+  GraphThemeType,
+  GraphDataType,
+} from './graph';
 
 export type ChartType =
   | ArrayChart
   | StackChart
   | QueueChart
   | LinkedListChart
-  | TreeChart;
+  | TreeChart
+  | GraphChart;
 
 export type ConfigType =
   | ArrayChartConfigType
   | StackChartConfigType
   | QueueChartConfigType
   | LinkedListConfigType
-  | TreeConfigType;
+  | TreeConfigType
+  | GraphConfigType;
 
 export type ThemeType =
   | ArrayChartThemeType
   | StackChartThemeType
   | QueueChartThemeType
   | LinkedListThemeType
-  | TreeThemeType;
+  | TreeThemeType
+  | GraphThemeType;
 
 export type DataType =
   | ArrayChartDataType
   | StackChartDataType
   | QueueChartDataType
   | LinkedListDataType
-  | TreeDataType;
+  | TreeDataType
+  | GraphDataType;
 
 export * from './array';
 export * from './queue';
 export * from './stack';
 export * from './linked-list';
 export * from './tree';
+export * from './graph';
