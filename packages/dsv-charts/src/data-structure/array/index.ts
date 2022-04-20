@@ -166,7 +166,6 @@ class DsArray extends ArrayChart {
       this.warpMethod((data) => {
         index.forEach((i, j) => {
           data[i].state = visual[j];
-          console.log(data[i], visual[j], visual);
         });
       });
       return true;
