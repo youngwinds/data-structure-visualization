@@ -1,12 +1,4 @@
-import {
-  Selection,
-  Simulation,
-  forceSimulation,
-  forceManyBody,
-  forceCenter,
-  forceLink,
-  forceCollide,
-} from 'd3';
+import { Selection, Simulation } from 'd3';
 import { Cartesian2Layout } from '@dsv-charts/components';
 import { merge } from 'lodash';
 import { BaseChart } from '@dsv-charts/charts/base';
@@ -55,6 +47,16 @@ class GraphChart extends BaseChart<
   }
 
   initGroup(): void {
+    const rect = this.layout.getRect();
+    this.layout
+      .getSvg()
+      .attr('viewBox', [
+        -rect.width / 2,
+        -rect.height / 2,
+        rect.width,
+        rect.height,
+      ]);
+
     this.nodesGroup = this.layout.addGroup();
     this.linksGroup = this.layout.addGroup();
     this.textsGroup = this.layout.addGroup();
@@ -70,96 +72,107 @@ class GraphChart extends BaseChart<
 
   private transitionEnd(resolve) {
     const { duration } = super.getConfigByKey('transition');
-
-    return this.nodesGroup.call((g) => {
-      g.transition()
-        .duration(duration)
-        .on('end', () => {
-          resolve(true);
-        });
-    });
-  }
-
-  render(data?: GraphDataType) {
-    data && super.updateData(data);
-
-    this.recalculateLayout();
-    this.renderNodes();
-    this.renderLinks();
-    this.renderTexts();
-
+    setTimeout(() => {
+      resolve(true);
+    }, duration);
     return this;
   }
 
-  recalculateLayout() {
-    this.nodes = this.getConfigByKey('data').nodes;
-    this.links = this.getConfigByKey('data').links;
-
-    const innerRect = this.layout.getInnerRect();
-
-    this.simulation = forceSimulation<GraphNodeType, GraphLinkType>(this.nodes)
-      .force(
-        'link',
-        forceLink<GraphNodeType, GraphLinkType>(this.links).id((d) => d.name)
-      )
-      .force('collide', forceCollide(30))
-      .force('charge', forceManyBody())
-      .force('center', forceCenter(...innerRect.innerCenter))
-      .on('tick', () => {
-        this.linksGroup
-          .selectAll('line')
-          .attr('x1', (d: GraphLinkType) => d.source.x)
-          .attr('y1', (d: GraphLinkType) => d.source.y)
-          .attr('x2', (d: GraphLinkType) => d.target.x)
-          .attr('y2', (d: GraphLinkType) => d.target.y);
-
-        this.nodesGroup
-          .selectAll('circle')
-          .attr('cx', (d: GraphNodeType) => d.x)
-          .attr('cy', (d: GraphNodeType) => d.y);
-
-        this.textsGroup
-          .selectAll('text')
-          .attr('x', (d: GraphNodeType) => d.x)
-          .attr('y', (d: GraphNodeType) => d.y);
-      });
+  render(data?: GraphDataType) {
+    this.renderNodes();
+    this.renderLinks();
+    this.renderTexts();
+    return this;
   }
 
   renderNodes() {
+    const { nodes } = this.getConfigByKey('data');
+
     const colorScheme = this.getThemeByKey('colorScheme');
     this.nodesGroup
-      .selectAll('circle')
-      .data(this.nodes)
-      .join('circle')
-      .attr('r', 15)
-      .attr('fill', colorScheme[0])
       .attr('stroke', '#ffffff')
-      .attr('stroke-width', 1);
+      .attr('stroke-width', 1)
+      .selectAll('circle')
+      .data(nodes, (d: GraphNodeType) => d.key)
+      .join(
+        (enter) =>
+          enter
+            .append('circle')
+            .attr('r', 15)
+            .attr('fill', colorScheme[0])
+            .transition()
+            .attr('cx', (d: GraphNodeType) => d.x)
+            .attr('cy', (d: GraphNodeType) => d.y),
+        (update) =>
+          update
+            .transition()
+            .attr('cx', (d: GraphNodeType) => d.x)
+            .attr('cy', (d: GraphNodeType) => d.y),
+        (exit) => exit.remove()
+      );
   }
 
   renderLinks() {
+    const { links } = this.getConfigByKey('data');
+
     const arrow = this.getThemeByKey('arrow');
 
     this.linksGroup
-      .selectAll('line')
-      .data(this.links)
-      .join('line')
       .attr('stroke', arrow.color)
-      .attr('stroke-width', arrow.width);
+      .attr('stroke-width', arrow.width)
+      .selectAll('line')
+      .data(links, (d: GraphLinkType) => `${d.source.key}-${d.target.key}`)
+      .join(
+        (enter) =>
+          enter
+            .append('line')
+            .attr('x1', (d: GraphLinkType) => d.source.x)
+            .attr('y1', (d: GraphLinkType) => d.source.y)
+            .attr('x2', (d: GraphLinkType) => d.source.x)
+            .attr('y2', (d: GraphLinkType) => d.source.y)
+            .transition()
+            .attr('x1', (d: GraphLinkType) => d.source.x)
+            .attr('y1', (d: GraphLinkType) => d.source.y)
+            .attr('x2', (d: GraphLinkType) => d.target.x)
+            .attr('y2', (d: GraphLinkType) => d.target.y),
+        (update) =>
+          update
+            .transition()
+            .attr('x1', (d: GraphLinkType) => d.source.x)
+            .attr('y1', (d: GraphLinkType) => d.source.y)
+            .attr('x2', (d: GraphLinkType) => d.target.x)
+            .attr('y2', (d: GraphLinkType) => d.target.y),
+        (exit) => exit.remove()
+      );
   }
 
   renderTexts() {
+    const { nodes } = this.getConfigByKey('data');
+
     const text = this.getThemeByKey('text');
 
     this.textsGroup
       .selectAll('text')
-      .data(this.nodes)
-      .join('text')
-      .attr('stroke', text.color)
-      .attr('text-anchor', 'middle')
-      .attr('dominant-baseline', 'middle')
-      .attr('stroke-width', 1)
-      .html((d) => d.name);
+      .data(nodes, (d: GraphNodeType) => d.key)
+      .join(
+        (enter) =>
+          enter
+            .append('text')
+            .attr('stroke', text.color)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .attr('stroke-width', 1)
+            .html((d) => d.name)
+            .transition()
+            .attr('x', (d: GraphNodeType) => d.x)
+            .attr('y', (d: GraphNodeType) => d.y),
+        (update) =>
+          update
+            .transition()
+            .attr('x', (d: GraphNodeType) => d.x)
+            .attr('y', (d: GraphNodeType) => d.y),
+        (exit) => exit.remove()
+      );
   }
 }
 

@@ -50,6 +50,7 @@ export default {
         (store: any) => store.backtracking,
       );
 
+      console.log(state);
       const { currentIndex, queue } = state;
 
       yield put({
@@ -138,11 +139,13 @@ export default {
 
   reducers: {
     push(state: IBacktrackingState, { payload }: any) {
+      console.log('push successful', payload);
       const [instance, chartState] = payload;
-
       return {
         ...state,
         queue: [...state.queue, [instance, chartState]],
+        percent: Math.floor(100 * (1 / state.queue.length)),
+        progressFormat: `${1}/${state.queue.length}`,
       };
     },
 

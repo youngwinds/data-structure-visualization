@@ -12,6 +12,7 @@ import {
   TreeChart,
   TreeConfigType,
   GraphChart,
+  GraphConfigType,
 } from '@dsv-charts/charts';
 
 import {
@@ -30,6 +31,9 @@ import {
   DsTree,
   DsTreeConfigType,
   DsTreeThemeType,
+  DsGraph,
+  DsGraphConfigType,
+  DsGraphThemeType,
 } from '@dsv-charts/data-structure';
 
 export class Dsv {
@@ -202,9 +206,32 @@ export class Dsv {
   }
 
   initGraph(addStateCallback) {
-    this.map.set('graph', (config, theme) => {
-      return new GraphChart('container', config, theme);
-    });
+    return this.map.set(
+      'graph',
+      (config: DsGraphConfigType, theme: DsGraphThemeType) => {
+        const graph = new DsGraph(
+          {
+            ...config,
+            lifeCircle: {
+              chartDidChartInit: (
+                config: GraphConfigType,
+                instance: GraphChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+              chartDidDataChanged: (
+                config: GraphConfigType,
+                instance: GraphChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+            },
+          },
+          { ...theme }
+        );
+        return graph;
+      }
+    );
   }
 
   create(config: DsConfigType, theme: DsThemeType) {
