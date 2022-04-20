@@ -1,5 +1,5 @@
 module.exports = {
-  'zh-CN': 'find-node',
-  'en-US': 'find-node',
+  'zh-CN': 'findNode',
+  'en-US': 'findNode',
   path: '/docs/api/graph/find-node',
 };
