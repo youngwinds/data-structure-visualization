@@ -4,59 +4,59 @@ import { DsGraphConfigType, DsGraphThemeType } from './type';
 import { forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3';
 
 interface IDsGraphNode {
-  key?: string;
   name?: string;
   value?: string | number;
   next?: IDsGraphNode;
+  state?: string;
+  ajdLinks?: string[];
 }
 
 class DsGraphNode {
-  key: string;
   name: string;
   value: string | number;
   next: IDsGraphNode | null = null;
+  state: string;
   dsGraph: DsGraph;
 
   constructor(props: IDsGraphNode, dsGraph: DsGraph) {
-    this.key = props.key ?? '';
     this.name = props.name ?? '';
     this.value = props.value ?? '';
+    this.state = props.state ?? '';
     this.next = props.next ?? null;
 
     this.dsGraph = dsGraph;
   }
 
   addAdjacencyLink(node: DsGraphNode): this {
+    const newNode = {
+      name: node.name,
+      value: node.value,
+      state: node.state,
+    };
+
     if (this.next === null) {
-      // head
-      this.next = node.getData();
+      this.next = newNode;
     } else {
-      // next
       let p = this.next;
       while (p.next) {
         p = p.next;
       }
-      p.next = node.getData();
+      p.next = newNode;
     }
 
     this.dsGraph.setData();
     return this;
   }
 
-  getData() {
-    return {
-      key: this.key,
-      value: this.value,
-      name: this.name,
-      next: this.next,
-    };
+  setVisual(color: string) {
+    this.state = color;
+    this.dsGraph.setData();
   }
 }
 
 class DsGraph extends GraphChart {
   // 邻接表
   private dsData: Array<DsGraphNode> = [];
-  private size: number = 0;
   private promiseQueue: any[] = [];
 
   constructor(customConfig: DsGraphConfigType, customTheme: DsGraphThemeType) {
@@ -67,7 +67,7 @@ class DsGraph extends GraphChart {
     const node = new DsGraphNode(
       {
         ...nodeData,
-        key: String(++this.size),
+        state: '',
         next: null,
       },
       this
@@ -78,43 +78,93 @@ class DsGraph extends GraphChart {
     return node;
   }
 
-  convertDsDataToChartData() {
-    const result = {
-      nodes: [],
-      links: [],
-    };
+  createGraph(ajdData: Array<IDsGraphNode>) {
+    const dsData = [];
 
-    result.nodes = this.dsData.map((d) => {
-      return {
-        key: d.key,
-        name: d.name,
-        value: d.value,
-      };
-    });
+    for (let rootNode of ajdData) {
+      const node = new DsGraphNode(
+        {
+          name: rootNode.name,
+          value: rootNode.value,
+          state: rootNode.state,
+          next: null,
+        },
+        this
+      );
 
-    for (let i = 0; i < this.dsData.length; i++) {
-      const node = this.dsData[i];
-      let pointer = node.next;
-      while (pointer) {
-        result.links.push({
-          source: node.name,
-          target: pointer.name,
-        });
-        pointer = pointer.next;
+      let prveNode = null;
+
+      for (let targetName of rootNode.ajdLinks) {
+        const targetNode = {
+          name: targetName,
+          value: '',
+          state: '',
+          next: null,
+        };
+
+        if (!prveNode) {
+          node.next = targetNode;
+        } else {
+          prveNode.next = targetNode;
+        }
+
+        prveNode = targetNode;
       }
+
+      dsData.push(node);
     }
-    return result;
+
+    this.dsData = dsData;
+    this.setData();
   }
 
-  setData(sourceData?: undefined) {
+  findNode(name: IDsGraphNode) {
+    return this.dsData.find((d) => d.name === name);
+  }
+
+  setData(sourceData?: any) {
     if (sourceData) {
       super.setData(sourceData);
       return this;
     }
 
-    const data = this.convertDsDataToChartData();
-    this.calculateTheLayout(data);
+    const chartData = this.convertDsDataToChartData();
+
+    this.calculateTheLayout(chartData);
     return this;
+  }
+
+  convertDsDataToChartData(dsData?: Array<DsGraphNode>) {
+    const data = this.dsData ?? dsData;
+    const result = {
+      nodes: [],
+      links: [],
+    };
+
+    result.nodes = data.map((d) => {
+      return {
+        name: d.name,
+        value: d.value,
+        state: d.state,
+      };
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      const node = this.dsData[i];
+      let pointer = node.next;
+
+      while (pointer) {
+        result.links.push({
+          state: '',
+          source: node.name,
+          target: pointer.name,
+        });
+
+        pointer = pointer.next;
+      }
+    }
+
+    return result;
   }
 
   calculateTheLayout({ nodes, links }) {
@@ -124,12 +174,12 @@ class DsGraph extends GraphChart {
           'link',
           forceLink(links)
             .id((d: any) => d.name)
-            .distance(200)
+            .distance(100)
         )
         .force('charge', forceManyBody().strength(-1000))
         .force('x', forceX())
-        .force('y', forceY())
-        .alphaDecay(0.1)
+        .force('y', forceY().strength(0.25))
+        .alphaDecay(0.2)
         .on('end', () => {
           resolve({
             nodes: cloneDeep(nodes),
@@ -141,11 +191,7 @@ class DsGraph extends GraphChart {
   }
 
   async startLayout(): Promise<true> {
-    console.log('start calculateTheLayout');
-
     const values = await Promise.all(this.promiseQueue);
-
-    console.log('end calculateTheLayout', values);
 
     for (let data of values) {
       super.setData(data);

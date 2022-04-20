@@ -141,10 +141,10 @@ export default {
       const [instance, chartState] = payload;
       return {
         ...state,
-        disableForward: Math.floor(100 * (1 / state.queue.length)) >= 100,
+        disableForward: Math.floor(100 * (1 / (state.queue.length + 1))) >= 100,
         queue: [...state.queue, [instance, chartState]],
-        percent: Math.floor(100 * (1 / state.queue.length)),
-        progressFormat: `${1}/${state.queue.length}`,
+        percent: Math.floor(100 * (1 / (state.queue.length + 1))),
+        progressFormat: `${1}/${state.queue.length + 1}`,
       };
     },
 

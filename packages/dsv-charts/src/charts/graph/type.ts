@@ -4,10 +4,10 @@ import { TransitionType } from './../../types/transition/index';
 import { Cartesian2LayoutConfigType } from './../../types/layout/index';
 
 type GraphNodeType = {
-  key?: string;
   index?: number;
   name: string;
   value: string | number;
+  state: string;
   x?: number;
   y?: number;
   vs?: number;
@@ -16,6 +16,7 @@ type GraphNodeType = {
 
 type GraphLinkType = {
   index?: number;
+  state?: string;
   source: GraphNodeType;
   target: GraphNodeType;
 };
