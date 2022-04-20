@@ -174,12 +174,12 @@ class DsGraph extends GraphChart {
           'link',
           forceLink(links)
             .id((d: any) => d.name)
-            .distance(200)
+            .distance(100)
         )
         .force('charge', forceManyBody().strength(-1000))
         .force('x', forceX())
-        .force('y', forceY())
-        .alphaDecay(0.25)
+        .force('y', forceY().strength(0.25))
+        .alphaDecay(0.2)
         .on('end', () => {
           resolve({
             nodes: cloneDeep(nodes),

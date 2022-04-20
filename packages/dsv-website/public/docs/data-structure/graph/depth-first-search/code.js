@@ -3,11 +3,19 @@ const graph = dsv.create({
 });
 
 graph.createGraph([
-  { name: 'A', ajdLinks: ['B', 'C', 'D'] },
-  { name: 'B', ajdLinks: ['C', 'D'] },
-  { name: 'C', ajdLinks: ['D'] },
-  { name: 'D', ajdLinks: ['E'] },
-  { name: 'E', ajdLinks: ['A'] },
+  { name: 'A', ajdLinks: ['B', 'C'] },
+  { name: 'B', ajdLinks: ['B1', 'B2'] },
+  { name: 'C', ajdLinks: ['C1', 'C2'] },
+
+  { name: 'B1', ajdLinks: ['B11', 'B22'] },
+  { name: 'B2', ajdLinks: [] },
+  { name: 'B11', ajdLinks: [] },
+  { name: 'B22', ajdLinks: [] },
+
+  { name: 'C1', ajdLinks: ['C11', 'C22'] },
+  { name: 'C2', ajdLinks: [] },
+  { name: 'C11', ajdLinks: [] },
+  { name: 'C22', ajdLinks: [] },
 ]);
 
 const visitedSet = new Set();
