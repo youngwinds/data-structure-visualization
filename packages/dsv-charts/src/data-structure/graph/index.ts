@@ -8,6 +8,7 @@ interface IDsGraphNode {
   value?: string | number;
   next?: IDsGraphNode;
   state?: string;
+  ajdLinks?: string[];
 }
 
 class DsGraphNode {
@@ -82,18 +83,57 @@ class DsGraph extends GraphChart {
     return node;
   }
 
+  createGraph(ajdData: Array<IDsGraphNode>) {
+    const dsData = [];
+
+    for (let rootNode of ajdData) {
+      const node = new DsGraphNode(
+        {
+          name: rootNode.name,
+          value: rootNode.value,
+          state: rootNode.state,
+          next: null,
+        },
+        this
+      );
+
+      let prveNode = null;
+
+      for (let targetName of rootNode.ajdLinks) {
+        const targetNode = {
+          name: targetName,
+          value: '',
+          state: '',
+          next: null,
+        };
+
+        if (!prveNode) {
+          node.next = targetNode;
+        } else {
+          prveNode.next = targetNode;
+        }
+
+        prveNode = targetNode;
+      }
+
+      dsData.push(node);
+    }
+
+    this.dsData = dsData;
+    this.setData();
+  }
+
   findNode(name: IDsGraphNode) {
     return this.dsData.find((d) => d.name === name);
   }
 
-  setData(sourceData?: undefined) {
+  setData(sourceData?: any) {
     if (sourceData) {
       super.setData(sourceData);
       return this;
     }
 
     const chartData = this.convertDsDataToChartData();
-    console.log(chartData);
 
     this.calculateTheLayout(chartData);
     return this;

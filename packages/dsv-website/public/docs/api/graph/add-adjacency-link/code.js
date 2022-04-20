@@ -8,15 +8,15 @@ const C = graph.createNode({ name: 'C' });
 const D = graph.createNode({ name: 'D' });
 const E = graph.createNode({ name: 'E' });
 
-A.addAdjacencyLink(B);
+A.addAdjacencyLink(B).addAdjacencyLink(C).addAdjacencyLink(D);
 
-A.addAdjacencyLink(C);
+B.addAdjacencyLink(C).addAdjacencyLink(D);
 
-B.addAdjacencyLink(D);
-
-B.addAdjacencyLink(C);
+C.addAdjacencyLink(D);
 
 D.addAdjacencyLink(E);
+
+E.addAdjacencyLink(A);
 
 const visitedSet = new Set();
 

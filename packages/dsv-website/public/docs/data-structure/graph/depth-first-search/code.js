@@ -2,21 +2,13 @@ const graph = dsv.create({
   type: 'graph',
 });
 
-const A = graph.createNode({ name: 'A' });
-const B = graph.createNode({ name: 'B' });
-const C = graph.createNode({ name: 'C' });
-const D = graph.createNode({ name: 'D' });
-const E = graph.createNode({ name: 'E' });
-
-A.addAdjacencyLink(B);
-
-A.addAdjacencyLink(C);
-
-B.addAdjacencyLink(D);
-
-B.addAdjacencyLink(C);
-
-D.addAdjacencyLink(E);
+graph.createGraph([
+  { name: 'A', ajdLinks: ['B', 'C', 'D'] },
+  { name: 'B', ajdLinks: ['C', 'D'] },
+  { name: 'C', ajdLinks: ['D'] },
+  { name: 'D', ajdLinks: ['E'] },
+  { name: 'E', ajdLinks: ['A'] },
+]);
 
 const visitedSet = new Set();
 
