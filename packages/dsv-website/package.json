@@ -10,6 +10,7 @@
     "build:COMPRESSNONE": "yarn generate && COMPRESS=none umi build",
     "postinstall": "umi generate tmp",
     "generate": "node ./scripts/generators/routes.js && node ./scripts/generators/locales.js",
+    "ng": "node ./scripts/generators/new-routes.js",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
