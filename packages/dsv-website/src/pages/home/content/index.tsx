@@ -45,10 +45,10 @@ export function Content() {
                 <ul>
                   {children?.map((child) => {
                     return (
-                      <li key={'api_' + child.key}>
+                      <li key={child.key}>
                         <Link to={child.path}>
                           {intl.formatMessage({
-                            id: 'api_' + child.key,
+                            id: child.key,
                           })}
                         </Link>
                       </li>
@@ -82,10 +82,10 @@ export function Content() {
                 <ul>
                   {children?.map((child) => {
                     return (
-                      <li key={'data_structure_' + child.key}>
+                      <li key={child.key}>
                         <Link to={child.path}>
                           {intl.formatMessage({
-                            id: 'data_structure_' + child.key,
+                            id: child.key,
                           })}
                         </Link>
                       </li>
@@ -120,10 +120,10 @@ export function Content() {
                 <ul>
                   {children?.map((child) => {
                     return (
-                      <li key={'gallery_' + child.key}>
+                      <li key={child.key}>
                         <Link to={child.path}>
                           {intl.formatMessage({
-                            id: 'gallery_' + child.key,
+                            id: child.key,
                           })}
                         </Link>
                       </li>

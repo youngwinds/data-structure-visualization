@@ -38,8 +38,7 @@ export function SiderMenu({ menu }: ISiderMenu) {
         <Menu.Item key={item.key}>
           <Link to={item.path}>
             {intl.formatMessage({
-              id:
-                location.hash.split('/')[1].replace('-', '_') + '_' + item.key,
+              id: item.key,
             })}
           </Link>
         </Menu.Item>
