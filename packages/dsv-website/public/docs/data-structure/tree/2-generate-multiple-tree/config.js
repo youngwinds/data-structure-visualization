@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '2 创建多叉树',
+  'en-US': '2 Generate-multiple-tree',
 };

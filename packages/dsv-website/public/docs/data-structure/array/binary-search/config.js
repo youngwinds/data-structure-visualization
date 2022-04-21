@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '二分查找',
+  'en-US': 'Binary Search',
 };

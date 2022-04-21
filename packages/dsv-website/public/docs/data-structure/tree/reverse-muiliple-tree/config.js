@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '逆置多叉树',
+  'en-US': 'Reverse Muiliple Tree',
 };

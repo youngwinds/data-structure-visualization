@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '深度优先搜索',
+  'en-US': 'Depth First Search',
 };
