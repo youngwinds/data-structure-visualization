@@ -22,37 +22,40 @@ function camelName(name, baseSeparator, suffix) {
  * @param {string} routePath 路由对应的路径
  */
 function createRoutes(rootPath, key, routePath) {
-  const result = fs.readdirSync(rootPath).map((dir) => {
-    const dirInfo = fs.statSync(path.join(rootPath, dir));
+  const result = fs
+    .readdirSync(rootPath)
+    .map((dir) => {
+      const dirInfo = fs.statSync(path.join(rootPath, dir));
 
-    // 如果遇到文件，跳过
-    if (dirInfo.isFile()) {
-      return;
-    }
+      // 如果遇到文件，跳过
+      if (dirInfo.isFile()) {
+        return null;
+      }
 
-    // 如果存在code文件，则表明当前目录是叶结点。
-    const isLeaf = fs.existsSync(path.join(rootPath, dir, 'code.js'));
+      // 如果存在code文件，则表明当前目录是叶结点。
+      const isLeaf = fs.existsSync(path.join(rootPath, dir, 'code.js'));
 
-    if (dirInfo.isDirectory() && !isLeaf) {
-      // 如果是非叶目录, 继续递归创建。
-      const children = createRoutes(
-        path.join(rootPath, dir),
-        `${key + dir}_`,
-        `${routePath}/${dir}`,
-      );
+      if (dirInfo.isDirectory() && !isLeaf) {
+        // 如果是非叶目录, 继续递归创建。
+        const children = createRoutes(
+          path.join(rootPath, dir),
+          `${key + dir}_`,
+          `${routePath}/${dir}`,
+        );
 
-      return {
-        key: key + dir,
-        children: children,
-      };
-    } else if (dirInfo.isDirectory() && isLeaf) {
-      // 当前目录是叶目录，得到最后结果
-      return {
-        key: key + dir,
-        path: `${routePath}_${dir}`,
-      };
-    }
-  });
+        return {
+          key: key + dir,
+          children: children,
+        };
+      } else if (dirInfo.isDirectory() && isLeaf) {
+        // 当前目录是叶目录，得到最后结果
+        return {
+          key: key + dir,
+          path: `${routePath}_${dir}`,
+        };
+      }
+    })
+    .filter((d) => d !== null);
 
   return result;
 }
