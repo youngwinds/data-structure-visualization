@@ -6,6 +6,7 @@ import {
   scaleLinear,
   ScaleBand,
   ScaleLinear,
+  min,
 } from 'd3';
 import { merge } from 'lodash';
 
@@ -92,9 +93,12 @@ class ArrayChart extends BaseChart<
     const maxValue = max(data, (d: ArrayChartItemType) =>
       isNumber(d.value) ? d.value : 100
     );
+    const minValue = min(data, (d: ArrayChartItemType) =>
+      isNumber(d.value) ? d.value : 100
+    );
 
     this.yScale = scaleLinear(
-      [0, maxValue === 0 ? 1 : maxValue],
+      [minValue === 0 ? 0 : minValue - 1, maxValue === 0 ? 1 : maxValue],
       [0, innerRect.innerHeight]
     );
 
