@@ -83,7 +83,7 @@ function createFiles(routes) {
       if (error) {
         console.error(`Error: generators routes${content.key}`);
       }
-      console.log('\x1b[32m%s\x1b[0m', 'Generate Successful: ' + content.key);
+      console.log('\x1b[32m%s\x1b[0m%s', 'Generate Routes Successful: ', filePath);
     });
   });
 }
