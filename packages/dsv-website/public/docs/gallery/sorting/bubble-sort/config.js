@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '冒牌排序',
+  'en-US': 'Bubble Sort',
 };

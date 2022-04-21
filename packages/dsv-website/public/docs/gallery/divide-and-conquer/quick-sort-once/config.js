@@ -1,4 +1,4 @@
 module.exports = {
-  'zh-CN': 'fill',
-  'en-US': 'fill',
+  'zh-CN': '快速排序',
+  'en-US': 'Quick Sort (Once)',
 };
