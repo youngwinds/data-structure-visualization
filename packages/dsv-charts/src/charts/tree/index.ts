@@ -106,11 +106,11 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
       })`;
     };
 
-    const fill = (d: HierarchyPointNode<TreeNodeType>) => {
+    const stroke = (d: HierarchyPointNode<TreeNodeType>) => {
       if (isString(d.data.state)) {
         return d.data.state;
       }
-      
+
       return colorScheme[0];
     };
 
@@ -125,7 +125,9 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
             enter
               .append('circle')
               .attr('transform', transform)
-              .attr('fill', fill)
+              .attr('fill', '#ffffff')
+              .attr('stroke', stroke)
+              .attr('stroke-width', 5)
               .attr('r', 0)
               .transition()
               .duration(transition.duration)
@@ -134,9 +136,14 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
             update
               .transition()
               .duration(transition.duration)
-              .attr('fill', fill)
+              .attr('stroke', stroke)
               .attr('transform', transform),
-          (exit) => exit.transition().duration(transition.duration).attr('r', 0).remove()
+          (exit) =>
+            exit
+              .transition()
+              .duration(transition.duration)
+              .attr('r', 0)
+              .remove()
         );
     });
   }
@@ -152,6 +159,13 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
       })`;
     };
 
+    const fill = (d) => {
+      if (isString(d.data.state) && d.data.state.length !== 0) {
+        return d.data.state;
+      }
+      return text.color;
+    };
+
     this.textsGroup.call((g) => {
       g.selectAll('text')
         .data(
@@ -165,7 +179,7 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
               .attr('transform', transform)
               .attr('text-anchor', 'middle')
               .attr('dominant-baseline', 'middle')
-              .attr('fill', text.color)
+              .attr('fill', fill)
               .html((d) => d.data.name)
               .attr('font-size', 0)
               .transition()
@@ -176,9 +190,15 @@ class TreeChart extends BaseChart<TreeConfigType, TreeThemeType, TreeDataType> {
               .transition()
               .duration(transition.duration)
               .attr('transform', transform)
+              .attr('fill', fill)
               .selection()
               .html((d) => d.data.name),
-          (exit) => exit.transition().duration(transition.duration).attr('font-size', 0).remove()
+          (exit) =>
+            exit
+              .transition()
+              .duration(transition.duration)
+              .attr('font-size', 0)
+              .remove()
         );
     });
   }

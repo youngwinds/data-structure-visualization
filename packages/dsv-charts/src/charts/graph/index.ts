@@ -169,6 +169,13 @@ class GraphChart extends BaseChart<
 
     const text = this.getThemeByKey('text');
 
+    const stroke = (d: GraphNodeType) => {
+      if (isString(d.state) && d.state.length !== 0) {
+        return d.state;
+      }
+      return text.color;
+    };
+
     this.textsGroup
       .selectAll('text')
       .data(nodes, (d: GraphNodeType) => d.name)
@@ -176,10 +183,9 @@ class GraphChart extends BaseChart<
         (enter) =>
           enter
             .append('text')
-            .attr('stroke', text.color)
+            .attr('fill', stroke)
             .attr('text-anchor', 'middle')
             .attr('dominant-baseline', 'middle')
-            .attr('stroke-width', 1)
             .html((d) => d.name)
             .transition()
             .attr('x', (d: GraphNodeType) => d.x)
@@ -187,6 +193,7 @@ class GraphChart extends BaseChart<
         (update) =>
           update
             .transition()
+            .attr('fill', stroke)
             .attr('x', (d: GraphNodeType) => d.x)
             .attr('y', (d: GraphNodeType) => d.y),
         (exit) => exit.remove()
