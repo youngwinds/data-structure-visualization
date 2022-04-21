@@ -190,7 +190,9 @@ class LinkedListChart extends BaseChart<
               .append('circle')
               .attr('cy', (d) => d.y)
               .attr('cx', innerRect.innerRight)
-              .attr('fill', colorScheme[0])
+              .attr('fill', '#ffffff')
+              .attr('stroke', colorScheme[0])
+              .attr('stroke-width', 5)
               .transition()
               .duration(transition.duration)
               .attr('cx', (d) => d.x)
@@ -199,6 +201,8 @@ class LinkedListChart extends BaseChart<
             update
               .transition()
               .duration(transition.duration)
+              .attr('fill', '#ffffff')
+              .attr('stroke', colorScheme[0])
               .attr('cx', (d) => d.x),
           (exit) =>
             exit.attr('opacity', 1).transition().attr('opacity', 0).remove()
