@@ -2,7 +2,7 @@ const binaryTree = dsv.create({
   type: 'binaryTree',
 });
 
-const root = binaryTree.createBinaryTree({
+const root = binaryTree.createNode({
   name: '1',
   left: {
     name: '2',
@@ -47,3 +47,14 @@ const root = binaryTree.createBinaryTree({
     },
   },
 });
+
+function dfs(node) {
+  if (!node) {
+    return;
+  }
+  node.state = '#edafda';
+  dfs(node.left);
+  dfs(node.right);
+}
+
+dfs(root);

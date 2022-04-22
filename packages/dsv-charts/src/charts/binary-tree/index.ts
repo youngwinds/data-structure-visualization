@@ -125,7 +125,7 @@ class BinaryTreeChart extends BaseChart<
       g.selectAll('circle')
         .data(
           this.rootData.descendants(),
-          (d: HierarchyPointNode<BinaryTreeNodeType>) => d.data.key
+          (d: HierarchyPointNode<BinaryTreeNodeType>) => d.data.name
         )
         .join(
           (enter) =>
@@ -177,7 +177,7 @@ class BinaryTreeChart extends BaseChart<
       g.selectAll('text')
         .data(
           this.rootData.descendants(),
-          (d: HierarchyPointNode<BinaryTreeNodeType>) => d.data.key
+          (d: HierarchyPointNode<BinaryTreeNodeType>) => d.data.name
         )
         .join(
           (enter) =>
@@ -225,7 +225,7 @@ class BinaryTreeChart extends BaseChart<
         .data(
           this.rootData.links(),
           (d: HierarchyPointLink<BinaryTreeNodeType>) =>
-            d.source.data.key + d.target.data.key
+            `${d.source.data.name}-${d.target.data.name}`
         )
         .join(
           (enter) =>
@@ -251,7 +251,7 @@ class BinaryTreeChart extends BaseChart<
               .transition()
               .duration(transition.duration)
               .attr('d', (d) =>
-                link({ source: d.source, target: d.source } as any)
+                link({ source: d.target, target: d.target } as any)
               )
               .remove()
         );

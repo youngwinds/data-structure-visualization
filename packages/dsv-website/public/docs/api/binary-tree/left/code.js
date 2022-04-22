@@ -2,7 +2,7 @@ const binaryTree = dsv.create({
   type: 'binaryTree',
 });
 
-const root = binaryTree.createBinaryTree({
+const root = binaryTree.createNode({
   name: '1',
   left: {
     name: '2',
@@ -47,3 +47,19 @@ const root = binaryTree.createBinaryTree({
     },
   },
 });
+
+const left = binaryTree.createNode({
+  name: 'A',
+  left: {
+    name: 'B',
+  },
+  right: {
+    name: 'C',
+  },
+});
+
+const tempLeft = root.left;
+
+root.left = left;
+
+left.left = tempLeft;

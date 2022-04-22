@@ -4,11 +4,10 @@ import { TransitionType } from './../../types/transition/index';
 import { Cartesian2LayoutConfigType } from './../../types/layout/index';
 
 type BinaryTreeNodeType = {
-  key: string;
   name: string;
-  value: string | number;
+  value?: string | number;
   state?: string;
-  children: BinaryTreeNodeType[];
+  children?: Array<BinaryTreeNodeType>;
 };
 
 type BinaryTreeDataType = BinaryTreeNodeType;
