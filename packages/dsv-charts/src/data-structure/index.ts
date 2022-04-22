@@ -6,10 +6,22 @@ import {
   DsLinkedListConfigType,
   DsLinkedListThemeType,
 } from './linked-list';
-import { DsTreeConfigType, DsTreeThemeType } from './tree';
+import { DsTree, DsTreeConfigType, DsTreeThemeType } from './tree';
+import {
+  DsBinaryTree,
+  DsBinaryTreeConfigType,
+  DsBinaryTreeThemeType,
+} from './binary-tree';
 import { DsGraph, DsGraphConfigType, DsGraphThemeType } from './graph';
 
-export type DsChartType = DsArray | DsStack | DsQueue | DsLinkedList | DsGraph;
+export type DsChartType =
+  | DsArray
+  | DsStack
+  | DsQueue
+  | DsLinkedList
+  | DsTree
+  | DsBinaryTree
+  | DsGraph;
 
 export type DsConfigType =
   | DsArrayConfigType
@@ -17,6 +29,7 @@ export type DsConfigType =
   | DsQueueConfigType
   | DsLinkedListConfigType
   | DsTreeConfigType
+  | DsBinaryTreeConfigType
   | DsGraphConfigType;
 
 export type DsThemeType =
@@ -25,6 +38,7 @@ export type DsThemeType =
   | DsQueueThemeType
   | DsLinkedListThemeType
   | DsTreeThemeType
+  | DsBinaryTreeThemeType
   | DsGraphThemeType;
 
 export * from './array';
@@ -32,4 +46,5 @@ export * from './queue';
 export * from './stack';
 export * from './linked-list';
 export * from './tree';
+export * from './binary-tree';
 export * from './graph';

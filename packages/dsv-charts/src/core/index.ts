@@ -11,6 +11,8 @@ import {
   LinkedListConfigType,
   TreeChart,
   TreeConfigType,
+  BinaryTreeChart,
+  BinaryTreeConfigType,
   GraphChart,
   GraphConfigType,
 } from '@dsv-charts/charts';
@@ -31,6 +33,9 @@ import {
   DsTree,
   DsTreeConfigType,
   DsTreeThemeType,
+  DsBinaryTree,
+  DsBinaryTreeConfigType,
+  DsBinaryTreeThemeType,
   DsGraph,
   DsGraphConfigType,
   DsGraphThemeType,
@@ -38,7 +43,13 @@ import {
 
 export class Dsv {
   private map = new Map<
-    'array' | 'stack' | 'queue' | 'linkedList' | 'tree' | 'graph',
+    | 'array'
+    | 'stack'
+    | 'queue'
+    | 'linkedList'
+    | 'tree'
+    | 'binaryTree'
+    | 'graph',
     Function
   >();
   private static instance: Dsv;
@@ -57,6 +68,7 @@ export class Dsv {
     this.initQueue(addStateCallback);
     this.initLinkedList(addStateCallback);
     this.initTree(addStateCallback);
+    this.initBinaryTree(addStateCallback);
     this.initGraph(addStateCallback);
   }
 
@@ -201,6 +213,35 @@ export class Dsv {
           { ...theme }
         );
         return tree;
+      }
+    );
+  }
+
+  initBinaryTree(addStateCallback) {
+    return this.map.set(
+      'binaryTree',
+      (config: DsBinaryTreeConfigType, theme: DsBinaryTreeThemeType) => {
+        const binaryTree = new DsBinaryTree(
+          {
+            ...config,
+            lifeCircle: {
+              chartDidChartInit: (
+                config: BinaryTreeConfigType,
+                instance: BinaryTreeChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+              chartDidDataChanged: (
+                config: BinaryTreeConfigType,
+                instance: BinaryTreeChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+            },
+          },
+          { ...theme }
+        );
+        return binaryTree;
       }
     );
   }

@@ -27,6 +27,12 @@ import {
 } from './linked-list';
 
 import { TreeChart, TreeConfigType, TreeThemeType, TreeDataType } from './tree';
+import {
+  BinaryTreeChart,
+  BinaryTreeConfigType,
+  BinaryTreeThemeType,
+  BinaryTreeDataType,
+} from './binary-tree';
 
 import {
   GraphChart,
@@ -41,6 +47,7 @@ export type ChartType =
   | QueueChart
   | LinkedListChart
   | TreeChart
+  | BinaryTreeChart
   | GraphChart;
 
 export type ConfigType =
@@ -49,6 +56,7 @@ export type ConfigType =
   | QueueChartConfigType
   | LinkedListConfigType
   | TreeConfigType
+  | BinaryTreeConfigType
   | GraphConfigType;
 
 export type ThemeType =
@@ -57,6 +65,7 @@ export type ThemeType =
   | QueueChartThemeType
   | LinkedListThemeType
   | TreeThemeType
+  | BinaryTreeThemeType
   | GraphThemeType;
 
 export type DataType =
@@ -65,6 +74,7 @@ export type DataType =
   | QueueChartDataType
   | LinkedListDataType
   | TreeDataType
+  | BinaryTreeDataType
   | GraphDataType;
 
 export * from './array';
@@ -72,4 +82,5 @@ export * from './queue';
 export * from './stack';
 export * from './linked-list';
 export * from './tree';
+export * from './binary-tree';
 export * from './graph';
