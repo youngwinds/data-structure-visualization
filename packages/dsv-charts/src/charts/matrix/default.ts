@@ -33,7 +33,7 @@ export const defaultTheme: MatrixThemeType = {
   },
   border: {
     color: '#eeeeee',
-    width: 10,
+    width: 5,
   },
   arrow: {
     color: '#212121',

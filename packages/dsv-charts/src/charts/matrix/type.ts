@@ -5,9 +5,13 @@ import {
   Cartesian2LayoutConfigType,
 } from '@dsv-charts/types';
 
-type MatrixItemType = { key: string; name: string; value: string | number };
+type MatrixItemType = {
+  name: string;
+  value?: string | number;
+  state?: string;
+};
 
-type MatrixDataType = MatrixItemType[];
+type MatrixDataType = MatrixItemType[][];
 
 type MatrixConfigType = {
   type: 'matrix';
