@@ -13,9 +13,11 @@ import {
   DsBinaryTreeThemeType,
 } from './binary-tree';
 import { DsGraph, DsGraphConfigType, DsGraphThemeType } from './graph';
+import { DsMatrix, DsMatrixConfigType, DsMatrixThemeType } from './matrix';
 
 export type DsChartType =
   | DsArray
+  | DsMatrix
   | DsStack
   | DsQueue
   | DsLinkedList
@@ -25,6 +27,7 @@ export type DsChartType =
 
 export type DsConfigType =
   | DsArrayConfigType
+  | DsMatrixConfigType
   | DsStackConfigType
   | DsQueueConfigType
   | DsLinkedListConfigType
@@ -34,6 +37,7 @@ export type DsConfigType =
 
 export type DsThemeType =
   | DsArrayThemeType
+  | DsMatrixThemeType
   | DsStackThemeType
   | DsQueueThemeType
   | DsLinkedListThemeType
@@ -48,3 +52,4 @@ export * from './linked-list';
 export * from './tree';
 export * from './binary-tree';
 export * from './graph';
+export * from './matrix';

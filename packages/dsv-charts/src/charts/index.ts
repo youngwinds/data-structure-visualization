@@ -4,7 +4,12 @@ import {
   ArrayChartThemeType,
   ArrayChartDataType,
 } from './array';
-
+import {
+  MatrixChart,
+  MatrixConfigType,
+  MatrixThemeType,
+  MatrixDataType,
+} from './matrix';
 import {
   StackChart,
   StackChartConfigType,
@@ -43,6 +48,7 @@ import {
 
 export type ChartType =
   | ArrayChart
+  | MatrixChart
   | StackChart
   | QueueChart
   | LinkedListChart
@@ -52,6 +58,7 @@ export type ChartType =
 
 export type ConfigType =
   | ArrayChartConfigType
+  | MatrixConfigType
   | StackChartConfigType
   | QueueChartConfigType
   | LinkedListConfigType
@@ -61,6 +68,7 @@ export type ConfigType =
 
 export type ThemeType =
   | ArrayChartThemeType
+  | MatrixThemeType
   | StackChartThemeType
   | QueueChartThemeType
   | LinkedListThemeType
@@ -70,6 +78,7 @@ export type ThemeType =
 
 export type DataType =
   | ArrayChartDataType
+  | MatrixDataType
   | StackChartDataType
   | QueueChartDataType
   | LinkedListDataType
@@ -84,3 +93,4 @@ export * from './linked-list';
 export * from './tree';
 export * from './binary-tree';
 export * from './graph';
+export * from './matrix';
