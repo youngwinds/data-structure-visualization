@@ -82,6 +82,8 @@ class MatrixChart extends BaseChart<
 
   renderScale(): this {
     const data = super.getConfigByKey('data');
+    console.log(data);
+    
     const innerRect = this.layout.getInnerRect();
     this.yScale = scaleBand()
       .domain(data.map((d, i) => String(i)))
@@ -162,7 +164,7 @@ class MatrixChart extends BaseChart<
                 (this.yScale.bandwidth() >> 1) + this.yScale(String(d.rowIndex))
             ),
 
-        (exit) => exit.transition().duration(duration).remove()
+        (exit) => exit.transition().duration(duration).attr('r', 0).remove()
       );
 
     return this;
@@ -173,7 +175,7 @@ class MatrixChart extends BaseChart<
     const { duration } = this.getConfigByKey('transition');
     const data = super.getConfigByKey('data');
 
-    this.circlesGroup
+    this.textsGroup
       .selectAll('text')
       .data(data.flat(), (d: MatrixItemType) => d.key)
       .join(
@@ -213,7 +215,7 @@ class MatrixChart extends BaseChart<
             )
             .selection()
             .html((d: MatrixItemType) => d.name),
-        (exit) => exit.transition().duration(duration).remove()
+        (exit) => exit.remove()
       );
     return this;
   }

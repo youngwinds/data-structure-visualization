@@ -6,7 +6,7 @@ import {
 } from '@dsv-charts/types';
 
 type MatrixItemType = {
-  key: string;
+  key?: string;
   name?: string;
   value?: string | number;
   state?: string;
