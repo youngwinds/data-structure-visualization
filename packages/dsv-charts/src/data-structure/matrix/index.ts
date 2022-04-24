@@ -8,6 +8,10 @@ import { UniqueKey } from '@dsv-charts/utils';
 import { merge } from 'lodash';
 import { DsMatrixConfigType, DsMatrixThemeType } from './type';
 
+interface IDsMatrixItemOptions {
+  updateHandler: Function;
+}
+
 class DsMatrixItem {
   private _key: string;
   private _name: string;
@@ -16,13 +20,23 @@ class DsMatrixItem {
   private _colIndex: number;
   private _value: string | number;
 
-  constructor(props: MatrixItemType) {
+  private _updateHandler: Function;
+
+  constructor(props: MatrixItemType, options: IDsMatrixItemOptions) {
     this._key = UniqueKey.generate();
     this._state = props.state;
     this._value = props.value;
     this._rowIndex = props.rowIndex ?? 0;
     this._colIndex = props.colIndex ?? 0;
     this._name = props.name ?? String(this._value);
+
+    this._updateHandler = options.updateHandler ?? null;
+  }
+
+  public update() {
+    if (this._updateHandler) {
+      this._updateHandler();
+    }
   }
 
   get name() {
@@ -31,6 +45,8 @@ class DsMatrixItem {
 
   set name(name) {
     this._name = name;
+
+    this.update();
   }
 
   get state() {
@@ -39,6 +55,8 @@ class DsMatrixItem {
 
   set state(state) {
     this._state = state;
+
+    this.update();
   }
 
   get value() {
@@ -47,6 +65,8 @@ class DsMatrixItem {
 
   set value(value) {
     this._value = value;
+    this._name = String(value);
+    this.update();
   }
 
   get rowIndex() {
@@ -54,19 +74,27 @@ class DsMatrixItem {
   }
 
   set rowIndex(rowIndex) {
+    // throw new Error('Modifying the rowIndex is not allowed');
     this._rowIndex = rowIndex;
+    this.update();
   }
 
   get colIndex() {
     return this._colIndex;
   }
 
-  set cowIndex(cowIndex) {
-    this._colIndex = cowIndex;
+  set colIndex(colIndex) {
+    this._colIndex = colIndex;
+    this.update();
+    // throw new Error('Modifying the colIndex is not allowed');
   }
 
   get key() {
     return this._key;
+  }
+
+  set key(key) {
+    throw new Error('Modifying the key is not allowed');
   }
 }
 
@@ -79,28 +107,30 @@ class DsMatrix extends MatrixChart {
   ) {
     super(
       'container',
-      merge({}, customConfig, {
-        data: DsMatrix.convertDataToChartData(customConfig.data),
-      }),
+      merge({}, customConfig, { data: [[]] }),
       merge({}, customTheme)
     );
 
     super.render();
   }
 
-  createMatrix(data: (string | number)[][]) {
-    this.dsData = DsMatrix.convertDataToDsData(data);
+  public getItem(rowIndex: number, colIndex: number) {
+    return this.dsData[rowIndex][colIndex];
+  }
+
+  public createMatrix(data: (string | number)[][]) {
+    this.dsData = this.convertDataToDsData(data);
 
     this.setData();
   }
 
-  setData() {
-    const chartData = DsMatrix.convertDsDataToChartData(this.dsData);
+  public setData() {
+    const chartData = this.convertDsDataToChartData(this.dsData);
     super.setData(chartData);
     return this;
   }
 
-  static convertDsDataToChartData(dsData): MatrixDataType {
+  private convertDsDataToChartData(dsData): MatrixDataType {
     const result: MatrixDataType = [];
 
     for (let i = 0; i < dsData.length; i++) {
@@ -121,19 +151,26 @@ class DsMatrix extends MatrixChart {
     return result;
   }
 
-  static convertDataToDsData(data: (string | number)[][]) {
+  private convertDataToDsData(data: (string | number)[][]) {
     const dsData: DsMatrixItem[][] = [];
     for (let i = 0; i < data.length; i++) {
       const dsRow: DsMatrixItem[] = [];
       for (let j = 0; j < data[i].length; j++) {
-        const item = new DsMatrixItem({
-          key: undefined,
-          name: String(data[i][j]),
-          value: data[i][j],
-          state: undefined,
-          rowIndex: i,
-          colIndex: j,
-        });
+        const item = new DsMatrixItem(
+          {
+            key: undefined,
+            name: String(data[i][j]),
+            value: data[i][j],
+            state: undefined,
+            rowIndex: i,
+            colIndex: j,
+          },
+          {
+            updateHandler: () => {
+              this.setData();
+            },
+          }
+        );
         dsRow.push(item);
       }
       dsData.push(dsRow);
@@ -141,9 +178,29 @@ class DsMatrix extends MatrixChart {
     return dsData;
   }
 
-  static convertDataToChartData(data: (string | number)[][]) {
-    const dsData = DsMatrix.convertDataToDsData(data);
-    const chartData = DsMatrix.convertDsDataToChartData(dsData);
+  private convertDataToChartData(data: (string | number)[][]): MatrixDataType {
+    const dsData = this.convertDataToDsData(data);
+    const chartData = this.convertDsDataToChartData(dsData);
+    return chartData;
+  }
+
+  static convertDataToChartData(data: (string | number)[][]): MatrixDataType {
+    const chartData: MatrixItemType[][] = [];
+    for (let i = 0; i < data.length; i++) {
+      const rowData: MatrixItemType[] = [];
+      for (let j = 0; j < data[i].length; j++) {
+        const item = {
+          key: UniqueKey.generate(),
+          name: String(data[i][j]),
+          value: data[i][j],
+          state: undefined,
+          rowIndex: i,
+          colIndex: j,
+        };
+        rowData.push(item);
+      }
+      chartData.push(rowData);
+    }
     return chartData;
   }
 }

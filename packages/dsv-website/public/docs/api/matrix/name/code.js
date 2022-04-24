@@ -7,3 +7,8 @@ matrix.createMatrix([
   [5, 6, 7, 8],
   [9, 10, 11, 12],
 ]);
+
+const item = matrix.getItem(2, 0);
+
+item.name = 'Name';
+item.value = 99;
