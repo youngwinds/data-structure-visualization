@@ -8,6 +8,4 @@ matrix.createMatrix([
   [9, 10, 11, 12],
 ]);
 
-const item = matrix.getItem(1, 0);
-
-item.name = String(1 === item.rowIndex);
+matrix.swap(0, 0, 1, 1);

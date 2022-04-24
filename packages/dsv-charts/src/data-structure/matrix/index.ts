@@ -55,7 +55,6 @@ class DsMatrixItem {
 
   set state(state) {
     this._state = state;
-
     this.update();
   }
 
@@ -74,9 +73,7 @@ class DsMatrixItem {
   }
 
   set rowIndex(rowIndex) {
-    // throw new Error('Modifying the rowIndex is not allowed');
-    this._rowIndex = rowIndex;
-    this.update();
+    throw new Error('Not writable: rowIndex');
   }
 
   get colIndex() {
@@ -84,9 +81,7 @@ class DsMatrixItem {
   }
 
   set colIndex(colIndex) {
-    this._colIndex = colIndex;
-    this.update();
-    // throw new Error('Modifying the colIndex is not allowed');
+    throw new Error('Not writable: colIndex');
   }
 
   get key() {
@@ -94,7 +89,31 @@ class DsMatrixItem {
   }
 
   set key(key) {
-    throw new Error('Modifying the key is not allowed');
+    throw new Error('Not writable: key');
+  }
+
+  setState(state) {
+    this._state = state;
+  }
+
+  setValue(value) {
+    this._value = value;
+  }
+
+  setName(name) {
+    this._name = name;
+  }
+
+  setRowIndex(rowIndex) {
+    this._rowIndex = rowIndex;
+  }
+
+  setColIndex(colIndex) {
+    this._colIndex = colIndex;
+  }
+
+  setKey(key) {
+    this._key = key;
   }
 }
 
@@ -116,6 +135,32 @@ class DsMatrix extends MatrixChart {
 
   public getItem(rowIndex: number, colIndex: number) {
     return this.dsData[rowIndex][colIndex];
+  }
+
+  public getRow(rowIndex: number) {
+    return this.dsData[rowIndex];
+  }
+
+  public swap(
+    rowIndex1: number,
+    colIndex1: number,
+    rowIndex2: number,
+    colIndex2: number
+  ) {
+    const item1 = this.dsData[rowIndex1][colIndex1];
+    const item2 = this.dsData[rowIndex2][colIndex2];
+
+    // 交换元素整体位置
+    this.dsData[rowIndex1].splice(colIndex1, 1, item2);
+    this.dsData[rowIndex2].splice(colIndex2, 1, item1);
+    // 修改下标值
+    item1.setRowIndex(rowIndex2);
+    item1.setColIndex(colIndex2);
+
+    item2.setRowIndex(rowIndex1);
+    item2.setColIndex(colIndex1);
+
+    this.setData();
   }
 
   public createMatrix(data: (string | number)[][]) {

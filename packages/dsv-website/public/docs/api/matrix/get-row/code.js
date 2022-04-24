@@ -8,6 +8,6 @@ matrix.createMatrix([
   [9, 10, 11, 12],
 ]);
 
-const item = matrix.getItem(1, 0);
-
-item.name = String(1 === item.rowIndex);
+for (let ch of matrix.getRow(1)) {
+  ch.state = 'red';
+}

@@ -82,8 +82,7 @@ class MatrixChart extends BaseChart<
 
   renderScale(): this {
     const data = super.getConfigByKey('data');
-    console.log(data);
-    
+
     const innerRect = this.layout.getInnerRect();
     this.yScale = scaleBand()
       .domain(data.map((d, i) => String(i)))
