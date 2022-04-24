@@ -123,31 +123,28 @@ class MatrixChart extends BaseChart<
     };
 
     this.circlesGroup
-      .selectAll('g')
-      .data(data)
-      .join('g')
-      .attr('transform', (d, i) => `translate(0,${this.yScale(i.toString())})`)
       .selectAll('circle')
-      .data(
-        (d: MatrixItemType[]) => d,
-        (d: MatrixItemType) => d.name
-      )
+      .data(data.flat(), (d: MatrixItemType) => d.key)
       .join(
         (enter) =>
           enter
             .append('circle')
             .attr('r', 0)
+            .attr('stroke-width', border.width)
             .attr(
               'cx',
-              (d, i) =>
-                (this.xScale.bandwidth() >> 1) + this.xScale(i.toString())
+              (d) =>
+                (this.xScale.bandwidth() >> 1) + this.xScale(String(d.colIndex))
             )
-            .attr('cy', this.yScale.bandwidth() >> 1)
+            .attr(
+              'cy',
+              (d) =>
+                (this.yScale.bandwidth() >> 1) + this.yScale(String(d.rowIndex))
+            )
             .transition()
             .duration(duration)
             .attr('r', r)
             .attr('stroke', stroke)
-            .attr('stroke-width', border.width)
             .attr('fill', '#ffffff'),
         (update) =>
           update
@@ -156,10 +153,14 @@ class MatrixChart extends BaseChart<
             .attr('stroke', stroke)
             .attr(
               'cx',
-              (d, i) =>
-                (this.xScale.bandwidth() >> 1) + this.xScale(i.toString())
+              (d) =>
+                (this.xScale.bandwidth() >> 1) + this.xScale(String(d.colIndex))
             )
-            .attr('cy', this.yScale.bandwidth() >> 1),
+            .attr(
+              'cy',
+              (d) =>
+                (this.yScale.bandwidth() >> 1) + this.yScale(String(d.rowIndex))
+            ),
 
         (exit) => exit.transition().duration(duration).remove()
       );
@@ -173,15 +174,8 @@ class MatrixChart extends BaseChart<
     const data = super.getConfigByKey('data');
 
     this.circlesGroup
-      .selectAll('g')
-      .data(data)
-      .join('g')
-      .attr('transform', (d, i) => `translate(0,${this.yScale(i.toString())})`)
       .selectAll('text')
-      .data(
-        (d: MatrixItemType[]) => d,
-        (d: MatrixItemType) => d.name
-      )
+      .data(data.flat(), (d: MatrixItemType) => d.key)
       .join(
         (enter) =>
           enter
@@ -190,10 +184,14 @@ class MatrixChart extends BaseChart<
             .attr('dominant-baseline', 'middle')
             .attr(
               'x',
-              (d, i) =>
-                (this.xScale.bandwidth() >> 1) + this.xScale(i.toString())
+              (d) =>
+                (this.xScale.bandwidth() >> 1) + this.xScale(String(d.colIndex))
             )
-            .attr('y', this.yScale.bandwidth() >> 1)
+            .attr(
+              'y',
+              (d) =>
+                (this.yScale.bandwidth() >> 1) + this.yScale(String(d.rowIndex))
+            )
             .transition()
             .duration(duration)
             .attr('fill', text.color)
@@ -205,11 +203,16 @@ class MatrixChart extends BaseChart<
             .duration(duration)
             .attr(
               'x',
-              (d, i) =>
-                (this.xScale.bandwidth() >> 1) + this.xScale(i.toString())
+              (d) =>
+                (this.xScale.bandwidth() >> 1) + this.xScale(String(d.colIndex))
             )
-            .attr('y', this.yScale.bandwidth() >> 1)
-            .transition(),
+            .attr(
+              'y',
+              (d) =>
+                (this.yScale.bandwidth() >> 1) + this.yScale(String(d.rowIndex))
+            )
+            .selection()
+            .html((d: MatrixItemType) => d.name),
         (exit) => exit.transition().duration(duration).remove()
       );
     return this;
