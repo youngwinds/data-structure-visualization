@@ -3,6 +3,8 @@ import { DsConfigType, DsThemeType } from '@dsv-charts/data-structure';
 import {
   ArrayChart,
   ArrayChartConfigType,
+  MatrixChart,
+  MatrixConfigType,
   QueueChart,
   QueueChartConfigType,
   StackChart,
@@ -21,6 +23,9 @@ import {
   DsArray,
   DsArrayConfigType,
   DsArrayThemeType,
+  DsMatrix,
+  DsMatrixConfigType,
+  DsMatrixThemeType,
   DsLinkedList,
   DsLinkedListConfigType,
   DsLinkedListThemeType,
@@ -44,6 +49,7 @@ import {
 export class Dsv {
   private map = new Map<
     | 'array'
+    | 'matrix'
     | 'stack'
     | 'queue'
     | 'linkedList'
@@ -64,6 +70,7 @@ export class Dsv {
 
   init(addStateCallback) {
     this.initArray(addStateCallback);
+    this.initMatrix(addStateCallback);
     this.initStack(addStateCallback);
     this.initQueue(addStateCallback);
     this.initLinkedList(addStateCallback);
@@ -97,6 +104,35 @@ export class Dsv {
           { ...theme }
         );
         return array;
+      }
+    );
+  }
+
+  initMatrix(addStateCallback) {
+    return this.map.set(
+      'matrix',
+      (config: DsMatrixConfigType, theme: DsMatrixThemeType) => {
+        const matrix = new DsMatrix(
+          {
+            ...config,
+            lifeCircle: {
+              chartDidChartInit: (
+                config: MatrixConfigType,
+                instance: MatrixChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+              chartDidDataChanged: (
+                config: MatrixConfigType,
+                instance: MatrixChart
+              ) => {
+                addStateCallback(config, instance);
+              },
+            },
+          },
+          { ...theme }
+        );
+        return matrix;
       }
     );
   }
