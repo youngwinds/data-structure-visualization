@@ -1,7 +1,5 @@
-# DsMatrixItem.colIndex
+# DsMatrixItem.name
 
-## Introduce
+## Description
 
-## Parameters
-
-## Return value
+The name property is used to set or access the name of the current element.

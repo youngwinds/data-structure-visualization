@@ -1,7 +1,5 @@
 # DsMatrixItem.colIndex
 
-## Introduce
+## Description
 
-## Parameters
-
-## Return value
+The colIndex property is used to set or access the column subscript of the current element.
