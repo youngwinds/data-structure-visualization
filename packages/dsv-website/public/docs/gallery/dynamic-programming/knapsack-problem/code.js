@@ -1,5 +1,8 @@
 const dp = dsv.create({
   type: 'matrix',
+  transition: {
+    duration: 100,
+  },
 });
 
 function knapsackProblem(weight, value, maxWeight) {
