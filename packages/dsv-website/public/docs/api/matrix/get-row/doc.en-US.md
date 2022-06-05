@@ -1,7 +1,14 @@
-# DsMatrix.getRow() 
+# DsMatrix.getRow(rowIndex)
 
-## Introduce
+## Description
+
+The getRow() method is used to get a row of data of a matrix.
 
 ## Parameters
 
+- rowIndex
+  Row subscript
+
 ## Return value
+
+An array containing all the elements of the specified row

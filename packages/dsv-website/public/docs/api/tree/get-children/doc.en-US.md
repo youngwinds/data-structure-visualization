@@ -1,4 +1,4 @@
-# Ds
+# DsTree.getChildren()
 
 ## Introduce
 
