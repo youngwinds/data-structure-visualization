@@ -1,7 +1,15 @@
-# Ds
+# DsGraph.addAdjacencyLink(node)
 
-## Introduce
+## Description
+
+addAdjacencyLink Creates an adjacency edge of the current node
 
 ## Parameters
 
+- node DsGraphNode
+
+The node in the adjacency table
+
 ## Return value
+
+Current node

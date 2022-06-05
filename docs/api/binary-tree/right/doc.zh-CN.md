@@ -1,7 +1,5 @@
-# Ds
+# DsBinaryTreeNode.right
 
 ## 描述
 
-## 参数
-
-## 返回值
+right 属性用于设置或者访问当前结点的右子树。

@@ -1,4 +1,4 @@
-# Ds
+# DsTree.clear()
 
 ## 描述
 
