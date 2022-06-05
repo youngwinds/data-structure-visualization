@@ -1,4 +1,4 @@
-# Ds
+# DsTree.remove()
 
 ## Introduce
 
