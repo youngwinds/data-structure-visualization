@@ -3,10 +3,6 @@ const queue = dsv.create({
   data: [],
   layout: {
     height: 225,
-    padding: {
-      top: 0,
-      bottom: 0,
-    },
   },
 });
 
@@ -14,10 +10,10 @@ const tree = dsv.create({
   type: 'tree',
   layout: {
     padding: {
-      top: 15,
+      top: 25,
       bottom: 20,
     },
-    height: 325,
+    height: 300,
   },
 });
 
