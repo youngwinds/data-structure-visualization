@@ -1,4 +1,4 @@
-# Ds
+# DsTree.removeVisual()
 
 ## 描述
 

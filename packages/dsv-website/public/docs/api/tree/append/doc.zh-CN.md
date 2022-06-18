@@ -1,5 +1,6 @@
 # DsTree.append(node)
 
+
 ## 描述
 
 append()方法向二叉树孩子节点中，追加一个结点。

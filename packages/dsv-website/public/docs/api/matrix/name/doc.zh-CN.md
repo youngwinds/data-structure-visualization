@@ -1,7 +1,5 @@
-# DsMatrixItem.colIndex
+# DsMatrixItem.name
 
 ## 描述
 
-## 参数
-
-## 返回值
+name 属性用于设置或者访问当前元素的名称。

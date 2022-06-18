@@ -1,7 +1,5 @@
 # DsMatrixItem.value
 
-## Introduce
+## Description
 
-## Parameters
-
-## Return value
+The value property is used to set or access the value of the current element.

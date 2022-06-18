@@ -2,10 +2,7 @@
 
 ## Introduce
 
-
 ## Parameters
-
-
 
 ## Return value
 

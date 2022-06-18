@@ -1,7 +1,5 @@
-# Ds
+# DsBinaryTreeNode.right
 
 ## Introduce
 
-## Parameters
-
-## Return value
+The right property is used to set or access the right subtree of the current node.
