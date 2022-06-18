@@ -1,7 +1,8 @@
-# DsTree.append()
+# DsTree.append(node)
 
 ## Introduce
 
 ## Parameters
 
 ## Return value
+
