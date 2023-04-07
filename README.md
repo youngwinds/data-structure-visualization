@@ -7,3 +7,9 @@ Data Structure Visualization is an interactive platform witch provide various fi
 Visit : https://youngwinds.github.io/data-structure-visualization
 
 ![cover](./public/images/cover.png)
+
+## Local startup
+
+`pnpm install`
+
+`pnpm run start`
