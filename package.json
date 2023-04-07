@@ -1,37 +1,31 @@
 {
   "name": "data-structure-visualization",
-  "version": "0.0.0",
-  "private": true,
-  "description": "algorithm-visualization depends on data-structure-visualization",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "lerna exec --scope dsv-website yarn start",
-    "build": "lerna exec --scope dsv-website yarn build",
-    "build:COMPRESSNONE": "lerna exec --scope dsv-website yarn build:COMPRESSNONE",
-    "generate": "lerna exec --scope dsv-website yarn generate",
-    "release:beta": "lerna version --conventional-commits --conventional-prerelease --preid beta --yes",
-    "release": "lerna version --conventional-commits --conventional-graduate --yes && lerna publish from-git --yes"
+    "start": "pnpm -F @dsv/web dev",
+    "lint": "linter",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/youngwinds/data-structure-visualization.git"
-  },
-  "keywords": [
-    "data-structure",
-    "algorithm",
-    "visualization"
-  ],
-  "author": "youngwinds",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/youngwinds/data-structure-visualization/issues"
-  },
-  "homepage": "https://github.com/youngwinds/data-structure-visualization#readme",
-  "dependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "@typescript-eslint/parser": "^5.57.1",
+    "@typescript-eslint/typescript-estree": "^5.57.1",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-formatter-codeframe": "^7.32.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.7",
+    "typescript": "^4.9.3"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix --cache --format codeframe",
+    "*.{html,css,js,cjs,jsx,ts,tsx,md,json}": "prettier --write"
+  }
 }

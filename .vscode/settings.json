@@ -1,0 +1,6 @@
+{
+  "npm.packageManager": "pnpm",
+  "eslint.enable": true,
+  "eslint.packageManager": "pnpm",
+  "eslint.debug": true
+}
