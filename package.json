@@ -6,7 +6,8 @@
   "scripts": {
     "start": "pnpm -F @dsv/web dev",
     "lint": "pnpm dlx lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "pnpm recursive test"
   },
   "keywords": [],
   "author": "",

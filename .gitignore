@@ -2,6 +2,5 @@ old_packages
 node_modules
 .eslintcache
 
-*.yaml
 *.md
 *.log

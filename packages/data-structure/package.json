@@ -1,5 +1,5 @@
 {
-  "name": "@dsv/utils",
+  "name": "@dsv/data-structure",
   "version": "0.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@dsv/utils": "workspace:*"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.1",
     "@types/node": "^20.2.3",
