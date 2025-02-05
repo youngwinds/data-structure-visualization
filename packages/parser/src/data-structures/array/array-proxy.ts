@@ -1,46 +1,46 @@
-export const ArrayProxyString = `
-const uuid = (prefix) => {
-  return (
-    prefix +
-    "-" +
-    "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0;
-      const v = c === "x" ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    })
-  );
-};
+import { Schema, SchemaBuilder, StructureType } from "schema";
 
-class ArrayProxy {
-  constructor(array, options) {
-    const id = uuid("ArrayProxy");
-    const { snapshotSchema, schema, SchemaBuilder } = options;
+interface ArrayProxyOptions {
+  snapshotSchema: (schema: Schema) => void;
+  schema: Schema;
+  SchemaBuilder: typeof SchemaBuilder;
+  uuid: (prefix: string) => string;
+}
+
+export class ArrayProxy {
+  structureId: string;
+  options: ArrayProxyOptions;
+  target: any[];
+
+  constructor(array: any[], options: ArrayProxyOptions) {
+    const { snapshotSchema, schema, SchemaBuilder, uuid } = options;
+    this.structureId = uuid("array");
     this.options = options;
-
     snapshotSchema(
       new SchemaBuilder()
         .from(schema)
         .addStructure({
-          id: id,
-          type: "ArrayProxy",
+          id: this.structureId,
+          type: StructureType.Array,
+          array,
         })
         .build()
     );
 
-    this.structureId = id;
     this.target = [...array];
 
     const proxy = new Proxy(this.target, {
       get: (target, prop) => {
         if (prop === "__proxyGet") {
-          return (index) => this._getHandler(target, index);
+          return (index: number) => this._getHandler(target, index);
         }
         if (prop === "__proxySet") {
-          return (index, value) => this._setHandler(target, index, value);
+          return (index: number, value: any) =>
+            this._setHandler(target, index, value);
         }
         if (prop === "__proxyCall") {
-          return (method, args) => {
-            const fn = target[method];
+          return (method: string, args: any[]) => {
+            const fn = target[method as keyof typeof target];
             return this._applyHandler(fn, target, args, method);
           };
         }
@@ -51,20 +51,21 @@ class ArrayProxy {
     return proxy;
   }
 
-  _getHandler(target, prop) {
+  _getHandler(target: any[], prop: number) {
     const { snapshotSchema, schema, SchemaBuilder } = this.options;
 
     const value = target[prop];
     if (typeof value === "function" && Array.prototype[prop]) {
-      return (...args) => {
+      return (...args: any[]) => {
         const result = value.apply(target, args);
 
         snapshotSchema(
           new SchemaBuilder()
             .from(schema)
-            .addAction(this.structureId, {
+            .addAction({
+              structureId: this.structureId,
               name: "call",
-              type: prop,
+              type: prop.toString(),
               args: [...args],
             })
             .build()
@@ -77,7 +78,8 @@ class ArrayProxy {
       snapshotSchema(
         new SchemaBuilder()
           .from(schema)
-          .addAction(this.structureId, {
+          .addAction({
+            structureId: this.structureId,
             name: "get",
             type: "get",
             args: [Number(prop)],
@@ -89,7 +91,7 @@ class ArrayProxy {
     return value;
   }
 
-  _setHandler(target, prop, value) {
+  _setHandler(target: any[], prop: number, value: any) {
     const { snapshotSchema, schema, SchemaBuilder } = this.options;
 
     const index = Number(prop);
@@ -97,7 +99,8 @@ class ArrayProxy {
       snapshotSchema(
         new SchemaBuilder()
           .from(schema)
-          .addAction(this.structureId, {
+          .addAction({
+            structureId: this.structureId,
             name: "set",
             type: "set",
             args: [index, value],
@@ -109,14 +112,15 @@ class ArrayProxy {
     return true;
   }
 
-  _applyHandler(target, thisArg, args, method) {
+  _applyHandler(fn: Function, thisArg: any, args: any[], method: string) {
     const { snapshotSchema, schema, SchemaBuilder } = this.options;
 
-    const result = target.apply(thisArg, args);
+    const result = fn.apply(thisArg, args);
     snapshotSchema(
       new SchemaBuilder()
         .from(schema)
-        .addAction(this.structureId, {
+        .addAction({
+          structureId: this.structureId,
           name: "call",
           type: method,
           args: [...args],
@@ -130,6 +134,3 @@ class ArrayProxy {
     return result;
   }
 }
-
-
-`;

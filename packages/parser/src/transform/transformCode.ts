@@ -1,4 +1,3 @@
-import { ArrayProxyString } from "../data-structures/array/array-proxy";
 import * as babel from "@babel/core";
 import { arrayVisitor } from "../data-structures/array/array-visitor";
 import { logStyle } from "../utils/log";
@@ -6,9 +5,7 @@ import { logStyle } from "../utils/log";
 // 转换代码
 export const transformCode = (code: string) => {
   try {
-    const presetCodeEnv = `
-${ArrayProxyString}
-    `;
+    const presetCodeEnv = ``;
 
     const result = babel.transformSync(code, {
       plugins: [arrayVisitor],

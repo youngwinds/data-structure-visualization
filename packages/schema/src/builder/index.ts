@@ -1,20 +1,20 @@
 import { Action, Schema, Structure } from "../types";
 
 export class SchemaBuilder {
-  private actionsMap: Record<string, Action[]> = {};
+  private actions: Action[] = [];
   private structures: Structure[] = [];
 
   constructor() {}
 
   init() {
     this.structures = [];
-    this.actionsMap = {};
+    this.actions = [];
     return this;
   }
 
   from(schema: Schema) {
     this.structures = [...(schema.structures ?? [])];
-    this.actionsMap = { ...(schema.actionsMap ?? {}) };
+    this.actions = [...(schema.actions ?? [])];
     return this;
   }
 
@@ -23,18 +23,15 @@ export class SchemaBuilder {
     return this;
   }
 
-  addAction(structureId: string, action: Action) {
-    this.actionsMap[structureId] = [
-      ...(this.actionsMap[structureId] || []),
-      action,
-    ];
+  addAction(action: Action) {
+    this.actions.push(action);
     return this;
   }
 
   build(): Schema {
     return {
       structures: this.structures,
-      actionsMap: this.actionsMap,
+      actions: this.actions,
     };
   }
 
@@ -43,6 +40,6 @@ export class SchemaBuilder {
   }
 
   getActions(structureId: string) {
-    return this.actionsMap[structureId];
+    return this.actions.filter((action) => action.structureId === structureId);
   }
 }

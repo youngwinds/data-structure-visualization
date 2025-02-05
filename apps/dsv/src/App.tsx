@@ -2,7 +2,29 @@ import { useEffect, useState } from 'react';
 import { run } from 'parser';
 
 function App() {
-  const [code, setCode] = useState(`const bubbleSort = (arr) => {
+  const [code, setCode] = useState(`
+// const bubbleSort = (arr) => {
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = 0; j < arr.length - i - 1; j++) {
+//       if (arr[j] > arr[j + 1]) {
+//         let temp = arr[j];
+//         arr[j] = arr[j + 1];
+//         arr[j + 1] = temp;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// const arr = [5, 3, 8, 4, 2];
+// arr.pop()
+// arr.push(1);
+// bubbleSort(arr)
+
+// console.log(arr)
+// console.log(JSON.parse(JSON.stringify(arr)))
+
+const bubbleSort = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
       if (arr[j] > arr[j + 1]) {
@@ -15,13 +37,16 @@ function App() {
   return arr;
 }
 
-const arr = [5, 3, 8, 4, 2];
-arr.pop()
-arr.push(1);
-bubbleSort(arr)
+const arr1 = [5, 3, 8, 4, 2];
 
-console.log(arr)
-console.log(JSON.parse(JSON.stringify(arr)))
+const arr2 = [1, 2, 4]
+
+const arr3 = arr1.concat(arr2)
+bubbleSort(arr3)
+
+console.log(arr3)
+console.log(JSON.parse(JSON.stringify(arr3)))
+
 `);
 
   return (

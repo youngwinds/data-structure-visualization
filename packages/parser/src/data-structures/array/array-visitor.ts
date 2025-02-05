@@ -10,6 +10,19 @@ export const arrayVisitor = {
         return;
       }
 
+      // 检查父节点是否为 __proxyCall 的参数
+      const parent = path.parentPath;
+      if (parent.isCallExpression()) {
+        const callee = parent.node.callee;
+        if (
+          t.isMemberExpression(callee) &&
+          t.isIdentifier(callee.property, { name: "__proxyCall" })
+        ) {
+          // 如果是 __proxyCall 的参数，跳过转换
+          return;
+        }
+      }
+
       // 创建内部数组时标记为已转换
       const innerArray = t.arrayExpression(path.node.elements);
       (innerArray as any).wasConverted = true;
@@ -37,6 +50,7 @@ export const arrayVisitor = {
           "splice",
           "sort",
           "reverse",
+          "concat",
         ].includes(node.callee.property.name)
       ) {
         const proxyCall = t.callExpression(

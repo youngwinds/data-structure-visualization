@@ -7,25 +7,23 @@ export interface Schema {
    */
   structures: Structure[];
   /**
-   * @description The actions map in the schema
+   * @description The actions in the schema
    */
-  actionsMap: ActionsMap;
+  actions: Action[];
 }
 
 export interface Structure {
   id: string;
   type: StructureType;
+  array: any[];
 }
 
 export enum StructureType {
   Array = "array",
 }
 
-export interface ActionsMap {
-  [structureId: string]: Action[];
-}
-
 export interface Action {
+  structureId: string;
   name: string;
   type: string;
   args: any[];
