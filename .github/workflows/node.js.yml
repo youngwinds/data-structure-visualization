@@ -54,5 +54,6 @@ jobs:
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
+          publish_dir: ./apps/dsv/dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/dsv-website/dist
