@@ -17,7 +17,7 @@ export const arrayVisitor = {
       // 创建 new ArrayProxy([...elements], schema)
       const newArray = t.newExpression(t.identifier("ArrayProxy"), [
         innerArray, // 已标记的内部数组
-        t.identifier("schema"), // 全局 schema 变量
+        t.identifier("__GlobalContext__"), // 全局配置
       ]);
 
       path.replaceWith(newArray);
