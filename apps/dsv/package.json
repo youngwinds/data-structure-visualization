@@ -1,0 +1,32 @@
+{
+  "name": "dsv",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rspack build",
+    "dev": "cross-env NODE_ENV=development rspack serve",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "parser": "workspace:*",
+    "process": "^0.11.10",
+    "assert": "^2.1.0",
+    "path-browserify": "^1.0.1",
+    "buffer": "^6.0.3",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.2.1",
+    "@rspack/core": "^1.2.1",
+    "@rspack/plugin-react-refresh": "1.0.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "cross-env": "^7.0.3",
+    "prettier": "^3.3.3",
+    "react-refresh": "^0.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
