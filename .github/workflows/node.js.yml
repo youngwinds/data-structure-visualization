@@ -56,4 +56,3 @@ jobs:
         with:
           publish_dir: ./apps/dsv/dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/dsv-website/dist
