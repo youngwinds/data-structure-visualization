@@ -1,37 +1,12 @@
 {
   "name": "data-structure-visualization",
-  "version": "0.0.0",
-  "private": true,
-  "description": "algorithm-visualization depends on data-structure-visualization",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "lerna exec --scope dsv-website yarn start",
-    "build": "lerna exec --scope dsv-website yarn build",
-    "build:COMPRESSNONE": "lerna exec --scope dsv-website yarn build:COMPRESSNONE",
-    "generate": "lerna exec --scope dsv-website yarn generate",
-    "release:beta": "lerna version --conventional-commits --conventional-prerelease --preid beta --yes",
-    "release": "lerna version --conventional-commits --conventional-graduate --yes && lerna publish from-git --yes"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/youngwinds/data-structure-visualization.git"
-  },
-  "keywords": [
-    "data-structure",
-    "algorithm",
-    "visualization"
-  ],
-  "author": "youngwinds",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/youngwinds/data-structure-visualization/issues"
-  },
-  "homepage": "https://github.com/youngwinds/data-structure-visualization#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "lerna": "^4.0.0"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
