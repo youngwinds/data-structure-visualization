@@ -1,7 +1,7 @@
-import { Action, Schema, Structure } from "../types";
+import { SchemaAction, Schema, Structure } from "../types";
 
 export class SchemaBuilder {
-  private actions: Action[] = [];
+  private actions: SchemaAction[] = [];
   private structures: Structure[] = [];
 
   constructor() {}
@@ -23,7 +23,7 @@ export class SchemaBuilder {
     return this;
   }
 
-  addAction(action: Action) {
+  addAction(action: SchemaAction) {
     this.actions.push(action);
     return this;
   }

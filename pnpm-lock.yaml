@@ -23,6 +23,9 @@ importers:
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
+      data-structure:
+        specifier: workspace:*
+        version: link:../../packages/data-structure
       parser:
         specifier: workspace:*
         version: link:../../packages/parser
@@ -38,6 +41,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      schema:
+        specifier: workspace:*
+        version: link:../../packages/schema
       util:
         specifier: ^0.12.5
         version: 0.12.5
@@ -71,6 +77,31 @@ importers:
         version: 10.9.2(@types/node@20.17.17)(typescript@5.7.3)
       typescript:
         specifier: ^5.7.2
+        version: 5.7.3
+
+  packages/data-structure:
+    dependencies:
+      '@babel/core':
+        specifier: ^7.26.7
+        version: 7.26.7
+      '@babel/types':
+        specifier: ^7.26.7
+        version: 7.26.7
+      '@visactor/vstory':
+        specifier: 0.0.23
+        version: 0.0.23
+      schema:
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      '@types/babel__core':
+        specifier: ^7.0.0
+        version: 7.20.5
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.17.17
+      typescript:
+        specifier: ^5.0.0
         version: 5.7.3
 
   packages/parser:

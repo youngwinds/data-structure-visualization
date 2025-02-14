@@ -2,10 +2,12 @@ import * as VStory from '@visactor/vstory';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { FC } from 'react';
+import { ArrayBar } from 'data-structure';
+import { Schema } from 'schema';
 VStory.registerAll();
 
 interface ChartProps {
-  schema: any;
+  schema: Schema;
 }
 export const Chart: FC<ChartProps> = (props) => {
   const { schema } = props;
@@ -18,64 +20,31 @@ export const Chart: FC<ChartProps> = (props) => {
       return;
     }
 
-    let top = 10;
-    let left = 10;
-    const characters = schema.structures.map(
-      (structure: any, index: number) => {
-        return {
-          type: 'VChart',
-          id: structure.id,
-          zIndex: 1,
-          position: {
-            top: top + 200 * index,
-            left: left,
-            width: 580,
-            height: 190,
-          },
-          options: {
-            // 图表的背景板配置
-            panel: {
-              fill: '#ffffff',
-              shadowColor: 'rgba(0, 0, 0, 0.05)',
-              shadowBlur: 10,
-              shadowOffsetX: 4,
-              shadowOffsetY: 4,
-              cornerRadius: 8,
-            },
-            spec: {
-              data: [
-                {
-                  id: 'barData',
-                  values: structure.array.map((y, x) => {
-                    return {
-                      x: y,
-                      y: 1,
-                    };
-                  }),
-                },
-              ],
-              axes: [
-                {
-                  orient: 'bottom',
-                  type: 'band',
-                },
-                {
-                  orient: 'bottom',
-                  type: 'linear',
-                  visible: false,
-                },
-              ],
-              type: 'bar',
-              xField: 'x',
-              yField: 'y',
-            },
-          },
-        };
+    const interval = 1000;
+    const arrayBar = new ArrayBar<number>([...schema.structures[0].array], {
+      id: schema.structures[0].id,
+      interval: interval,
+      structure: {
+        position: {
+          top: 10,
+          left: 10,
+          width: 580,
+          height: 300,
+        },
       },
-    );
+    });
+
+    schema.actions.forEach((action) => {
+      if (action.structureId === arrayBar.id) {
+        if (action.type === 'set') {
+          arrayBar.set(action.args[0], action.args[1]);
+        }
+      }
+    });
+
     // 生成一个DSL，该DSL只包含一个VChart元素
     const dsl = {
-      characters: characters,
+      characters: [arrayBar.structure],
       // 图表的具体动画编排
       acts: [
         // 幕数组，一个故事可以包含多个幕，幕与幕之间是有先后顺序的串联结构
@@ -88,39 +57,14 @@ export const Chart: FC<ChartProps> = (props) => {
               // 场景中包含的动作数组，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的
               actions: [
                 {
-                  characterId: 'array-fad29a',
-                  characterActions: [
-                    {
-                      action: 'appear',
-                      payload: {
-                        animation: {
-                          duration: 1000,
-                        },
-                      },
-                    },
-                  ],
-                },
-                {
-                  characterId: 'array-7d8dc9',
-                  characterActions: [
-                    {
-                      action: 'appear',
-                      payload: {
-                        animation: {
-                          duration: 1000,
-                        },
-                      },
-                    },
-                  ],
-                },
-                {
                   characterId: 'array-94718b',
                   characterActions: [
                     {
                       action: 'appear',
+                      startTime: 0,
                       payload: {
                         animation: {
-                          duration: 1000,
+                          duration: interval,
                         },
                       },
                     },
@@ -128,10 +72,16 @@ export const Chart: FC<ChartProps> = (props) => {
                 },
               ],
             },
+            {
+              id: 'scene1',
+              actions: arrayBar.actions,
+            },
           ],
         },
       ],
     };
+
+    console.log(dsl);
 
     const story = new VStory.Story(dsl, {
       dom: ref.current,

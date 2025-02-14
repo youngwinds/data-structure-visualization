@@ -16,13 +16,14 @@ export class ArrayProxy {
     const { snapshotSchema, schema, SchemaBuilder, uuid } = options;
     this.structureId = uuid("array");
     this.options = options;
+    debugger
     snapshotSchema(
       new SchemaBuilder()
         .from(schema)
         .addStructure({
           id: this.structureId,
           type: StructureType.Array,
-          array,
+          array: [...array],
         })
         .build()
     );
@@ -44,11 +45,13 @@ export class ArrayProxy {
             return this._applyHandler(fn, target, args, method);
           };
         }
-        return this._getHandler(target, prop);
+        return this._getHandler(target, prop as unknown as number);
       },
-      set: (target, prop, value) => this._setHandler(target, prop, value),
+      set: (target, prop, value) =>
+        this._setHandler(target, prop as unknown as number, value),
     });
-    return proxy;
+
+    return proxy as unknown as ArrayProxy;
   }
 
   _getHandler(target: any[], prop: number) {

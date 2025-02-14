@@ -1,6 +1,1 @@
-export {
-  Schema,
-  Structure,
-  Action,
-  StructureType,
-} from "./schema";
+export { Schema, Structure, SchemaAction, StructureType } from "./schema";

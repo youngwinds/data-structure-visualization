@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"pnpm --filter dsv dev\" \"pnpm --filter=schema dev\" \"pnpm --filter=parser dev\"",
+    "dev": "concurrently \"pnpm --filter dsv dev\" \"pnpm --filter=./packages/* dev\" ",
     "build": "pnpm -r build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

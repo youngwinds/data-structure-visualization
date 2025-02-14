@@ -9,7 +9,7 @@ export interface Schema {
   /**
    * @description The actions in the schema
    */
-  actions: Action[];
+  actions: SchemaAction[];
 }
 
 export interface Structure {
@@ -22,7 +22,7 @@ export enum StructureType {
   Array = "array",
 }
 
-export interface Action {
+export interface SchemaAction {
   structureId: string;
   name: string;
   type: string;
