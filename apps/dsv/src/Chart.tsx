@@ -21,7 +21,7 @@ export const Chart: FC = () => {
     }
     const arrayBar = new ArrayBar<number>([...schema.structures[0].array], {
       id: schema.structures[0].id,
-      interval: 300,
+      interval: 1000,
       structure: {},
     });
     schema.actions.forEach((action) => {
@@ -34,6 +34,9 @@ export const Chart: FC = () => {
         }
         if (action.type === 'appear') {
           arrayBar.appear();
+        }
+        if (action.type === 'reverse') {
+          arrayBar.reverse();
         }
       }
     });

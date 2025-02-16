@@ -106,6 +106,30 @@ export class ArrayBar<T> {
     });
   }
 
+  reverse() {
+    this._data = this._data.reverse();
+    const id = this._id;
+    const dataId = this._dataId;
+    const interval = this._interval;
+    const length = this._actions.length;
+    const action = {
+      action: "update",
+      startTime: interval * length,
+      payload: {
+        id: dataId,
+        animation: {
+          duration: interval,
+        },
+        values: cloneDeep(this._data),
+      },
+    };
+    this._actions.push({
+      characterId: id,
+      characterActions: [action],
+    });
+    return this;
+  }
+
   appear() {
     this._actions.push({
       characterId: this._id,
