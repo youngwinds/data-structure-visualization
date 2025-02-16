@@ -4,13 +4,11 @@ import { useRef } from 'react';
 import { FC } from 'react';
 import { ArrayBar } from 'data-structure';
 import { Schema } from 'schema';
+import { useDsv } from './model';
 VStory.registerAll();
 
-interface ChartProps {
-  schema: Schema;
-}
-export const Chart: FC<ChartProps> = (props) => {
-  const { schema } = props;
+export const Chart: FC = () => {
+  const schema = useDsv((state) => state.schema);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -18,21 +16,14 @@ export const Chart: FC<ChartProps> = (props) => {
     if (!ref.current) {
       return;
     }
-
-    const interval = 1000;
+    if (schema.actions.length === 0 || schema.structures.length === 0) {
+      return;
+    }
     const arrayBar = new ArrayBar<number>([...schema.structures[0].array], {
       id: schema.structures[0].id,
-      interval: interval,
-      structure: {
-        position: {
-          top: 10,
-          left: 10,
-          width: 580,
-          height: 300,
-        },
-      },
+      interval: 300,
+      structure: {},
     });
-
     schema.actions.forEach((action) => {
       if (action.structureId === arrayBar.id) {
         if (action.type === 'set') {
@@ -40,6 +31,9 @@ export const Chart: FC<ChartProps> = (props) => {
         }
         if (action.type === 'swap') {
           arrayBar.swap(action.args[0], action.args[1]);
+        }
+        if (action.type === 'appear') {
+          arrayBar.appear();
         }
       }
     });
@@ -53,29 +47,8 @@ export const Chart: FC<ChartProps> = (props) => {
         {
           id: 'default-chapter',
           scenes: [
-            // 场景数组，可以包含多个场景，场景与场景是有先后顺序的串联结构
             {
-              id: 'scene0',
-              // 场景中包含的动作数组，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的
-              actions: [
-                {
-                  characterId: 'array-f5c481',
-                  characterActions: [
-                    {
-                      action: 'appear',
-                      startTime: 0,
-                      payload: {
-                        animation: {
-                          duration: interval,
-                        },
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 'scene1',
+              id: 'scene',
               actions: arrayBar.actions,
             },
           ],
@@ -83,7 +56,7 @@ export const Chart: FC<ChartProps> = (props) => {
       ],
     };
 
-    console.log(dsl);
+    console.log('debug dsl', dsl);
 
     const story = new VStory.Story(dsl, {
       dom: ref.current,
@@ -97,11 +70,10 @@ export const Chart: FC<ChartProps> = (props) => {
     return () => {
       story?.release();
     };
-  }, []);
+  }, [schema]);
 
   return (
     <>
-      <div>test</div>
       <div style={{ width: '600px', height: '600px' }} ref={ref}></div>
     </>
   );

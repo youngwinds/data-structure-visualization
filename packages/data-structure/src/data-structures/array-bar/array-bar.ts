@@ -34,10 +34,10 @@ export class ArrayBar<T> {
         type: "VChart",
         zIndex: 1,
         position: {
-          top: 200,
-          left: 200,
-          width: 580,
-          height: 190,
+          top: 0,
+          left: 0,
+          width: 500,
+          height: 200,
         },
         options: {
           // 图表的背景板配置
@@ -70,7 +70,8 @@ export class ArrayBar<T> {
                 type: "linear",
                 visible: true,
                 zero: true,
-                max: 8,
+                max: Math.max(...this._data.map((d) => d.value as number)),
+                nice: true,
               },
             ],
             type: "bar",
@@ -105,6 +106,23 @@ export class ArrayBar<T> {
     });
   }
 
+  appear() {
+    this._actions.push({
+      characterId: this._id,
+      characterActions: [
+        {
+          action: "appear",
+          startTime: 0,
+          payload: {
+            animation: {
+              duration: this._interval,
+            },
+          },
+        },
+      ],
+    });
+  }
+
   set(index: number, value: T) {
     const id = this._id;
     const dataId = this._dataId;
@@ -115,7 +133,7 @@ export class ArrayBar<T> {
 
     const action = {
       action: "update",
-      startTime: interval * (length + 1),
+      startTime: interval * length,
       payload: {
         id: dataId,
         animation: {

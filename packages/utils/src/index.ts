@@ -1,0 +1,1 @@
+export { withLog } from "./withLog";

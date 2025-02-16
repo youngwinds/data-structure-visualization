@@ -25,6 +25,12 @@ export class ArrayProxy {
           type: StructureType.Array,
           array: [...array],
         })
+        .addAction({
+          structureId: this.structureId,
+          name: "appear",
+          type: "appear",
+          args: [],
+        })
         .build()
     );
 

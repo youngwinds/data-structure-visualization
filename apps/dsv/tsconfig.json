@@ -11,8 +11,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
     "useDefineForClassFields": true,
-    "allowImportingTsExtensions": true,
-    "sourceMap": true
+    "allowImportingTsExtensions": true
   },
   "include": ["src"],
   "ts-node": {
