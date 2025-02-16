@@ -16,7 +16,7 @@ export class ArrayProxy {
     const { snapshotSchema, schema, SchemaBuilder, uuid } = options;
     this.structureId = uuid("array");
     this.options = options;
-    debugger
+
     snapshotSchema(
       new SchemaBuilder()
         .from(schema)

@@ -5,27 +5,6 @@ import { StructureType } from 'schema';
 
 function App() {
   const [code, setCode] = useState(`
-// const bubbleSort = (arr) => {
-//   for (let i = 0; i < arr.length; i++) {
-//     for (let j = 0; j < arr.length - i - 1; j++) {
-//       if (arr[j] > arr[j + 1]) {
-//         let temp = arr[j];
-//         arr[j] = arr[j + 1];
-//         arr[j + 1] = temp;
-//       }
-//     }
-//   }
-//   return arr;
-// }
-
-// const arr = [5, 3, 8, 4, 2];
-// arr.pop()
-// arr.push(1);
-// bubbleSort(arr)
-
-// console.log(arr)
-// console.log(JSON.parse(JSON.stringify(arr)))
-
 const bubbleSort = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
@@ -39,15 +18,9 @@ const bubbleSort = (arr) => {
   return arr;
 }
 
-const arr1 = [5, 3, 8, 4, 2];
+const arr1 = [5, 3, 8, 4, 2, 1, 2, 4];
 
-const arr2 = [1, 2, 4]
-
-const arr3 = arr1.concat(arr2)
-bubbleSort(arr3)
-
-console.log(arr3)
-console.log(JSON.parse(JSON.stringify(arr3)))
+bubbleSort(arr1)
 
 `);
 
@@ -78,17 +51,17 @@ console.log(JSON.parse(JSON.stringify(arr3)))
         schema={{
           structures: [
             {
-              id: 'array-94718b',
+              id: 'array-f5c481',
               type: StructureType.Array,
               array: [5, 3, 8, 4, 2, 1, 2, 4],
             },
           ],
           actions: [
             {
-              structureId: 'array-94718b',
-              name: 'set',
-              type: 'set',
-              args: [0, 10],
+              structureId: 'array-f5c481',
+              name: 'swap',
+              type: 'swap',
+              args: [0, 1],
             },
           ],
         }}

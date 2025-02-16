@@ -11,7 +11,6 @@ interface ChartProps {
 }
 export const Chart: FC<ChartProps> = (props) => {
   const { schema } = props;
-  console.log(schema);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -39,6 +38,9 @@ export const Chart: FC<ChartProps> = (props) => {
         if (action.type === 'set') {
           arrayBar.set(action.args[0], action.args[1]);
         }
+        if (action.type === 'swap') {
+          arrayBar.swap(action.args[0], action.args[1]);
+        }
       }
     });
 
@@ -57,7 +59,7 @@ export const Chart: FC<ChartProps> = (props) => {
               // 场景中包含的动作数组，动作中描述了一个或多个character的具体行为，一个场景中可以包含多个动作，动作之间是并行执行的
               actions: [
                 {
-                  characterId: 'array-94718b',
+                  characterId: 'array-f5c481',
                   characterActions: [
                     {
                       action: 'appear',

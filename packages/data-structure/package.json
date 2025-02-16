@@ -15,11 +15,13 @@
     "@visactor/vstory": "0.0.23",
     "@babel/core": "^7.26.7",
     "@babel/types": "^7.26.7",
-    "schema": "workspace:*"
+    "schema": "workspace:*",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/babel__core": "^7.0.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "@types/lodash-es": "^4.17.10"
   }
 }
