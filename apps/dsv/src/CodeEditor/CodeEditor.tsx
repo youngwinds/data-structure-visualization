@@ -5,16 +5,22 @@ import { useDsv } from '../model';
 export const CodeEditor = () => {
   const setSchema = useDsv((state) => state.setSchema);
 
-  const [code, setCode] = useState(`Array.prototype.swap = function(i, j){
-    const temp = this[i]
-    this[i] = this[j]
-    this[j] = temp
+  const ArrayProtoType = `
+Array.prototype.swap = function(i, j){
+  const temp = this[i]
+  this[i] = this[j]
+  this[j] = temp
 }
 
+Array.prototype.compare = function(i, j, fn) {
+  return fn(this[i], this[j]);
+};
+`;
+  const [code, setCode] = useState(`${ArrayProtoType}
 const bubbleSort = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
+      if (arr.compare(j, j + 1, (a, b) => a > b)) {
         arr.swap(j, j+1)
       }
     }

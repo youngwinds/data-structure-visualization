@@ -229,8 +229,55 @@ export class ArrayBar<T> {
     return this;
   }
 
+  compare(i: number, j: number, fn: (a: T, b: T) => boolean) {
+    const id = this._id;
+    const dataId = this._dataId;
+    const interval = this._interval;
+    const length = this._actions.length;
+    const valueI = this._data[i];
+    const valueJ = this._data[j];
+    const compareRes = fn(valueI.value, valueJ.value);
+    const actionI = {
+      action: "highlight",
+      startTime: interval * length,
+      payload: {
+        id: dataId,
+        value: valueI,
+        animation: {
+          duration: interval,
+        },
+        style: {
+          fill: "red",
+        },
+      },
+    } as IActionSpec;
+    const actionJ = {
+      action: "highlight",
+      startTime: interval * length,
+      payload: {
+        id: dataId,
+        value: valueJ,
+        animation: {
+          duration: interval,
+        },
+        style: {
+          fill: "red",
+        },
+      },
+    } as IActionSpec;
+    if (compareRes) {
+      actionI.payload.style.fill = "green";
+    } else {
+      actionJ.payload.style.fill = "green";
+    }
+    this._actions.push({
+      characterId: id,
+      characterActions: [actionI, actionJ],
+    });
+    return this;
+  }
   get(index: number) {
-    const value = this._data[index].value;
+    const value = this._data[index];
     const action = {
       action: "highlight",
       startTime: this._interval * this._actions.length,

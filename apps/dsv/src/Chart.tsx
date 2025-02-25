@@ -29,6 +29,12 @@ export const Chart: FC = () => {
         if (action.type === 'set') {
           arrayBar.set(action.args[0], action.args[1]);
         }
+        if (action.type === 'get') {
+          arrayBar.get(action.args[0]);
+        }
+        if (action.type === 'compare') {
+          arrayBar.compare(action.args[0], action.args[1], action.args[2]);
+        }
         if (action.type === 'swap') {
           arrayBar.swap(action.args[0], action.args[1]);
         }
