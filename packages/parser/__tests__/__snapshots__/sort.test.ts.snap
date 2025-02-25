@@ -1,0 +1,5405 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sort bubble sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+const bubbleSort = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        arr.swap(j, j + 1);
+      }
+    }
+  }
+  console.log("res", arr);
+  return arr;
+};
+const arr1 = new ArrayProxy([5, 3, 8, 4, 2, 1, 2, 4], __GlobalContext__);
+bubbleSort(arr1);",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array-792350253",
+        "type": "appear",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          7,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-792350253",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-792350253",
+        "type": "get",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          5,
+          3,
+          8,
+          4,
+          2,
+          1,
+          2,
+          4,
+        ],
+        "id": "array-792350253",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort heap sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+function heapSort(arr) {
+  function heapify(n, i) {
+    let largest = i;
+    const l = 2 * i + 1;
+    const r = 2 * i + 2;
+    if (l < n && arr[l] > arr[largest]) largest = l;
+    if (r < n && arr[r] > arr[largest]) largest = r;
+    if (largest !== i) {
+      arr.swap(i, largest); // 改用 swap 方法
+      heapify(n, largest);
+    }
+  }
+
+  // 构建最大堆
+  for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+    heapify(arr.length, i);
+  }
+
+  // 逐个提取元素
+  for (let i = arr.length - 1; i > 0; i--) {
+    arr.swap(0, i); // 改用 swap 方法
+    heapify(i, 0);
+  }
+  return arr;
+}
+heapSort(new ArrayProxy([6, 7, 8, 1, 3, 4, 10, 3, 5, 1], __GlobalContext__));",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array-367635097",
+        "type": "appear",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          7,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          7,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-367635097",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-367635097",
+        "type": "swap",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          6,
+          7,
+          8,
+          1,
+          3,
+          4,
+          10,
+          3,
+          5,
+          1,
+        ],
+        "id": "array-367635097",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort in-place merge sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+function mergeSort(arr, left = 0, right = arr.length - 1) {
+  if (left >= right) return;
+  let mid = Math.floor((left + right) / 2);
+
+  // 递归分割
+  mergeSort(arr, left, mid);
+  mergeSort(arr, mid + 1, right);
+
+  // 双指针合并算法
+  let i = left;
+  let j = mid + 1;
+  while (i <= mid && j <= right) {
+    if (arr[i] <= arr[j]) {
+      i++;
+    } else {
+      // 将右侧元素插入到i位置
+      const temp = arr[j];
+      for (let k = j; k > i; k--) {
+        arr.swap(k, k - 1);
+      }
+      arr[i] = temp;
+
+      // 更新指针位置
+      i++;
+      mid++;
+      j++;
+    }
+  }
+  return arr;
+}
+mergeSort(new ArrayProxy([5, 2, 8, 4, 7, 1, 3, 6, 9], __GlobalContext__));",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array1866220999",
+        "type": "appear",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          0,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+          0,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+          3,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          6,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array1866220999",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array1866220999",
+        "type": "set",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array1866220999",
+        "type": "get",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          5,
+          2,
+          8,
+          4,
+          7,
+          1,
+          3,
+          6,
+          9,
+        ],
+        "id": "array1866220999",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort insert sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+const insertSort = arr => {
+  for (let i = 1; i < arr.length; i++) {
+    let current = arr[i];
+    let j = i - 1;
+    while (j >= 0 && arr[j] > current) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = current;
+  }
+  return arr;
+};
+const testArr = new ArrayProxy([5, 2, 4, 6, 1, 3, 9, 7], __GlobalContext__);
+insertSort(testArr);",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array1757142481",
+        "type": "appear",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+          2,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array1757142481",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array1757142481",
+        "type": "set",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          5,
+          2,
+          4,
+          6,
+          1,
+          3,
+          9,
+          7,
+        ],
+        "id": "array1757142481",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort quick sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+const quickSort = arr => {
+  const partition = (low, high) => {
+    // 取中间元素作为基准值（三数取中法优化）
+    let mid = Math.floor((low + high) / 2);
+    arr.swap(mid, high);
+    const pivot = arr[high];
+    let i = low - 1;
+    for (let j = low; j < high; j++) {
+      if (arr[j] < pivot) {
+        i++;
+        arr.swap(i, j);
+      }
+    }
+    arr.swap(i + 1, high);
+    return i + 1;
+  };
+  const sort = (low, high) => {
+    if (low < high) {
+      const pi = partition(low, high);
+      sort(low, pi - 1);
+      sort(pi + 1, high);
+    }
+  };
+  sort(0, arr.length - 1);
+  console.log("res", arr);
+  return arr;
+};
+
+// ... 保留原有的冒泡排序代码 ...
+
+const arr1 = new ArrayProxy([5, 3, 8, 4, 2, 1, 2, 9, 1, 2, 3, 3, 6, 12, 34, 23, 11, 45, 13, 52], __GlobalContext__);
+
+// 测试快速排序
+quickSort(arr1); // 使用扩展运算符避免修改原数组",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array-2079642510",
+        "type": "appear",
+      },
+      {
+        "args": [
+          9,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          5,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          10,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          12,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          16,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          11,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          10,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          12,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          16,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          12,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          10,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+          10,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          11,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          12,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+          12,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          16,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          10,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          7,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          15,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+          11,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          12,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          12,
+          13,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          16,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+          16,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          15,
+          18,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          16,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          13,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          11,
+          11,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          12,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          12,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          14,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          13,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          14,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          15,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          14,
+          15,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          18,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+          17,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          18,
+          18,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          19,
+          19,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          17,
+          18,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          18,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+        ],
+        "name": "get",
+        "structureId": "array-2079642510",
+        "type": "get",
+      },
+      {
+        "args": [
+          17,
+          17,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+      {
+        "args": [
+          18,
+          18,
+        ],
+        "name": "call",
+        "structureId": "array-2079642510",
+        "type": "swap",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          5,
+          3,
+          8,
+          4,
+          2,
+          1,
+          2,
+          9,
+          1,
+          2,
+          3,
+          3,
+          6,
+          12,
+          34,
+          23,
+          11,
+          45,
+          13,
+          52,
+        ],
+        "id": "array-2079642510",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort selection sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+Array.prototype.swap = function (i, j) {
+  const temp = this[i];
+  this[i] = this[j];
+  this[j] = temp;
+};
+const selectionSort = arr => {
+  // 外层循环遍历每个位置
+  for (let current = 0; current < arr.length - 1; current++) {
+    let minIndex = current;
+
+    // 内层循环寻找最小值索引
+    for (let scan = current + 1; scan < arr.length; scan++) {
+      if (arr[scan] < arr[minIndex]) {
+        minIndex = scan;
+      }
+    }
+
+    // 仅在需要时交换（优化点）
+    if (minIndex !== current) {
+      arr.swap(current, minIndex);
+    }
+  }
+  console.log('Sorted array:', arr);
+  return arr;
+};
+
+// 测试包含正负数、重复值的复杂数组
+const testData = new ArrayProxy([3, 0, -2, 5, -1, 4, 1, 9, -5, 4], __GlobalContext__);
+selectionSort(testData);",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array-79236675",
+        "type": "appear",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          6,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          8,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          9,
+        ],
+        "name": "call",
+        "structureId": "array-79236675",
+        "type": "swap",
+      },
+      {
+        "args": [
+          9,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array-79236675",
+        "type": "get",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          3,
+          0,
+          -2,
+          5,
+          -1,
+          4,
+          1,
+          9,
+          -5,
+          4,
+        ],
+        "id": "array-79236675",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;
+
+exports[`sort shell sort 1`] = `
+{
+  "SchemaBuilder": [Function],
+  "code": "
+
+const shellSort = arr => {
+  let gap = Math.floor(arr.length / 2);
+  while (gap > 0) {
+    for (let i = gap; i < arr.length; i++) {
+      const temp = arr[i];
+      let j = i;
+      while (j >= gap && arr[j - gap] > temp) {
+        arr[j] = arr[j - gap];
+        j -= gap;
+      }
+      arr[j] = temp;
+    }
+    gap = Math.floor(gap / 2);
+  }
+  return arr;
+};
+shellSort(new ArrayProxy([9, 4, 2, 7, 1, 5, 3, 8, 6], __GlobalContext__));",
+  "schema": {
+    "actions": [
+      {
+        "args": [],
+        "name": "appear",
+        "structureId": "array221689765",
+        "type": "appear",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+          1,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          3,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          8,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          2,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          3,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          8,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          0,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          1,
+          2,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+          5,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          3,
+          4,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          1,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          2,
+          3,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+          7,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          4,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          5,
+          6,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          6,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+          8,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+      {
+        "args": [
+          8,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          7,
+        ],
+        "name": "get",
+        "structureId": "array221689765",
+        "type": "get",
+      },
+      {
+        "args": [
+          8,
+          9,
+        ],
+        "name": "set",
+        "structureId": "array221689765",
+        "type": "set",
+      },
+    ],
+    "structures": [
+      {
+        "array": [
+          9,
+          4,
+          2,
+          7,
+          1,
+          5,
+          3,
+          8,
+          6,
+        ],
+        "id": "array221689765",
+        "type": "array",
+      },
+    ],
+  },
+  "snapshotSchema": [Function],
+  "uuid": [Function],
+}
+`;

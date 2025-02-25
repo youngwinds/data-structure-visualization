@@ -9,6 +9,7 @@ export const executeCode = withLog<Record<string, any>>((code: string) => {
 
     const __GlobalContext__: Record<string, any> = {
       uuid,
+      code,
       schema: {},
       SchemaBuilder,
       snapshotSchema: (schema: Schema) => {

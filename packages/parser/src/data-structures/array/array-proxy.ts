@@ -3,8 +3,9 @@ import { Schema, SchemaBuilder, StructureType } from "schema";
 interface ArrayProxyOptions {
   snapshotSchema: (schema: Schema) => void;
   schema: Schema;
+  code: string;
   SchemaBuilder: typeof SchemaBuilder;
-  uuid: (prefix: string) => string;
+  uuid: (prefix: string, hashSource: string) => string;
 }
 
 export class ArrayProxy {
@@ -13,8 +14,8 @@ export class ArrayProxy {
   target: any[];
 
   constructor(array: any[], options: ArrayProxyOptions) {
-    const { snapshotSchema, schema, SchemaBuilder, uuid } = options;
-    this.structureId = uuid("array");
+    const { snapshotSchema, schema, SchemaBuilder, uuid, code } = options;
+    this.structureId = uuid("array", code);
     this.options = options;
 
     snapshotSchema(
