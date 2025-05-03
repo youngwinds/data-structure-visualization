@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","sources":["webpack://dsv/./src/App.css"],"sourcesContent":["html,\nbody {\n  padding: 0;\n  margin: 0;\n  background: #fff;\n}\n"],"names":[],"mappings":"AAAA"}
