@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { FC } from 'react';
 import { ArrayBar } from 'data-structure';
 import { Schema } from 'schema';
-import { useDsv } from './model';
+import { useDsv } from '../model';
 VStory.registerAll();
 
 export const Chart: FC = () => {
@@ -21,7 +21,7 @@ export const Chart: FC = () => {
     }
     const arrayBar = new ArrayBar<number>([...schema.structures[0].array], {
       id: schema.structures[0].id,
-      interval: 1000,
+      interval: 400,
       structure: {},
     });
     schema.actions.forEach((action) => {
@@ -29,9 +29,12 @@ export const Chart: FC = () => {
         if (action.type === 'set') {
           arrayBar.set(action.args[0], action.args[1]);
         }
-        if (action.type === 'get') {
-          arrayBar.get(action.args[0]);
+        if (action.type === 'highlight') {
+          arrayBar.highlight(action.args[0]);
         }
+        // if (action.type === 'get') {
+        //   arrayBar.get(action.args[0]);
+        // }
         if (action.type === 'compare') {
           arrayBar.compare(action.args[0], action.args[1], action.args[2]);
         }
@@ -69,7 +72,7 @@ export const Chart: FC = () => {
 
     const story = new VStory.Story(dsl, {
       dom: ref.current,
-      background: 'pink',
+      // background: 'pink',
     });
     const player = new VStory.Player(story);
     story.init(player);
@@ -82,8 +85,14 @@ export const Chart: FC = () => {
   }, [schema]);
 
   return (
-    <>
-      <div style={{ width: '600px', height: '600px' }} ref={ref}></div>
-    </>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: '8px',
+        overflow: 'hidden',
+      }}
+      ref={ref}
+    ></div>
   );
 };

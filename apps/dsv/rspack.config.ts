@@ -1,9 +1,9 @@
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
 import * as RefreshPlugin from '@rspack/plugin-react-refresh';
+const Dotenv = require('dotenv-webpack');
 
 const isDev = process.env.NODE_ENV === 'development';
-
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ['chrome >= 87', 'edge >= 88', 'firefox >= 78', 'safari >= 14'];
 
@@ -52,6 +52,12 @@ export default defineConfig({
           },
         ],
       },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
   plugins: [
@@ -62,6 +68,11 @@ export default defineConfig({
     new rspack.ProvidePlugin({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
+    }),
+    new Dotenv({
+      path: '../../.env',
+      safe: true,
+      defaults: true,
     }),
   ].filter(Boolean),
   optimization: {

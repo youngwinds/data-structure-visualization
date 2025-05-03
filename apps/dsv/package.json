@@ -8,18 +8,24 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@ant-design/icons": "5.x",
+    "@types/dotenv-webpack": "^7.0.8",
     "@visactor/vstory": "0.0.23",
+    "antd": "^5.24.9",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "data-structure": "workspace:*",
+    "dotenv-webpack": "^8.1.0",
+    "openai": "^4.97.0",
+    "parser": "workspace:*",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "parser": "workspace:*",
-    "data-structure": "workspace:*",
     "schema": "workspace:*",
-    "process": "^0.11.10",
-    "assert": "^2.1.0",
-    "path-browserify": "^1.0.1",
-    "buffer": "^6.0.3",
+    "styled-components": "^6.1.17",
     "util": "^0.12.5",
-    "zustand": "^5.0.3"
+    "zustand": "5.0.4"
   },
   "devDependencies": {
     "@rspack/cli": "^1.2.1",

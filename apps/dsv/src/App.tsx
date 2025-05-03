@@ -1,21 +1,8 @@
-import { Chart } from './Chart';
-import { StructureType } from 'schema';
-import { CodeEditor } from './CodeEditor/CodeEditor';
+import { Home } from './components/Home/Home';
+import './App.css';
 
 function App() {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'start',
-        alignItems: 'center',
-        height: '100vh',
-      }}
-    >
-      <CodeEditor />
-      <Chart />
-    </div>
-  );
+  return <Home />;
 }
 
 export default App;

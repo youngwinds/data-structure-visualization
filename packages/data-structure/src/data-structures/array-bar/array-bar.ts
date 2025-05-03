@@ -11,8 +11,14 @@ interface ArrayBarOptions {
   structure?: Partial<ICharacterConfig>;
 }
 
+type ArrayBarDataType<T> = {
+  key: string;
+  value: T;
+  state?: Record<string, any>;
+};
+
 export class ArrayBar<T> {
-  private _data: { key: string; value: T }[];
+  private _data: ArrayBarDataType<T>[];
   private _id: string;
   private _dataId: string;
   private _interval: number;
@@ -36,8 +42,8 @@ export class ArrayBar<T> {
         position: {
           top: 0,
           left: 0,
-          width: 500,
-          height: 200,
+          width: 960,
+          height: 600,
         },
         options: {
           // 图表的背景板配置
@@ -74,6 +80,11 @@ export class ArrayBar<T> {
                 nice: true,
               },
             ],
+            bar: {
+              style: {
+                fill: (d: any) => d.state.fill,
+              },
+            },
             type: "bar",
             xField: "key",
             yField: "value",
@@ -87,6 +98,7 @@ export class ArrayBar<T> {
               },
               style: {
                 fontSize: 14,
+                fill: (d: any) => d.state.fill,
               },
             },
           },
@@ -96,12 +108,15 @@ export class ArrayBar<T> {
     );
   }
 
-  arrayToData(data: T[]): { key: string; value: T }[] {
+  arrayToData(data: T[]): ArrayBarDataType<T>[] {
     const result = data;
     return result.map((value, index) => {
       return {
         key: `${value}-${index}`,
         value: value,
+        state: {
+          fill: "#3063F6",
+        },
       };
     });
   }
@@ -175,6 +190,11 @@ export class ArrayBar<T> {
     return this;
   }
 
+  get(index: number) {
+    this.highlight(index);
+    this.unhighlight(index);
+  }
+
   swap(index1: number, index2: number) {
     const id = this._id;
     const dataId = this._dataId;
@@ -230,70 +250,75 @@ export class ArrayBar<T> {
   }
 
   compare(i: number, j: number, fn: (a: T, b: T) => boolean) {
-    const id = this._id;
+    this.highlight(i);
+    this.highlight(j);
+  }
+  highlight(index: number | [number, number]) {
+    if (Array.isArray(index)) {
+      const left = index[0];
+      const right = index[1];
+      for (let i = left; i < right; i++) {
+        const state = this._data[i].state;
+        if (state) {
+          state.fill = "red";
+        }
+      }
+    } else {
+      if (this._data[index].state) {
+        this._data[index].state.fill = "red";
+      }
+    }
+
     const dataId = this._dataId;
     const interval = this._interval;
-    const length = this._actions.length;
-    const valueI = this._data[i];
-    const valueJ = this._data[j];
-    const compareRes = fn(valueI.value, valueJ.value);
-    const actionI = {
-      action: "highlight",
-      startTime: interval * length,
-      payload: {
-        id: dataId,
-        value: valueI,
-        animation: {
-          duration: interval,
-        },
-        style: {
-          fill: "red",
-        },
-      },
-    } as IActionSpec;
-    const actionJ = {
-      action: "highlight",
-      startTime: interval * length,
-      payload: {
-        id: dataId,
-        value: valueJ,
-        animation: {
-          duration: interval,
-        },
-        style: {
-          fill: "red",
-        },
-      },
-    } as IActionSpec;
-    if (compareRes) {
-      actionI.payload.style.fill = "green";
-    } else {
-      actionJ.payload.style.fill = "green";
-    }
-    this._actions.push({
-      characterId: id,
-      characterActions: [actionI, actionJ],
-    });
-    return this;
-  }
-  get(index: number) {
-    const value = this._data[index];
     const action = {
-      action: "highlight",
+      action: "update",
       startTime: this._interval * this._actions.length,
       payload: {
-        id: this._dataId,
-        value: value,
+        id: dataId,
         animation: {
-          duration: 1000,
-          easing: "linear",
+          duration: interval,
         },
-        style: {
-          fill: "red",
-        },
+        values: cloneDeep(this._data),
       },
     } as IActionSpec;
 
+    this._actions.push({
+      characterId: this._id,
+      characterActions: [action],
+    });
+  }
+
+  unhighlight(index: number | [number, number]) {
+    if (Array.isArray(index)) {
+      const left = index[0];
+      const right = index[1];
+      for (let i = left; i < right; i++) {
+        const state = this._data[i].state;
+        if (state) {
+          state.fill = "#3063F6";
+        }
+      }
+    } else {
+      if (this._data[index].state) {
+        this._data[index].state.fill = "#3063F6";
+      }
+    }
+
+    const dataId = this._dataId;
+    const interval = this._interval;
+
+    const action = {
+      action: "update",
+      startTime: this._interval * this._actions.length,
+      payload: {
+        id: dataId,
+        animation: {
+          duration: interval,
+        },
+        values: cloneDeep(this._data),
+      },
+    } as IActionSpec;
     this._actions.push({
       characterId: this._id,
       characterActions: [action],
