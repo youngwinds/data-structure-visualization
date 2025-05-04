@@ -1,4 +1,3 @@
-// 转换代码
 export function withLog<T>(fn: Function, name?: string) {
   return function (...args: any): T {
     console.group(`${name ?? fn.name}`);

@@ -4,13 +4,7 @@ import { useDsv } from '../../model';
 import { OpenAI } from 'openai';
 import { Button, Input } from 'antd';
 import { systemPrompt } from './constant';
-import { CodeContainer, Toolbar, CodeInput } from './style';
-
-const S = {
-  CodeContainer,
-  Toolbar,
-  CodeInput,
-};
+import * as S from './style';
 
 export const CodeEditor = () => {
   const setSchema = useDsv((state) => state.setSchema);

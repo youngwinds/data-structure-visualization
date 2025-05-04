@@ -17,8 +17,3 @@ export const DSVEditorContainer = styled.div`
 
   margin: 12px;
 `;
-
-export const ChartContainer = styled.div`
-  flex: 0 0 960px;
-  height: 100%;
-`;

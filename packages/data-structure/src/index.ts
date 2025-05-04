@@ -1,2 +1,2 @@
-export { Algorithm } from "./algorithm";
-export { ArrayBar } from "./data-structures";
+export { DSVArray } from "./data-structures";
+export { executor } from "./executor";

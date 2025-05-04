@@ -1,1 +1,2 @@
-export { Schema, Structure, SchemaAction, StructureType } from "./schema";
+export type { Schema, Structure, SchemaAction } from "./schema";
+export { StructureType } from "./schema";

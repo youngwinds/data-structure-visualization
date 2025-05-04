@@ -1,2 +1,2 @@
 export * from "./types";
-export * from "./builder";
+export { SchemaBuilder } from "./builder";

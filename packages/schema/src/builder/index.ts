@@ -1,3 +1,4 @@
+import { uuid } from "utils";
 import { SchemaAction, Schema, Structure } from "../types";
 
 export class SchemaBuilder {
@@ -23,16 +24,10 @@ export class SchemaBuilder {
     return this;
   }
 
-  addAction(action: SchemaAction) {
-    this.actions.push(action);
+  addAction(action: Omit<SchemaAction, "id">) {
+    const actionId = uuid("action");
+    this.actions.push({ id: actionId, ...action });
     return this;
-  }
-
-  build(): Schema {
-    return {
-      structures: this.structures,
-      actions: this.actions,
-    };
   }
 
   getStructure(structureId: string) {
@@ -41,5 +36,12 @@ export class SchemaBuilder {
 
   getActions(structureId: string) {
     return this.actions.filter((action) => action.structureId === structureId);
+  }
+
+  build(): Schema {
+    return {
+      structures: this.structures,
+      actions: this.actions,
+    };
   }
 }

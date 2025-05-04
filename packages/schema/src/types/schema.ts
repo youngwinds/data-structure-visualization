@@ -20,9 +20,11 @@ export interface Structure {
 
 export enum StructureType {
   Array = "array",
+  BinaryTree = "binaryTree",
 }
 
 export interface SchemaAction {
+  id: string;
   structureId: string;
   name: string;
   type: string;
